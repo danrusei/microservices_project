@@ -1,0 +1,12 @@
+runtime: go111
+
+handlers:
+# Configure App Engine to serve any static assets.
+- url: /public
+  static_dir: public
+
+# Use HTTPS for all requests.
+- url: /.*
+  secure: always
+  redirect_http_response_code: 301
+  script: auto
