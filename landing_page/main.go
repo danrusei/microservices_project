@@ -14,6 +14,18 @@ var (
 	indexTmpl = template.Must(template.ParseFiles(filepath.Join("templates", "index.html")))
 )
 
+type logo struct {
+	Gopher     string
+	Gcloud     string
+	Tensorflow string
+}
+
+type indexdata struct {
+	Logos       logo
+	Style       string
+	RequestTime string
+}
+
 func main() {
 	http.HandleFunc("/", indexHandler)
 
@@ -39,16 +51,17 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 		http.NotFound(w, r)
 		return
 	}
-	type indexdata struct {
-		Logo        string
-		Style       string
-		RequestTime string
-	}
+
 	data := indexdata{
-		Logo:        "/public/gcp-gopher.svg",
+		Logos: logo{
+			Gopher:     "/public/gopher.png",
+			Gcloud:     "/public/google_cloud.png",
+			Tensorflow: "/public/tensorflow.png",
+		},
 		Style:       "/public/style.css",
 		RequestTime: time.Now().Format(time.RFC822),
 	}
+
 	if err := indexTmpl.Execute(w, data); err != nil {
 		log.Printf("Error executing template: %v", err)
 		http.Error(w, "Internal server error", http.StatusInternalServerError)
