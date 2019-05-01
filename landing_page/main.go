@@ -15,13 +15,11 @@ var (
 )
 
 type logo struct {
-	Gopher     string
-	Gcloud     string
-	Tensorflow string
+	Link string
 }
 
 type indexdata struct {
-	Logos       logo
+	Logos       []logo
 	Style       string
 	RequestTime string
 }
@@ -33,8 +31,8 @@ func main() {
 	// By configuring a static handler in app.yaml, App Engine serves all the
 	// static content itself. As a result, the following two lines are in
 	// effect for development only.
-	public := http.StripPrefix("/public", http.FileServer(http.Dir("public")))
-	http.Handle("/public", public)
+	public := http.StripPrefix("/public/", http.FileServer(http.Dir("public")))
+	http.Handle("/public/", public)
 
 	port := os.Getenv("PORT")
 	if port == "" {
@@ -53,10 +51,10 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	data := indexdata{
-		Logos: logo{
-			Gopher:     "/public/gopher.png",
-			Gcloud:     "/public/google_cloud.png",
-			Tensorflow: "/public/tensorflow.png",
+		Logos: []logo{
+			{Link: "/public/gopher.png"},
+			{Link: "/public/google_cloud.png"},
+			{Link: "/public/tensorflow.png"},
 		},
 		Style:       "/public/style.css",
 		RequestTime: time.Now().Format(time.RFC822),

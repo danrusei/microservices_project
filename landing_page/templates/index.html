@@ -9,9 +9,8 @@
 
 <h2>Dan's Development State</h2>
 <p>Current time is: {{.RequestTime}}</p>
-
-<img id="gopher" src="{{.Logos.Gopher}}" width="100">
-<img id="gcloud" src="{{.Logos.Gcloud}}" width="100">
-<img id="tensorflow" src="{{.Logos.Tensorflow}}" width="100">
+{{range .Logos}}
+  <img id="name" src="{{.Link}}" width="100">
+{{end}}
 </body>
 </html>
