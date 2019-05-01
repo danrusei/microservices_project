@@ -1,0 +1,9 @@
+[submodule "hugo_site/themes/ananke"]
+	path = hugo_site/themes/ananke
+	url = https://github.com/budparr/gohugo-theme-ananke.git
+[submodule "hugo_site/quickstart/themes/ananke"]
+	path = hugo_site/quickstart/themes/ananke
+	url = https://github.com/budparr/gohugo-theme-ananke.git
+[submodule "homepage_source/homepage_source/themes/introduction"]
+	path = homepage_source/homepage_source/themes/introduction
+	url = https://github.com/victoriadotdev/hugo-theme-introduction.git
