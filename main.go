@@ -52,9 +52,9 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 
 	data := indexdata{
 		Logos: []logo{
-			{Link: "/public/gopher.png"},
-			{Link: "/public/google_cloud.png"},
-			{Link: "/public/tensorflow.png"},
+			{Link: "/public/gopher.jpg"},
+			{Link: "/public/google_cloud.jpg"},
+			{Link: "/public/tensorflow.jpg"},
 		},
 		Style:       "/public/style.css",
 		RequestTime: time.Now().Format(time.RFC822),

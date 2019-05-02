@@ -1,4 +1,0 @@
-$(document).ready(function() {
-    var time = moment().tz("Romania/Bucharest").format("h:mm A");
-    $("#time").html(time);
-})
