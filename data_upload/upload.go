@@ -64,7 +64,7 @@ func ToFirestore(ctx context.Context, e GCSEvent) error {
 		log.Printf("could not construct the struct : %v", err)
 	}
 
-	err := insertInFirestore(teams)
+	err = insertInFirestore(teams)
 	if err != nil {
 		log.Printf("could not create the Team Document in Firestore: %v: ", err)
 	}
@@ -166,7 +166,7 @@ func insertInFirestore(teams []Team) error {
 	}
 	teamsCol := client.Collection("Teams")
 	for _, indTeam := range teams {
-		ca := teamsCol.Doc(indTeam.Team)
+		ca := teamsCol.Doc(indTeam.Team + "" + indTeam.Player)
 		_, err = ca.Set(ctx, Team{
 			Team: indTeam.Team,
 			Player: indTeam.Player,
@@ -185,6 +185,6 @@ func insertInFirestore(teams []Team) error {
 	}
 	
 	return nil
-	
+
 }
 
