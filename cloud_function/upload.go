@@ -3,16 +3,17 @@ package upload
 import (
 	"context"
 	"encoding/csv"
-//	"encoding/json"
+
+	//	"encoding/json"
 	"fmt"
+	"io"
 	"log"
 	"strconv"
 	"time"
-	"io"
 
+	"cloud.google.com/go/firestore"
 	"cloud.google.com/go/functions/metadata"
 	"cloud.google.com/go/storage"
-	"cloud.google.com/go/firestore"
 )
 
 //GCSEvent is the payload of a GCS event.
@@ -31,14 +32,14 @@ type Team struct {
 	Player        string `json:"player" firestore:"player"`
 	Nationality   string `json:"nationality" firestore:"nationality"`
 	Position      string `json:"postion" firestore:"position"`
-	Appearences   int `json:"appearences" firestore:"appearences"`
-	Goals         int `json:"goals" firestore:"goals"`
-	Assists       int `json:"assists" firestore:"assists"`
-	Passes        int `json:"passes" firestore:"passes"`
-	Interceptions int `json:"interceptions" firestores:"interceptions"`
-	Tackles       int `json:"tackles" firestores:"tackles"`
-	Fouls         int `json:"fouls" firestores:"fouls"`
-	Price         int `json:"price" firestores:"price"`
+	Appearences   int    `json:"appearences" firestore:"appearences"`
+	Goals         int    `json:"goals" firestore:"goals"`
+	Assists       int    `json:"assists" firestore:"assists"`
+	Passes        int    `json:"passes" firestore:"passes"`
+	Interceptions int    `json:"interceptions" firestores:"interceptions"`
+	Tackles       int    `json:"tackles" firestores:"tackles"`
+	Fouls         int    `json:"fouls" firestores:"fouls"`
+	Price         int    `json:"price" firestores:"price"`
 }
 
 // ToFirestore reads GCS file and upload contet to Firestore
@@ -69,14 +70,14 @@ func ToFirestore(ctx context.Context, e GCSEvent) error {
 		log.Printf("could not create the Team Document in Firestore: %v: ", err)
 	}
 	//teamsJSON, _ := json.Marshal(teams)
-    //fmt.Println(string(teamsJSON))
-	
+	//fmt.Println(string(teamsJSON))
+
 	return nil
 }
 
 func getFileFromGCS(bucket string, filename string) ([]Team, error) {
 	ctx := context.Background()
- 	client, err := storage.NewClient(ctx)
+	client, err := storage.NewClient(ctx)
 	if err != nil {
 		panic("Unable to create the storage client")
 	}
@@ -93,11 +94,11 @@ func getFileFromGCS(bucket string, filename string) ([]Team, error) {
 	var teams []Team
 	// Loop through lines & turn into object
 	for {
-        line, error := reader.Read()
-        if error == io.EOF {
-            break
-        } else if error != nil {
-            log.Fatal(error)
+		line, error := reader.Read()
+		if error == io.EOF {
+			break
+		} else if error != nil {
+			log.Fatal(error)
 		}
 		teamName := line[0]
 		player := line[1]
@@ -137,23 +138,23 @@ func getFileFromGCS(bucket string, filename string) ([]Team, error) {
 		}
 
 		squand := Team{
-			Team: teamName,
-			Player: player,
-			Nationality: nationality,
-			Position: position,
-			Appearences: appearences,
-			Goals: goals,
-			Assists: assists,
-			Passes: passes,
+			Team:          teamName,
+			Player:        player,
+			Nationality:   nationality,
+			Position:      position,
+			Appearences:   appearences,
+			Goals:         goals,
+			Assists:       assists,
+			Passes:        passes,
 			Interceptions: interceptions,
-			Tackles: tackles,
-			Fouls: fouls,
-			Price: price,
+			Tackles:       tackles,
+			Fouls:         fouls,
+			Price:         price,
 		}
 
 		teams = append(teams, squand)
 
-	}	
+	}
 
 	return teams, nil
 }
@@ -168,23 +169,22 @@ func insertInFirestore(teams []Team) error {
 	for _, indTeam := range teams {
 		ca := teamsCol.Doc(indTeam.Team + "" + indTeam.Player)
 		_, err = ca.Set(ctx, Team{
-			Team: indTeam.Team,
-			Player: indTeam.Player,
-			Nationality: indTeam.Nationality,
-			Position: indTeam.Position,
-			Appearences: indTeam.Appearences,
-			Goals: indTeam.Goals,
-			Assists: indTeam.Assists,
-			Passes: indTeam.Passes,
+			Team:          indTeam.Team,
+			Player:        indTeam.Player,
+			Nationality:   indTeam.Nationality,
+			Position:      indTeam.Position,
+			Appearences:   indTeam.Appearences,
+			Goals:         indTeam.Goals,
+			Assists:       indTeam.Assists,
+			Passes:        indTeam.Passes,
 			Interceptions: indTeam.Interceptions,
-			Tackles: indTeam.Tackles,
-			Fouls: indTeam.Fouls,
-			Price: indTeam.Price,
+			Tackles:       indTeam.Tackles,
+			Fouls:         indTeam.Fouls,
+			Price:         indTeam.Price,
 		})
 
 	}
-	
+
 	return nil
 
 }
-
