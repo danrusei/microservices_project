@@ -3,13 +3,16 @@ package upload
 import (
 	"context"
 	"encoding/csv"
+//	"encoding/json"
 	"fmt"
 	"log"
-	"os"
 	"strconv"
 	"time"
+	"io"
 
 	"cloud.google.com/go/functions/metadata"
+	"cloud.google.com/go/storage"
+	"cloud.google.com/go/firestore"
 )
 
 //GCSEvent is the payload of a GCS event.
@@ -22,30 +25,20 @@ type GCSEvent struct {
 	Updated        time.Time `json:"updated"`
 }
 
+//Team holds the team member information
 type Team struct {
-	Club   string
-	Won    int32
-	Drawn  int32
-	Lost   int32
-	GF     int32
-	GA     int32
-	GD     int32
-	Points int32
-}
-
-type Player struct {
-	Team          string
-	Player        string
-	Nationality   string
-	Position      string
-	Appearences   int32
-	Goals         int32
-	Assists       int32
-	Passes        int32
-	Interceptions int32
-	Tackles       int32
-	Fouls         int32
-	Price         int32
+	Team          string `json:"team" firestore:"team"`
+	Player        string `json:"player" firestore:"player"`
+	Nationality   string `json:"nationality" firestore:"nationality"`
+	Position      string `json:"postion" firestore:"position"`
+	Appearences   int `json:"appearences" firestore:"appearences"`
+	Goals         int `json:"goals" firestore:"goals"`
+	Assists       int `json:"assists" firestore:"assists"`
+	Passes        int `json:"passes" firestore:"passes"`
+	Interceptions int `json:"interceptions" firestores:"interceptions"`
+	Tackles       int `json:"tackles" firestores:"tackles"`
+	Fouls         int `json:"fouls" firestores:"fouls"`
+	Price         int `json:"price" firestores:"price"`
 }
 
 // ToFirestore reads GCS file and upload contet to Firestore
@@ -62,65 +55,136 @@ func ToFirestore(ctx context.Context, e GCSEvent) error {
 	log.Printf("Created: %v\n", e.TimeCreated)
 	log.Printf("Updated: %v\n", e.Updated)
 
-	if e.Name == "Teams.csv" {
-		teams, err := teamsTOstruct(e.Bucket, e.Name)
-		if err != nil {
-			panic(err)
-		}
-		fmt.Printf(teams[0].Club)
+	//copy file from gs bucket
+	//read csv file and populate Team struct
+	//insert data in Firestore
 
-	} else {
-		return nil
+	teams, err := getFileFromGCS(e.Bucket, e.Name)
+	if err != nil {
+		log.Printf("could not construct the struct : %v", err)
 	}
 
+	err := insertInFirestore(teams)
+	if err != nil {
+		log.Printf("could not create the Team Document in Firestore: %v: ", err)
+	}
+	//teamsJSON, _ := json.Marshal(teams)
+    //fmt.Println(string(teamsJSON))
+	
 	return nil
 }
 
-func teamsTOstruct(bucket string, file string) ([]Team, error) {
-
-	// Open CSV file
-	f, err := os.Open(file)
+func getFileFromGCS(bucket string, filename string) ([]Team, error) {
+	ctx := context.Background()
+ 	client, err := storage.NewClient(ctx)
 	if err != nil {
-		panic(err)
+		panic("Unable to create the storage client")
 	}
-	defer f.Close()
-
-	// Read File into a Variable
-	lines, err := csv.NewReader(f).ReadAll()
+	bkt := client.Bucket(bucket)
+	obj := bkt.Object(filename)
+	r, err := obj.NewReader(ctx)
 	if err != nil {
-		panic(err)
+		panic("cannot read object")
 	}
+	defer r.Close()
 
-	teams := []Team{}
+	reader := csv.NewReader(r)
 
+	var teams []Team
 	// Loop through lines & turn into object
-	for _, line := range lines {
-		var lineint []int64
-		for i := 0; i <= len(line); i++ {
-			switch line[i] {
-			case line[0]:
-				continue
-			default:
-				lineint[i], err = strconv.ParseInt(line[i], 10, 32)
-				if err != nil {
-					panic(err)
-				}
-			}
+	for {
+        line, error := reader.Read()
+        if error == io.EOF {
+            break
+        } else if error != nil {
+            log.Fatal(error)
+		}
+		teamName := line[0]
+		player := line[1]
+		nationality := line[2]
+		position := line[3]
+		appearences, err := strconv.Atoi(line[4])
+		if err != nil {
+			panic(err)
+		}
+		goals, err := strconv.Atoi(line[5])
+		if err != nil {
+			panic(err)
+		}
+		assists, err := strconv.Atoi(line[6])
+		if err != nil {
+			panic(err)
+		}
+		passes, err := strconv.Atoi(line[7])
+		if err != nil {
+			panic(err)
+		}
+		interceptions, err := strconv.Atoi(line[8])
+		if err != nil {
+			panic(err)
+		}
+		tackles, err := strconv.Atoi(line[9])
+		if err != nil {
+			panic(err)
+		}
+		fouls, err := strconv.Atoi(line[10])
+		if err != nil {
+			panic(err)
+		}
+		price, err := strconv.Atoi(line[11])
+		if err != nil {
+			panic(err)
 		}
 
-		team := Team{
-			Club:   line[0],
-			Won:    int32(lineint[1]),
-			Drawn:  int32(lineint[2]),
-			Lost:   int32(lineint[3]),
-			GF:     int32(lineint[4]),
-			GA:     int32(lineint[5]),
-			GD:     int32(lineint[6]),
-			Points: int32(lineint[7]),
+		squand := Team{
+			Team: teamName,
+			Player: player,
+			Nationality: nationality,
+			Position: position,
+			Appearences: appearences,
+			Goals: goals,
+			Assists: assists,
+			Passes: passes,
+			Interceptions: interceptions,
+			Tackles: tackles,
+			Fouls: fouls,
+			Price: price,
 		}
-		fmt.Println(team.Club + " " + string(team.Won) + " " + string(team.Drawn) + " " + string(team.Lost) + " " + string(team.GF) + " " + string(team.GA) + " " + string(team.GD) + " " + string(team.Points))
-		teams = append(teams, team)
-	}
+
+		teams = append(teams, squand)
+
+	}	
 
 	return teams, nil
 }
+
+func insertInFirestore(teams []Team) error {
+	ctx := context.Background()
+	client, err := firestore.NewClient(ctx, "apps-microservices")
+	if err != nil {
+		log.Printf("cannot create new firestore client: %v", err)
+	}
+	teamsCol := client.Collection("Teams")
+	for _, indTeam := range teams {
+		ca := teamsCol.Doc(indTeam.Team)
+		_, err = ca.Set(ctx, Team{
+			Team: indTeam.Team,
+			Player: indTeam.Player,
+			Nationality: indTeam.Nationality,
+			Position: indTeam.Position,
+			Appearences: indTeam.Appearences,
+			Goals: indTeam.Goals,
+			Assists: indTeam.Assists,
+			Passes: indTeam.Passes,
+			Interceptions: indTeam.Interceptions,
+			Tackles: indTeam.Tackles,
+			Fouls: indTeam.Fouls,
+			Price: indTeam.Price,
+		})
+
+	}
+	
+	return nil
+	
+}
+
