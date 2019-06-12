@@ -10,6 +10,7 @@ import (
 	"log"
 	"strconv"
 	"time"
+	"strings"
 
 	"cloud.google.com/go/firestore"
 	"cloud.google.com/go/functions/metadata"
@@ -167,7 +168,7 @@ func insertInFirestore(teams []Team) error {
 	}
 	teamsCol := client.Collection("Teams")
 	for _, indTeam := range teams {
-		ca := teamsCol.Doc(indTeam.Team + "" + indTeam.Player)
+		ca := teamsCol.Doc(indTeam.Team + "_" + strings.Replace(indTeam.Player, " ", "_", -1))
 		_, err = ca.Set(ctx, Team{
 			Team:          indTeam.Team,
 			Player:        indTeam.Player,
