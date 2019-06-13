@@ -1,7 +1,6 @@
 package service
 
-//Table model
-
+//Table struct holds League table data
 type Table struct {
 	TeamName    string
 	TeamPlayed  int32
@@ -15,8 +14,7 @@ type Table struct {
 	TeamCapital int32
 }
 
-//Player model
-
+//Player struct holds player data
 type Player struct {
 	Name          string
 	Team          string

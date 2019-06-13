@@ -1,9 +1,9 @@
 package main
 
 import (
-	"os"
-	"net"
 	"fmt"
+	"net"
+	"os"
 	"os/signal"
 	"syscall"
 
@@ -12,10 +12,10 @@ import (
 	"google.golang.org/grpc"
 
 	"github.com/Danr17/microservices_project/stats/pb"
-
+	"github.com/Danr17/microservices_project/stats/service"
 )
 
-func main () {
+func main() {
 
 	var logger log.Logger
 	logger = log.NewLogfmtLogger(os.Stderr)
