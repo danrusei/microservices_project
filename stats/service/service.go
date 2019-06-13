@@ -19,7 +19,7 @@ type StatsService interface {
 func NewStatsService(logger log.Logger) StatsService {
 	var svc StatsService
 	svc = NewBasicService()
-	svc = LoggingMiddleWare(logger)(svc)
+	svc = LoggingMiddleware(logger)(svc)
 	return svc
 }
 

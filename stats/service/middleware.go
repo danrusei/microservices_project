@@ -35,7 +35,7 @@ func (mw loggingMiddleware) ListTeamPlayers(ctx context.Context, teamName string
 	return mw.next.ListTeamPlayers(ctx, teamName)
 }
 
-func (mw loggingMiddleware) ListPostionPlayers(ctx context.Context, postion string) (p []Player, err error) {
+func (mw loggingMiddleware) ListPostionPlayers(ctx context.Context, position string) (p []Player, err error) {
 	defer func() {
 		mw.logger.Log("method", "ListPostionPlayers", "position", position, "err", err)
 	}()
