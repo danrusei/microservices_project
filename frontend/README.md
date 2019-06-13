@@ -1,0 +1,1 @@
+This is the main service which expose and JSON over HTTP to users and talk by grpc with Stats Service, Player Service and Transfer Service.

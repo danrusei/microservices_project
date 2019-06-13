@@ -1,0 +1,101 @@
+syntax = "proto3";
+
+package pb;
+
+// -------------- Stats Service ------------------
+
+service StatsService {
+    rpc ListTable(TableRequest) returns (TableReply) {}
+    rpc ListTeamPlayers(TeamRequest) returns (Players) {}
+    rpc ListPostionPlayers(PositionRequest) returns (Players) {}
+}
+
+message TableRequest {
+    string table_name = 1;
+}
+
+message Table {
+    string team_name = 1;
+    int32 team_played = 2;
+    int32 team_won = 3;
+    int32 team_drawn = 4;
+    int32 team_lost = 5;
+    int32 team_gf = 6;
+    int32 team_ga = 7;
+    int32 team_gd = 8;
+    int32 team_points = 9;
+    int32 team_capital = 10;
+}
+
+message TableReply {
+    repeated Table teams = 1;
+
+}
+
+message TeamRequest {
+    string team_name = 1;
+}
+
+message Player {
+    string name = 1;
+    string team = 2;
+    string nationality = 3;
+    string position = 4;
+    int32 appearences = 5;
+    int32 goals = 6;
+    int32 assists = 7;
+    int32 passes = 8;
+    int32 interceptions = 9;
+    int32 tackles = 10;
+    int32 fouls = 11;
+}
+
+message Players {
+    repeated Player players = 1;
+}
+
+message PositionRequest {
+    string position = 1;
+}
+
+// -------------- Player Service -----------------
+
+service PlayerService {
+    rpc GetPlayer(PlayerRequest) returns (Player) {}
+    rpc CreatePlayer(Player) returns (OpsReply) {}
+    rpc UpadatePlayer(Player) returns (OpsReply) {}
+    rpc DeletePLayer(PlayerRequest) returns (OpsReply) {}
+}
+
+message PlayerRequest {
+    string name = 1;
+}
+
+message OpsReply {
+    string ops = 1;
+}
+
+
+// -------------- Transfer Service ---------------
+
+service TransferService {
+    rpc TeamCapital(TeamCapitalRequest) returns (TeamCapitalReply) {}
+    rpc PlayerCost(PlayerRequest) returns (PlayerCostReply) {}
+    rpc TransferPlayer(PlayerTransferRequest) returns (OpsReply) {}
+}
+
+message TeamCapitalRequest {
+    string name = 1;
+}
+
+message TeamCapitalReply {
+    int32 capital = 1;
+}
+
+message PlayerCostReply {
+    int32 cost = 1;
+}
+
+message PlayerTransferRequest {
+    int32 transfer = 1;
+}
