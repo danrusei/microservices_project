@@ -10,7 +10,7 @@ import (
 type StatsService interface {
 	ListTable(ctx context.Context, league string) ([]Table, error)
 	ListTeamPlayers(ctx context.Context, teamName string) ([]Player, error)
-	ListPostionPlayers(ctx context.Context, postion string) ([]Player, error)
+	ListPositionPlayers(ctx context.Context, postion string) ([]Player, error)
 }
 
 // ** Implementation of the service **
@@ -38,6 +38,6 @@ func (s basicService) ListTeamPlayers(ctx context.Context, teamName string) ([]P
 
 }
 
-func (s basicService) ListPostionPlayers(ctx context.Context, postion string) ([]Player, error) {
+func (s basicService) ListPositionPlayers(ctx context.Context, postion string) ([]Player, error) {
 
 }
