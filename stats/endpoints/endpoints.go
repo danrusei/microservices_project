@@ -9,17 +9,17 @@ import (
 
 //Endpoints holds all Stats Service enpoints
 type Endpoints struct {
-	ListTable           endpoint.Endpoint
-	ListTeamPlayers     endpoint.Endpoint
-	ListPositionPlayers endpoint.Endpoint
+	ListTableEndpoint           endpoint.Endpoint
+	ListTeamPlayersEndpoint     endpoint.Endpoint
+	ListPositionPlayersEndpoint endpoint.Endpoint
 }
 
 //MakeStatsEndpoints initialize all service Endpoints
 func MakeStatsEndpoints(s service.StatsService) Endpoints {
 	return Endpoints{
-		ListTable:           makeListTableEndpoint(s),
-		ListTeamPlayers:     makeListTeamPLayersEndpoint(s),
-		ListPositionPlayers: makeListPositionPlayersEnpoint(s),
+		ListTableEndpoint:           makeListTableEndpoint(s),
+		ListTeamPlayersEndpoint:     makeListTeamPLayersEndpoint(s),
+		ListPositionPlayersEndpoint: makeListPositionPlayersEnpoint(s),
 	}
 }
 
