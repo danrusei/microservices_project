@@ -27,10 +27,21 @@ func main() {
 	level.Info(logger).Log("msg", "service started")
 	defer level.Info(logger).Log("msg", "service ended")
 
+	/* add database
+	ctx := context.Background()
+	var firestoreClient *firestore.Client
+	firestoreClient, err := firestore.NewClient(ctx, "apps-microservices")
+	if err != nil {
+		logger.Log("database", "firestore", "during", "ClientCreation", "err", err)
+		os.Exit(1)
+	}
+	*/
+
 	// Build the layers of the service "onion" from the inside out. First, the
 	// business logic service; then, the set of endpoints that wrap the service;
 	// and finally, a series of concrete transport adapters
 
+	//addDatabase := database.New(firestoreClient, logger)
 	addservice := service.NewStatsService(logger)
 	addendpoints := endpoints.MakeStatsEndpoints(addservice)
 	grpcServer := transport.NewGRPCServer(addendpoints, logger)
