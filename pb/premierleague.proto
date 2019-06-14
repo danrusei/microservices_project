@@ -6,25 +6,25 @@ package pb;
 
 service StatsService {
     rpc ListTable(TableRequest) returns (TableReply) {}
-    rpc ListTeamPlayers(TeamRequest) returns (Players) {}
-    rpc ListPostionPlayers(PositionRequest) returns (Players) {}
+    rpc ListTeamPlayers(TeamRequest) returns (TeamReply) {}
+    rpc ListPostionPlayers(PositionRequest) returns (PositionReply) {}
 }
 
 message TableRequest {
-    string table_name = 1;
+    string tableName = 1;
 }
 
 message Table {
-    string team_name = 1;
-    int32 team_played = 2;
-    int32 team_won = 3;
-    int32 team_drawn = 4;
-    int32 team_lost = 5;
-    int32 team_gf = 6;
-    int32 team_ga = 7;
-    int32 team_gd = 8;
-    int32 team_points = 9;
-    int32 team_capital = 10;
+    string teamName = 1;
+    int32 teamPlayed = 2;
+    int32 teamWon = 3;
+    int32 teamDrawn = 4;
+    int32 teamLost = 5;
+    int32 teamGF = 6;
+    int32 teamGA = 7;
+    int32 teamGD = 8;
+    int32 teamPoints = 9;
+    int32 teamCapital = 10;
 }
 
 message TableReply {
@@ -33,7 +33,7 @@ message TableReply {
 }
 
 message TeamRequest {
-    string team_name = 1;
+    string teamName = 1;
 }
 
 message Player {
@@ -50,7 +50,7 @@ message Player {
     int32 fouls = 11;
 }
 
-message Players {
+message TeamReply {
     repeated Player players = 1;
 }
 
@@ -58,20 +58,48 @@ message PositionRequest {
     string position = 1;
 }
 
+message PositionReply {
+    repeated Player players = 1;
+}
+
 // -------------- Player Service -----------------
 
 service PlayerService {
-    rpc GetPlayer(PlayerRequest) returns (Player) {}
-    rpc CreatePlayer(Player) returns (OpsReply) {}
-    rpc UpadatePlayer(Player) returns (OpsReply) {}
-    rpc DeletePLayer(PlayerRequest) returns (OpsReply) {}
+    rpc GetPlayer(GetPlayerRequest) returns (GetPlayerReply) {}
+    rpc CreatePlayer(CreatePlayerRequest) returns (CreatePlayerReply) {}
+    rpc UpdatePlayer(UpdatePlayerRequest) returns (UpdatePlayerReply) {}
+    rpc DeletePLayer(DeletePlayerRequest) returns (DeletePlayerReply) {}
 }
 
-message PlayerRequest {
+message GetPlayerRequest {
     string name = 1;
 }
 
-message OpsReply {
+message GetPlayerReply {
+    string ops = 1;
+}
+
+message CreatePlayerRequest {
+    Player name = 1;
+}
+
+message CreatePlayerReply {
+    string ops = 1;
+}
+
+message UpdatePlayerRequest {
+    Player name = 1;
+}
+
+message UpdatePlayerReply {
+    string ops = 1;
+}
+
+message DeletePlayerRequest {
+    string name = 1;
+}
+
+message DeletePlayerReply {
     string ops = 1;
 }
 
@@ -80,8 +108,8 @@ message OpsReply {
 
 service TransferService {
     rpc TeamCapital(TeamCapitalRequest) returns (TeamCapitalReply) {}
-    rpc PlayerCost(PlayerRequest) returns (PlayerCostReply) {}
-    rpc TransferPlayer(PlayerTransferRequest) returns (OpsReply) {}
+    rpc PlayerCost(PlayerCostRequest) returns (PlayerCostReply) {}
+    rpc TransferPlayer(PlayerTransferRequest) returns (PlayerTransferReply) {}
 }
 
 message TeamCapitalRequest {
@@ -92,10 +120,19 @@ message TeamCapitalReply {
     int32 capital = 1;
 }
 
+message PlayerCostRequest {
+    string name = 1;
+}
+
 message PlayerCostReply {
     int32 cost = 1;
 }
 
 message PlayerTransferRequest {
-    int32 transfer = 1;
+    string name = 1;
+    string team = 2;
+}
+
+message PlayerTransferReply {
+    string ops = 1;
 }
