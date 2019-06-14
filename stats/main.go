@@ -11,8 +11,10 @@ import (
 	"github.com/go-kit/kit/log/level"
 	"google.golang.org/grpc"
 
+	"github.com/Danr17/microservices_project/stats/endpoints"
 	"github.com/Danr17/microservices_project/stats/pb"
 	"github.com/Danr17/microservices_project/stats/service"
+	"github.com/Danr17/microservices_project/stats/transport"
 )
 
 func main() {
@@ -29,9 +31,9 @@ func main() {
 	// business logic service; then, the set of endpoints that wrap the service;
 	// and finally, a series of concrete transport adapters
 
-	service := service.NewStatsService(logger)
-	endpoints := enpoints.MakeStatsEndpoints(service)
-	grpcServer := transport.NewGRPCServer(endpoints, logger)
+	addservice := service.NewStatsService(logger)
+	addendpoints := endpoints.MakeStatsEndpoints(addservice)
+	grpcServer := transport.NewGRPCServer(addendpoints, logger)
 
 	errs := make(chan error)
 	go func() {
@@ -53,5 +55,4 @@ func main() {
 	}()
 
 	level.Error(logger).Log("exit", <-errs)
-
 }
