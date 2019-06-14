@@ -47,8 +47,8 @@ type TeamRequest struct {
 	teamName string
 }
 
-//PlayersReply holds the response params for ListTeamPlayers
-type PlayersReply struct {
+//TeamReply holds the response params for ListTeamPlayers
+type TeamReply struct {
 	players []service.Player
 	Err     error
 }
@@ -57,7 +57,7 @@ func makeListTeamPLayersEndpoint(s service.StatsService) endpoint.Endpoint {
 	return func(ctx context.Context, request interface{}) (interface{}, error) {
 		req := request.(TeamRequest)
 		teamPlayers, err := s.ListTeamPlayers(ctx, req.teamName)
-		return PlayersReply{players: teamPlayers, Err: err}, nil
+		return TeamReply{players: teamPlayers, Err: err}, nil
 	}
 }
 

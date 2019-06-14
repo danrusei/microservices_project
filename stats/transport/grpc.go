@@ -22,13 +22,13 @@ func NewGRPCServer(newendpoints endpoints.Endpoints, logger log.logger) pb.Stats
 		),
 		listTeamPlayers: gt.NewServer(
 			newendpoints.ListTeamPlayersEndpoint,
-			decodeListTeamPLayers
-			encodeListTeamPLayers,
+			decodeListTeamPlayers,
+			encodeListTeamPlayers,
 		),
 		listPositionPlayers: gt.NewServer(
 			newendpoints.ListPositionPlayersEndpoint,
 			decodeListPositionPlayers,
-			encodeListPositionPLayers,
+			encodeListPositionPlayers,
 		),
 	}
 }
@@ -57,4 +57,52 @@ func (s *gRPCServer) ListPositionPlayers(ctx context.Context, req *pb.PositionRe
 	return resp.(*pb.PositionReply), nil
 }
 
-//TODO have to add encode and decode functions !!!!!
+func decodeListTableRequest(_ context.Context, request interface{}) (interface{}, error) {
+	req := request.(*pb.TableRequest)
+	return endpoints.TableRequest{league: req.tableName}
+}
+
+///!!! but Err is not defined in pb file!!!!!!!!!
+func encodeListTableResponse(_ context.Context, response interface{}) (interface{}, error) {
+	resp := response.(endpoints.TableReply)
+	return &pb.TableReply{teams: resp.teams, Err: err2str(resp.Err)}
+}
+
+func decodeListTeamPlayers(_ context.Context, request interface{}) (interface{}, error) {
+	req := request.(*pb.TeamRequest)
+	return endpoints.TeamRequest{teamName: req.teamName}
+}
+
+///!!! but Err is not defined in pb file!!!!!!!!!
+func encodeListTeamPlayers(_ context.Context, response interface{}) (interface{}, error) {
+	resp := response.(endpoints.TeamReply)
+	return &pb.TeamReply{players: resp.players, Err: err2str(resp.Err)}
+}
+
+func decodeListPositionPlayers(_ context.Context, request interface{}) (interface{}, error) {
+	req := request.(*pb.PositionRequest)
+	return endpoints.PositionRequest{position: req.position}
+}
+
+///!!! but Err is not defined in pb file!!!!!!!!!
+func encodeListPositionPlayers(_ context.Context, response interface{}) (interface{}, error) {
+	resp := response.(endpoints.PositionReply)
+	return &pb.PositionReply{players: resp.players, Err: err2str(resp.Err)}
+}
+
+// Helper functions are required to translate Go error types to
+// and from strings, which is the type we use in our IDLs to represent errors.
+
+func str2err(s string) error {
+	if s == "" {
+		return nil
+	}
+	return errors.New(s)
+}
+
+func err2str(err error) string {
+	if err == nil {
+		return ""
+	}
+	return err.Error()
+}
