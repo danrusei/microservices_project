@@ -29,6 +29,7 @@ message Table {
 
 message TableReply {
     repeated Table teams = 1;
+    string err = 2;
 
 }
 
@@ -52,6 +53,7 @@ message Player {
 
 message TeamReply {
     repeated Player players = 1;
+    string err = 2;
 }
 
 message PositionRequest {
@@ -60,6 +62,7 @@ message PositionRequest {
 
 message PositionReply {
     repeated Player players = 1;
+    string err = 2;
 }
 
 // -------------- Player Service -----------------
@@ -77,6 +80,7 @@ message GetPlayerRequest {
 
 message GetPlayerReply {
     string ops = 1;
+    string err = 2;
 }
 
 message CreatePlayerRequest {
@@ -85,6 +89,7 @@ message CreatePlayerRequest {
 
 message CreatePlayerReply {
     string ops = 1;
+    string err = 2;
 }
 
 message UpdatePlayerRequest {
@@ -93,6 +98,7 @@ message UpdatePlayerRequest {
 
 message UpdatePlayerReply {
     string ops = 1;
+    string err = 2;
 }
 
 message DeletePlayerRequest {
@@ -101,6 +107,7 @@ message DeletePlayerRequest {
 
 message DeletePlayerReply {
     string ops = 1;
+    string err = 2;
 }
 
 
@@ -118,6 +125,7 @@ message TeamCapitalRequest {
 
 message TeamCapitalReply {
     int32 capital = 1;
+    string err = 2;
 }
 
 message PlayerCostRequest {
@@ -126,6 +134,7 @@ message PlayerCostRequest {
 
 message PlayerCostReply {
     int32 cost = 1;
+    string err = 2;
 }
 
 message PlayerTransferRequest {
@@ -135,4 +144,5 @@ message PlayerTransferRequest {
 
 message PlayerTransferReply {
     string ops = 1;
+    string err = 2;
 }
