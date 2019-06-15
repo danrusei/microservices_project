@@ -6,6 +6,7 @@ import (
 
 	"github.com/Danr17/microservices_project/stats/endpoints"
 	"github.com/Danr17/microservices_project/stats/pb"
+	"github.com/go-kit/kit/log"
 	gt "github.com/go-kit/kit/transport/grpc"
 )
 
@@ -16,7 +17,7 @@ type gRPCServer struct {
 }
 
 // NewGRPCServer makes a set of endpoints available as a gRPC StatsServiceServer.
-func NewGRPCServer(newendpoints endpoints.Endpoints, logger log.logger) pb.StatsServiceServer {
+func NewGRPCServer(newendpoints endpoints.Endpoints, logger log.Logger) pb.StatsServiceServer {
 	return &gRPCServer{
 		listTable: gt.NewServer(
 			newendpoints.ListTableEndpoint,
