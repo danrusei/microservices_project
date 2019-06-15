@@ -7,7 +7,7 @@ package pb;
 service StatsService {
     rpc ListTable(TableRequest) returns (TableReply) {}
     rpc ListTeamPlayers(TeamRequest) returns (TeamReply) {}
-    rpc ListPostionPlayers(PositionRequest) returns (PositionReply) {}
+    rpc ListPositionPlayers(PositionRequest) returns (PositionReply) {}
 }
 
 message TableRequest {

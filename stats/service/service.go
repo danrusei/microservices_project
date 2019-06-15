@@ -3,6 +3,7 @@ package service
 import (
 	"context"
 
+	"cloud.google.com/go/firestore"
 	"github.com/go-kit/kit/log"
 )
 
@@ -16,28 +17,41 @@ type StatsService interface {
 // ** Implementation of the service **
 
 // NewStatsService returns a basic StatsService with all of the expected middlewares wired in.
-func NewStatsService(logger log.Logger) StatsService {
+func NewStatsService(client *firestore.Client, logger log.Logger) StatsService {
 	var svc StatsService
-	svc = NewBasicService()
+	svc = NewBasicService(client)
 	svc = LoggingMiddleware(logger)(svc)
 	return svc
 }
 
 // NewBasicService returns a naive, stateless implementation of StatsService.
-func NewBasicService() StatsService {
-	return basicService{}
+func NewBasicService(client *firestore.Client) StatsService {
+	return basicService{
+		dbClient: client,
+	}
 }
 
-type basicService struct{}
+type basicService struct {
+	dbClient *firestore.Client
+}
 
 func (s basicService) ListTable(ctx context.Context, league string) ([]Table, error) {
 
+	//implement database request
+
+	return nil, nil
 }
 
 func (s basicService) ListTeamPlayers(ctx context.Context, teamName string) ([]Player, error) {
 
+	//implement database request
+
+	return nil, nil
 }
 
 func (s basicService) ListPositionPlayers(ctx context.Context, postion string) ([]Player, error) {
 
+	//implement database request
+
+	return nil, nil
 }

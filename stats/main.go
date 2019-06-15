@@ -1,14 +1,17 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"net"
 	"os"
 	"os/signal"
 	"syscall"
 
+	"cloud.google.com/go/firestore"
 	"github.com/go-kit/kit/log"
 	"github.com/go-kit/kit/log/level"
+	"google.golang.org/api/option"
 	"google.golang.org/grpc"
 
 	"github.com/Danr17/microservices_project/stats/endpoints"
@@ -27,22 +30,23 @@ func main() {
 	level.Info(logger).Log("msg", "service started")
 	defer level.Info(logger).Log("msg", "service ended")
 
-	/* add database
+	// add database with credentials to run locally
 	ctx := context.Background()
 	var firestoreClient *firestore.Client
-	firestoreClient, err := firestore.NewClient(ctx, "apps-microservices")
+	sa := option.WithCredentialsFile("../keys/apps-microservices-68b9b8c44847.json")
+	firestoreClient, err := firestore.NewClient(ctx, "apps-microservices", sa)
 	if err != nil {
 		logger.Log("database", "firestore", "during", "ClientCreation", "err", err)
 		os.Exit(1)
 	}
-	*/
+
+	defer firestoreClient.Close()
 
 	// Build the layers of the service "onion" from the inside out. First, the
 	// business logic service; then, the set of endpoints that wrap the service;
 	// and finally, a series of concrete transport adapters
 
-	//addDatabase := database.New(firestoreClient, logger)
-	addservice := service.NewStatsService(logger)
+	addservice := service.NewStatsService(firestoreClient, logger)
 	addendpoints := endpoints.MakeStatsEndpoints(addservice)
 	grpcServer := transport.NewGRPCServer(addendpoints, logger)
 

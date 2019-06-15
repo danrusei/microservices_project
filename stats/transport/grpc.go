@@ -62,32 +62,32 @@ func (s *gRPCServer) ListPositionPlayers(ctx context.Context, req *pb.PositionRe
 
 func decodeListTableRequest(_ context.Context, request interface{}) (interface{}, error) {
 	req := request.(*pb.TableRequest)
-	return endpoints.TableRequest{league: req.TableName}
+	return endpoints.TableRequest{League: req.TableName}, nil
 }
 
 func encodeListTableResponse(_ context.Context, response interface{}) (interface{}, error) {
 	resp := response.(endpoints.TableReply)
-	return &pb.TableReply{Teams: resp.teams, Err: err2str(resp.Err)}
+	return &pb.TableReply{Teams: resp.Teams, Err: err2str(resp.Err)}, nil
 }
 
 func decodeListTeamPlayers(_ context.Context, request interface{}) (interface{}, error) {
 	req := request.(*pb.TeamRequest)
-	return endpoints.TeamRequest{teamName: req.TeamName}
+	return endpoints.TeamRequest{TeamName: req.TeamName}, nil
 }
 
 func encodeListTeamPlayers(_ context.Context, response interface{}) (interface{}, error) {
 	resp := response.(endpoints.TeamReply)
-	return &pb.TeamReply{Players: resp.players, Err: err2str(resp.Err)}
+	return &pb.TeamReply{Players: resp.Players, Err: err2str(resp.Err)}, nil
 }
 
 func decodeListPositionPlayers(_ context.Context, request interface{}) (interface{}, error) {
 	req := request.(*pb.PositionRequest)
-	return endpoints.PositionRequest{position: req.Position}
+	return endpoints.PositionRequest{Position: req.Position}, nil
 }
 
 func encodeListPositionPlayers(_ context.Context, response interface{}) (interface{}, error) {
 	resp := response.(endpoints.PositionReply)
-	return &pb.PositionReply{Players: resp.players, Err: err2str(resp.Err)}
+	return &pb.PositionReply{Players: resp.Players, Err: err2str(resp.Err)}, nil
 }
 
 // Helper functions are required to translate Go error types to

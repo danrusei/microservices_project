@@ -25,58 +25,58 @@ func MakeStatsEndpoints(s service.StatsService) Endpoints {
 
 //TableRequest holds the request params for ListTables
 type TableRequest struct {
-	league string
+	League string
 }
 
 //TableReply holds the response params for ListTables
 type TableReply struct {
-	teams []service.Table
+	Teams []service.Table
 	Err   error
 }
 
 func makeListTableEndpoint(s service.StatsService) endpoint.Endpoint {
 	return func(ctx context.Context, request interface{}) (interface{}, error) {
 		req := request.(TableRequest)
-		table, err := s.ListTable(ctx, req.league)
-		return TableReply{teams: table, Err: err}, nil
+		table, err := s.ListTable(ctx, req.League)
+		return TableReply{Teams: table, Err: err}, nil
 	}
 }
 
 //TeamRequest holds the request params for ListTeamPLayers
 type TeamRequest struct {
-	teamName string
+	TeamName string
 }
 
 //TeamReply holds the response params for ListTeamPlayers
 type TeamReply struct {
-	players []service.Player
+	Players []service.Player
 	Err     error
 }
 
 func makeListTeamPLayersEndpoint(s service.StatsService) endpoint.Endpoint {
 	return func(ctx context.Context, request interface{}) (interface{}, error) {
 		req := request.(TeamRequest)
-		teamPlayers, err := s.ListTeamPlayers(ctx, req.teamName)
-		return TeamReply{players: teamPlayers, Err: err}, nil
+		teamPlayers, err := s.ListTeamPlayers(ctx, req.TeamName)
+		return TeamReply{Players: teamPlayers, Err: err}, nil
 	}
 }
 
 //PositionRequest holds the request paramas for ListPositionPlayers
 type PositionRequest struct {
-	position string
+	Position string
 }
 
 //PositionReply holds the response paramas for ListPositionPlayers
 type PositionReply struct {
-	players []service.Player
+	Players []service.Player
 	Err     error
 }
 
 func makeListPositionPlayersEnpoint(s service.StatsService) endpoint.Endpoint {
 	return func(ctx context.Context, request interface{}) (interface{}, error) {
 		req := request.(PositionRequest)
-		positionPlayers, err := s.ListPositionPlayers(ctx, req.position)
-		return PositionReply{players: positionPlayers, Err: err}, nil
+		positionPlayers, err := s.ListPositionPlayers(ctx, req.Position)
+		return PositionReply{Players: positionPlayers, Err: err}, nil
 	}
 
 }

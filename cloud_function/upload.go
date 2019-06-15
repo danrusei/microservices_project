@@ -9,8 +9,8 @@ import (
 	"io"
 	"log"
 	"strconv"
-	"time"
 	"strings"
+	"time"
 
 	"cloud.google.com/go/firestore"
 	"cloud.google.com/go/functions/metadata"
@@ -166,6 +166,8 @@ func insertInFirestore(teams []Team) error {
 	if err != nil {
 		log.Printf("cannot create new firestore client: %v", err)
 	}
+	defer client.Close()
+
 	teamsCol := client.Collection("Teams")
 	for _, indTeam := range teams {
 		ca := teamsCol.Doc(indTeam.Team + "_" + strings.Replace(indTeam.Player, " ", "_", -1))
