@@ -37,21 +37,24 @@ type basicService struct {
 
 func (s basicService) ListTable(ctx context.Context, league string) ([]Table, error) {
 
+	var t []Table
 	//implement database request
 
-	return nil, nil
+	return t, nil
 }
 
 func (s basicService) ListTeamPlayers(ctx context.Context, teamName string) ([]Player, error) {
 
+	var p []Player
 	//implement database request
 
-	return nil, nil
+	return p, nil
 }
 
 func (s basicService) ListPositionPlayers(ctx context.Context, postion string) ([]Player, error) {
 
+	var p []Player
 	//implement database request
 
-	return nil, nil
+	return p, nil
 }
