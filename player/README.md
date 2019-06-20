@@ -1,1 +1,0 @@
-This is the Player service, which implement CRUD operations over player database.
