@@ -7,6 +7,14 @@ import (
 	"github.com/go-kit/kit/log"
 )
 
+var (
+	//ErrIterate informs if iteration errors
+	ErrIterate = errors.New("can't iterate over the colection documents")
+
+	//ErrExtractDataToStruct informs if unable to extract firestore data to struct
+	ErrExtractDataToStruct = errors.New("can't extract the data into a struct with DataTo")
+)
+
 //StatsService describe the Stats service
 type StatsService interface {
 	ListTable(ctx context.Context, league string) ([]Table, error)
@@ -37,10 +45,28 @@ type basicService struct {
 
 func (s basicService) ListTable(ctx context.Context, league string) ([]Table, error) {
 
-	var t []Table
-	//implement database request
+	var teamTable Table
+	var leagueTable []Table
 
-	return t, nil
+	leagueDocs := s.dbClient.Collection(league)
+	q := leagueDocs.OrderBy("Points", firestore.Desc)
+	iter := q.Documents(ctx)
+	defer iter.Stop()
+	for {
+		doc, err := iter.Next()
+		if err == iterator.Done {
+			break
+		}
+		if err != nil {
+			return nil, ErrIterate
+		}
+		if err := doc.DataTo(&teamTable); err != nil {
+			return nil, ErrExtractDataToStruct
+		}
+		leagueTable = append(leagueTable, teamTable)
+	}
+
+	return leagueTable, nil
 }
 
 func (s basicService) ListTeamPlayers(ctx context.Context, teamName string) ([]Player, error) {
