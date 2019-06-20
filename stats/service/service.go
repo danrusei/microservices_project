@@ -71,16 +71,52 @@ func (s basicService) ListTable(ctx context.Context, league string) ([]Table, er
 
 func (s basicService) ListTeamPlayers(ctx context.Context, teamName string) ([]Player, error) {
 
-	var p []Player
-	//implement database request
+	var singlePlayer Player
+	var teamPlayers []Player
+	
+	teamsDocs := s.dbClient.Collection("Teams")
+	q := teamsDocs.Where("team", "array-contains", teamName).OrderBy("player", firestore.Desc)
+	iter := q.Documents(ctx)
+	defer iter.Stop()
+	for {
+		doc, err := iter.Next()
+		if err == iterator.Done {
+			break
+		}
+		if err != nil {
+			return nil, ErrIterate
+		}
+		if err := doc.DataTo(&singlePlayer); err != nil {
+			return nil, ErrExtractDataToStruct
+		}
+		teamPlayers = append(teamPlayers, singlePlayer)
+	}
 
-	return p, nil
+	return teamPlayers, nil
 }
 
 func (s basicService) ListPositionPlayers(ctx context.Context, postion string) ([]Player, error) {
 
-	var p []Player
-	//implement database request
+	var singlePlayer Player
+	var teamPlayers []Player
+	
+	teamsDocs := s.dbClient.Collection("Teams")
+	q := teamsDocs.Where("position", "array-contains", position).OrderBy("team", firestore.Desc)
+	iter := q.Documents(ctx)
+	defer iter.Stop()
+	for {
+		doc, err := iter.Next()
+		if err == iterator.Done {
+			break
+		}
+		if err != nil {
+			return nil, ErrIterate
+		}
+		if err := doc.DataTo(&singlePlayer); err != nil {
+			return nil, ErrExtractDataToStruct
+		}
+		teamPlayers = append(teamPlayers, singlePlayer)
+	}
 
-	return p, nil
+	return teamPlayers, nil
 }
