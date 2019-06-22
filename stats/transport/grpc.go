@@ -2,12 +2,15 @@ package transport
 
 import (
 	"context"
+	"encoding/json"
 	"errors"
+	"strings"
 
 	"github.com/Danr17/microservices_project/stats/endpoints"
 	"github.com/Danr17/microservices_project/stats/pb"
 	"github.com/go-kit/kit/log"
 	gt "github.com/go-kit/kit/transport/grpc"
+	"github.com/golang/protobuf/jsonpb"
 )
 
 type gRPCServer struct {
@@ -68,7 +71,18 @@ func decodeListTableRequest(_ context.Context, request interface{}) (interface{}
 
 func encodeListTableResponse(_ context.Context, response interface{}) (interface{}, error) {
 	resp := response.(endpoints.TableReply)
-	return &pb.TableReply{Teams: resp.Teams, Err: err2str(resp.Err)}, nil
+
+	rbytes, err := json.Marshal(resp)
+	if err != nil {
+		panic(err)
+	}
+	resultTeams := &pb.TableReply{}
+	r := strings.NewReader(string(rbytes))
+	if err := jsonpb.Unmarshal(r, resultTeams); err != nil {
+		panic(err)
+	}
+
+	return resultTeams, nil
 }
 
 func decodeListTeamPlayers(_ context.Context, request interface{}) (interface{}, error) {

@@ -2,16 +2,16 @@ package service
 
 //Table struct holds League table data
 type Table struct {
-	TeamName    string `firestore:"Name"`
-	TeamPlayed  int32  `firestore:"Played"`
-	TeamWon     int32  `firestore:"Won"`
-	TeamDrawn   int32  `firestore:"Drawn"`
-	TeamLost    int32  `firestore:"Lost"`
-	TeamGF      int32  `firestore:"GF"`
-	TeamGA      int32  `firestore:"GA"`
-	TeamGD      int32  `firestore:"GD"`
-	TeamPoints  int32  `firestore:"Points"`
-	TeamCapital int32  `firestore:"Capital"`
+	TeamName    string `firestore:"Name" json:"teamName"`
+	TeamPlayed  int32  `firestore:"Played" json:"teamPlayed"`
+	TeamWon     int32  `firestore:"Won" json:"teamWon"`
+	TeamDrawn   int32  `firestore:"Drawn" json:"teamDrawn"`
+	TeamLost    int32  `firestore:"Lost" json:"teamLost"`
+	TeamGF      int32  `firestore:"GF" json:"teamGF"`
+	TeamGA      int32  `firestore:"GA" json:"teamGA"`
+	TeamGD      int32  `firestore:"GD" json:"teamGD"`
+	TeamPoints  int32  `firestore:"Points" json:"teamPoints"`
+	TeamCapital int32  `firestore:"Capital" json:"teamCapital"`
 }
 
 //Player struct holds player data

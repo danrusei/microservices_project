@@ -30,8 +30,8 @@ type TableRequest struct {
 
 //TableReply holds the response params for ListTables
 type TableReply struct {
-	Teams []*service.Table
-	Err   error
+	Teams []*service.Table `json:"teams"`
+	Err   error            `json:"err"`
 }
 
 func makeListTableEndpoint(s service.StatsService) endpoint.Endpoint {
