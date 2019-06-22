@@ -22,6 +22,8 @@ import (
 
 func main() {
 
+	var grpcAddr = ":8081"
+
 	var logger log.Logger
 	logger = log.NewLogfmtLogger(os.Stderr)
 	logger = log.With(logger, "ts", log.DefaultTimestampUTC)
@@ -57,16 +59,17 @@ func main() {
 		errs <- fmt.Errorf("%s", <-c)
 	}()
 
-	grpcListener, err := net.Listen("tcp", *grpcAddr)
+	grpcListener, err := net.Listen("tcp", grpcAddr)
 	if err != nil {
 		logger.Log("transport", "gRPC", "during", "Listen", "err", err)
 		os.Exit(1)
 	}
 
 	go func() {
-		level.Info(logger).Log("transport", "GRPC", "addr", *grpcAddr)
+		level.Info(logger).Log("transport", "GRPC", "addr", grpcAddr)
 		baseServer := grpc.NewServer()
 		pb.RegisterStatsServiceServer(baseServer, grpcServer)
+		baseServer.Serve(grpcListener)
 	}()
 
 	level.Error(logger).Log("exit", <-errs)

@@ -2,9 +2,11 @@ package service
 
 import (
 	"context"
+	"errors"
 
 	"cloud.google.com/go/firestore"
 	"github.com/go-kit/kit/log"
+	"google.golang.org/api/iterator"
 )
 
 var (
@@ -73,7 +75,7 @@ func (s basicService) ListTeamPlayers(ctx context.Context, teamName string) ([]P
 
 	var singlePlayer Player
 	var teamPlayers []Player
-	
+
 	teamsDocs := s.dbClient.Collection("Teams")
 	q := teamsDocs.Where("team", "array-contains", teamName).OrderBy("player", firestore.Desc)
 	iter := q.Documents(ctx)
@@ -95,11 +97,11 @@ func (s basicService) ListTeamPlayers(ctx context.Context, teamName string) ([]P
 	return teamPlayers, nil
 }
 
-func (s basicService) ListPositionPlayers(ctx context.Context, postion string) ([]Player, error) {
+func (s basicService) ListPositionPlayers(ctx context.Context, position string) ([]Player, error) {
 
 	var singlePlayer Player
 	var teamPlayers []Player
-	
+
 	teamsDocs := s.dbClient.Collection("Teams")
 	q := teamsDocs.Where("position", "array-contains", position).OrderBy("team", firestore.Desc)
 	iter := q.Documents(ctx)
