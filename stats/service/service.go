@@ -19,7 +19,7 @@ var (
 
 //StatsService describe the Stats service
 type StatsService interface {
-	ListTable(ctx context.Context, league string) ([]Table, error)
+	ListTable(ctx context.Context, league string) ([]*Table, error)
 	ListTeamPlayers(ctx context.Context, teamName string) ([]Player, error)
 	ListPositionPlayers(ctx context.Context, postion string) ([]Player, error)
 }
@@ -45,10 +45,10 @@ type basicService struct {
 	dbClient *firestore.Client
 }
 
-func (s basicService) ListTable(ctx context.Context, league string) ([]Table, error) {
+func (s basicService) ListTable(ctx context.Context, league string) ([]*Table, error) {
 
 	var teamTable Table
-	var leagueTable []Table
+	var leagueTable []*Table
 
 	leagueDocs := s.dbClient.Collection(league)
 	q := leagueDocs.OrderBy("Points", firestore.Desc)
@@ -65,7 +65,7 @@ func (s basicService) ListTable(ctx context.Context, league string) ([]Table, er
 		if err := doc.DataTo(&teamTable); err != nil {
 			return nil, ErrExtractDataToStruct
 		}
-		leagueTable = append(leagueTable, teamTable)
+		leagueTable = append(leagueTable, &teamTable)
 	}
 
 	return leagueTable, nil

@@ -30,7 +30,7 @@ type TableRequest struct {
 
 //TableReply holds the response params for ListTables
 type TableReply struct {
-	Teams []service.Table
+	Teams []*service.Table
 	Err   error
 }
 
