@@ -2,15 +2,12 @@ package transport
 
 import (
 	"context"
-	"encoding/json"
 	"errors"
-	"strings"
 
 	"github.com/Danr17/microservices_project/stats/endpoints"
 	"github.com/Danr17/microservices_project/stats/pb"
 	"github.com/go-kit/kit/log"
 	gt "github.com/go-kit/kit/transport/grpc"
-	"github.com/golang/protobuf/jsonpb"
 )
 
 type gRPCServer struct {
@@ -72,17 +69,38 @@ func decodeListTableRequest(_ context.Context, request interface{}) (interface{}
 func encodeListTableResponse(_ context.Context, response interface{}) (interface{}, error) {
 	resp := response.(endpoints.TableReply)
 
-	rbytes, err := json.Marshal(resp)
-	if err != nil {
-		panic(err)
-	}
-	resultTeams := &pb.TableReply{}
-	r := strings.NewReader(string(rbytes))
-	if err := jsonpb.Unmarshal(r, resultTeams); err != nil {
-		panic(err)
+	/*
+		rbytes, err := json.Marshal(resp)
+		if err != nil {
+			panic(err)
+		}
+		resultTeams := &pb.TableReply{}
+		r := strings.NewReader(string(rbytes))
+		if err := jsonpb.Unmarshal(r, resultTeams); err != nil {
+			panic(err)
+		}
+
+		return resultTeams, nil
+	*/
+
+	teams := []*pb.Table{}
+	for i := 0; i <= (len(resp.Teams) - 1); i++ {
+		td := new(pb.Table)
+		td.TeamName = resp.Teams[i].TeamName
+		td.TeamPlayed = resp.Teams[i].TeamPlayed
+		td.TeamWon = resp.Teams[i].TeamWon
+		td.TeamDrawn = resp.Teams[i].TeamDrawn
+		td.TeamLost = resp.Teams[i].TeamLost
+		td.TeamGF = resp.Teams[i].TeamGF
+		td.TeamGA = resp.Teams[i].TeamGA
+		td.TeamGD = resp.Teams[i].TeamGD
+		td.TeamPoints = resp.Teams[i].TeamPoints
+		td.TeamCapital = resp.Teams[i].TeamCapital
+
+		teams = append(teams, td)
 	}
 
-	return resultTeams, nil
+	return &pb.TableReply{Teams: teams, Err: err2str(resp.Err)}, nil
 }
 
 func decodeListTeamPlayers(_ context.Context, request interface{}) (interface{}, error) {

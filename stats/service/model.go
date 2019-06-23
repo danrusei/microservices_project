@@ -16,16 +16,16 @@ type Table struct {
 
 //Player struct holds player data
 type Player struct {
-	Name          string `firestore:"player"`
-	Team          string `firestore:"team"`
-	Nationality   string `firestore:"nationality"`
-	Position      string `firestore:"position"`
-	Appearences   int32  `firestore:"appearences"`
-	Goals         int32  `firestore:"goals"`
-	Assists       int32  `firestore:"assists"`
-	Passes        int32  `firestore:"passes"`
-	Interceptions int32  `firestore:"Interceptions"`
-	Tackles       int32  `firestore:"Tackles"`
-	Fouls         int32  `firestore:"Fouls"`
-	Price         int32  `firestore:"Price"`
+	Name          string `firestore:"player" json:"name"`
+	Team          string `firestore:"team" json:"team"`
+	Nationality   string `firestore:"nationality" json:"nationality"`
+	Position      string `firestore:"position" json:"position"`
+	Appearences   int32  `firestore:"appearences" json:"appearences"`
+	Goals         int32  `firestore:"goals" json:"goals"`
+	Assists       int32  `firestore:"assists" json:"assists"`
+	Passes        int32  `firestore:"passes" json:"passes"`
+	Interceptions int32  `firestore:"Interceptions" json:"interceptions"`
+	Tackles       int32  `firestore:"Tackles" json:"tackles"`
+	Fouls         int32  `firestore:"Fouls" json:"fouls"`
+	Price         int32  `firestore:"Price" json:"price"`
 }
