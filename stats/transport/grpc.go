@@ -110,7 +110,25 @@ func decodeListTeamPlayers(_ context.Context, request interface{}) (interface{},
 
 func encodeListTeamPlayers(_ context.Context, response interface{}) (interface{}, error) {
 	resp := response.(endpoints.TeamReply)
-	return &pb.TeamReply{Players: resp.Players, Err: err2str(resp.Err)}, nil
+	players := []*pb.Player{}
+	for i := 0; i <= (len(resp.Players) - 1); i++ {
+		pl := new(pb.Player)
+		pl.Name = resp.Players[i].Name
+		pl.Team = resp.Players[i].Team
+		pl.Nationality = resp.Players[i].Nationality
+		pl.Position = resp.Players[i].Position
+		pl.Appearences = resp.Players[i].Appearences
+		pl.Goals = resp.Players[i].Goals
+		pl.Assists = resp.Players[i].Assists
+		pl.Passes = resp.Players[i].Passes
+		pl.Interceptions = resp.Players[i].Interceptions
+		pl.Tackles = resp.Players[i].Tackles
+		pl.Fouls = resp.Players[i].Fouls
+
+		players = append(players, pl)
+	}
+
+	return &pb.TeamReply{Players: players, Err: err2str(resp.Err)}, nil
 }
 
 func decodeListPositionPlayers(_ context.Context, request interface{}) (interface{}, error) {
@@ -120,7 +138,24 @@ func decodeListPositionPlayers(_ context.Context, request interface{}) (interfac
 
 func encodeListPositionPlayers(_ context.Context, response interface{}) (interface{}, error) {
 	resp := response.(endpoints.PositionReply)
-	return &pb.PositionReply{Players: resp.Players, Err: err2str(resp.Err)}, nil
+	players := []*pb.Player{}
+	for i := 0; i <= (len(resp.Players) - 1); i++ {
+		pl := new(pb.Player)
+		pl.Name = resp.Players[i].Name
+		pl.Team = resp.Players[i].Team
+		pl.Nationality = resp.Players[i].Nationality
+		pl.Position = resp.Players[i].Position
+		pl.Appearences = resp.Players[i].Appearences
+		pl.Goals = resp.Players[i].Goals
+		pl.Assists = resp.Players[i].Assists
+		pl.Passes = resp.Players[i].Passes
+		pl.Interceptions = resp.Players[i].Interceptions
+		pl.Tackles = resp.Players[i].Tackles
+		pl.Fouls = resp.Players[i].Fouls
+
+		players = append(players, pl)
+	}
+	return &pb.PositionReply{Players: players, Err: err2str(resp.Err)}, nil
 }
 
 // Helper functions are required to translate Go error types to
