@@ -7,9 +7,13 @@ import (
 	"os"
 	"os/signal"
 	"syscall"
+	"time"
 
+	"github.com/Danr17/microservices_project/frontend/service"
 	"github.com/go-kit/kit/log"
 	"github.com/go-kit/kit/log/level"
+	"github.com/pkg/errors"
+	"go.opencensus.io/plugin/ocgrpc"
 	"google.golang.org/grpc"
 )
 
@@ -25,6 +29,8 @@ type frontendServer struct {
 }
 
 func main() {
+
+	var httpAddr = ":8080"
 
 	var logger log.Logger
 	logger = log.NewLogfmtLogger(os.Stderr)
@@ -44,14 +50,13 @@ func main() {
 	//mustConnGRPC(ctx, &svc.playerSvcConn, svc.playerSvcAddr)
 	//mustConnGRPC(ctx, &svc.transferSvcConn, svc.transferSvcAddr)
 
-
 	// Build the layers of the service "onion" from the inside out. First, the
 	// business logic service; then, the set of endpoints that wrap the service;
 	// and finally, a series of concrete transport adapters
 
-	addservice := service.NewStatsService(logger)
-	addendpoints := endpoints.MakeStatsEndpoints(addservice)
-	httpHandlers := transport.NewHTTPServer(addendpoints, logger)
+	addservice := service.NewSiteService(logger, svc.statsSvcConn)
+	//addendpoints := endpoints.MakeStatsEndpoints(addservice)
+	//httpHandlers := transport.NewHTTPServer(addendpoints, logger)
 
 	errs := make(chan error)
 	go func() {
@@ -61,9 +66,9 @@ func main() {
 	}()
 
 	go func() {
-		level.Info(logger).Log("transport", "HTTP", "addr", *httpAddr)
+		level.Info(logger).Log("transport", "HTTP", "addr", httpAddr)
 		server := &http.Server{
-			Addr:    *httpAddr,
+			Addr:    httpAddr,
 			Handler: httpHandlers,
 		}
 		errs <- server.ListenAndServe()
