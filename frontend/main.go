@@ -9,6 +9,7 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/Danr17/microservices_project/frontend/endpoints"
 	"github.com/Danr17/microservices_project/frontend/service"
 	"github.com/go-kit/kit/log"
 	"github.com/go-kit/kit/log/level"
@@ -55,7 +56,7 @@ func main() {
 	// and finally, a series of concrete transport adapters
 
 	addservice := service.NewSiteService(logger, svc.statsSvcConn)
-	//addendpoints := endpoints.MakeStatsEndpoints(addservice)
+	addendpoints := endpoints.MakeSiteEndpoints(addservice)
 	//httpHandlers := transport.NewHTTPServer(addendpoints, logger)
 
 	errs := make(chan error)
