@@ -11,6 +11,7 @@ import (
 
 	"github.com/Danr17/microservices_project/frontend/endpoints"
 	"github.com/Danr17/microservices_project/frontend/service"
+	"github.com/Danr17/microservices_project/frontend/transport"
 	"github.com/go-kit/kit/log"
 	"github.com/go-kit/kit/log/level"
 	"github.com/pkg/errors"
@@ -57,7 +58,7 @@ func main() {
 
 	addservice := service.NewSiteService(logger, svc.statsSvcConn)
 	addendpoints := endpoints.MakeSiteEndpoints(addservice)
-	//httpHandlers := transport.NewHTTPServer(addendpoints, logger)
+	httpHandlers := transport.NewHTTPHandler(addendpoints, logger)
 
 	errs := make(chan error)
 	go func() {

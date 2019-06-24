@@ -11,6 +11,7 @@ require (
 	github.com/google/btree v1.0.0 // indirect
 	github.com/google/pprof v0.0.0-20190515194954-54271f7e092f // indirect
 	github.com/googleapis/gax-go/v2 v2.0.5 // indirect
+	github.com/gorilla/mux v1.7.2
 	github.com/kr/pty v1.1.5 // indirect
 	github.com/pkg/errors v0.8.1
 	go.opencensus.io v0.22.0

@@ -17,20 +17,20 @@ type gRPCServer struct {
 }
 
 // NewGRPCServer makes a set of endpoints available as a gRPC StatsServiceServer.
-func NewGRPCServer(newendpoints endpoints.Endpoints, logger log.Logger) pb.StatsServiceServer {
+func NewGRPCServer(statsEndpoints endpoints.Endpoints, logger log.Logger) pb.StatsServiceServer {
 	return &gRPCServer{
 		listTable: gt.NewServer(
-			newendpoints.ListTableEndpoint,
+			statsEndpoints.ListTableEndpoint,
 			decodeListTableRequest,
 			encodeListTableResponse,
 		),
 		listTeamPlayers: gt.NewServer(
-			newendpoints.ListTeamPlayersEndpoint,
+			statsEndpoints.ListTeamPlayersEndpoint,
 			decodeListTeamPlayers,
 			encodeListTeamPlayers,
 		),
 		listPositionPlayers: gt.NewServer(
-			newendpoints.ListPositionPlayersEndpoint,
+			statsEndpoints.ListPositionPlayersEndpoint,
 			decodeListPositionPlayers,
 			encodeListPositionPlayers,
 		),
