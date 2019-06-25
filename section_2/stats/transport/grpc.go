@@ -2,7 +2,6 @@ package transport
 
 import (
 	"context"
-	"errors"
 
 	"github.com/Danr17/microservices_project/section_2/stats/endpoints"
 	"github.com/Danr17/microservices_project/section_2/stats/pb"
