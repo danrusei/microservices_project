@@ -144,15 +144,8 @@ func encodeListPositionPlayers(_ context.Context, response interface{}) (interfa
 	return &pb.PositionReply{Players: players, Err: err2str(resp.Err)}, nil
 }
 
-// Helper functions are required to translate Go error types to
-// and from strings, which is the type we use in our IDLs to represent errors.
-
-func str2err(s string) error {
-	if s == "" {
-		return nil
-	}
-	return errors.New(s)
-}
+// Helper function is required to translate Go error types to strings,
+// which is the type we use in our IDLs to represent errors.
 
 func err2str(err error) string {
 	if err == nil {

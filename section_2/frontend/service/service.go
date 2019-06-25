@@ -50,64 +50,158 @@ var (
 
 //GetTable display final league table
 func (s *basicService) GetTable(ctx context.Context, league string) ([]*Table, error) {
-	response, err := s.gcStats.ListTable(context.Background(), &pb.TableRequest{
+	resp, err := s.gcStats.ListTable(context.Background(), &pb.TableRequest{
 		TableName: league,
 	})
 	if err != nil {
 		return nil, ErrDisplayTable  
 	}
 
-	return response, nil
+	teams := make([]*Table, len(resp.Teams))
+	for i := range resp.Teams {
+		teams[i] = &Table{
+			TeamName:    resp.Teams[i].TeamName,
+			TeamPlayed:  resp.Teams[i].TeamPlayed,
+			TeamWon:     resp.Teams[i].TeamWon,
+			TeamDrawn:   resp.Teams[i].TeamDrawn,
+			TeamLost:    resp.Teams[i].TeamLost,
+			TeamGF:      resp.Teams[i].TeamGF,
+			TeamGA:      resp.Teams[i].TeamGA,
+			TeamGD:      resp.Teams[i].TeamGD,
+			TeamPoints:  resp.Teams[i].TeamPoints,
+			TeamCapital: resp.Teams[i].TeamCapital,
+		}
+	}
+
+	return teams, str2err(resp.Err)
 }
 
 //GetTeamBestPLayers diplay top 3 players of a team (one forward, one mid and one defender)
 func (s *basicService) GetTeamBestPlayers(ctx context.Context, teamName string) ([]*Player, error) {
 
-	response, err := s.gcStats.ListTeamPlayers(context.Background(), &pb.TeamRequest{
+	resp, err := s.gcStats.ListTeamPlayers(context.Background(), &pb.TeamRequest{
 		TeamName: teamName,
 	})
 	if err != nil {
 		return nil, ErrDisplayPlayers 
 	}
 
-	return response, nil
+	players := make([]*Player, len(resp.Players))
+	for i := range resp.Players {
+		players[i] = &Player{
+			Name:          resp.Players[i].Name,
+			Team:          resp.Players[i].Team,
+			Nationality:   resp.Players[i].Nationality,
+			Position:      resp.Players[i].Position,
+			Appearences:   resp.Players[i].Appearences,
+			Goals:         resp.Players[i].Goals,
+			Assists:       resp.Players[i].Assists,
+			Passes:        resp.Players[i].Passes,
+			Interceptions: resp.Players[i].Interceptions,
+			Tackles:       resp.Players[i].Tackles,
+			Fouls:         resp.Players[i].Fouls,
+		}
+	}
+
+	return players, str2err(resp.Err)
 }
 
 //GetBestDefenders display top 3 league defenders
 func (s *basicService) GetBestDefenders(ctx context.Context, position string) ([]*Player, error) {
 
-	response, err := s.gcStats.ListPositionPlayers(context.Background(), &pb.PositionRequest{
+	resp, err := s.gcStats.ListPositionPlayers(context.Background(), &pb.PositionRequest{
 		Position: position,
 	})
 	if err != nil {
 		return nil, ErrDisplayPlayers 
 	}
 
-	return response, nil
+	players := make([]*Player, len(resp.Players))
+	for i := range resp.Players {
+		players[i] = &Player{
+			Name:          resp.Players[i].Name,
+			Team:          resp.Players[i].Team,
+			Nationality:   resp.Players[i].Nationality,
+			Position:      resp.Players[i].Position,
+			Appearences:   resp.Players[i].Appearences,
+			Goals:         resp.Players[i].Goals,
+			Assists:       resp.Players[i].Assists,
+			Passes:        resp.Players[i].Passes,
+			Interceptions: resp.Players[i].Interceptions,
+			Tackles:       resp.Players[i].Tackles,
+			Fouls:         resp.Players[i].Fouls,
+		}
+	}
+
+	return players, str2err(resp.Err)
 }
 
 //GetBestAttackers display top 3 league attackers
 func (s *basicService) GetBestAttackers(ctx context.Context, position string) ([]*Player, error) {
 
-	response, err := s.gcStats.ListPositionPlayers(context.Background(), &pb.PositionRequest{
+	resp, err := s.gcStats.ListPositionPlayers(context.Background(), &pb.PositionRequest{
 		Position: position,
 	})
 	if err != nil {
 		return nil, ErrDisplayPlayers 
 	}
 
-	return response, nil
+	players := make([]*Player, len(resp.Players))
+	for i := range resp.Players {
+		players[i] = &Player{
+			Name:          resp.Players[i].Name,
+			Team:          resp.Players[i].Team,
+			Nationality:   resp.Players[i].Nationality,
+			Position:      resp.Players[i].Position,
+			Appearences:   resp.Players[i].Appearences,
+			Goals:         resp.Players[i].Goals,
+			Assists:       resp.Players[i].Assists,
+			Passes:        resp.Players[i].Passes,
+			Interceptions: resp.Players[i].Interceptions,
+			Tackles:       resp.Players[i].Tackles,
+			Fouls:         resp.Players[i].Fouls,
+		}
+	}
+
+	return players, str2err(resp.Err)
 }
 
 //GetGreatPassers display top 3 league passers
 func (s *basicService) GetGreatPassers(ctx context.Context, position string) ([]*Player, error) {
 
-	response, err := s.gcStats.ListPositionPlayers(context.Background(), &pb.PositionRequest{
+	resp, err := s.gcStats.ListPositionPlayers(context.Background(), &pb.PositionRequest{
 		Position: position,
 	})
 	if err != nil {
 		return nil, ErrDisplayPlayers 
 	}
 
-	return response, nil
+	players := make([]*Player, len(resp.Players))
+	for i := range resp.Players {
+		players[i] = &Player{
+			Name:          resp.Players[i].Name,
+			Team:          resp.Players[i].Team,
+			Nationality:   resp.Players[i].Nationality,
+			Position:      resp.Players[i].Position,
+			Appearences:   resp.Players[i].Appearences,
+			Goals:         resp.Players[i].Goals,
+			Assists:       resp.Players[i].Assists,
+			Passes:        resp.Players[i].Passes,
+			Interceptions: resp.Players[i].Interceptions,
+			Tackles:       resp.Players[i].Tackles,
+			Fouls:         resp.Players[i].Fouls,
+		}
+	}
+
+	return players, str2err(resp.Err)
+}
+
+// Helper function is required to translate Go error types from strings,
+// which is the type we use in our IDLs to represent errors.
+
+func str2err(s string) error {
+	if s == "" {
+		return nil
+	}
+	return errors.New(s)
 }
