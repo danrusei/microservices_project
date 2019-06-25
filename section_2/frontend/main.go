@@ -9,9 +9,9 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/Danr17/microservices_project/frontend/endpoints"
-	"github.com/Danr17/microservices_project/frontend/service"
-	"github.com/Danr17/microservices_project/frontend/transport"
+	"github.com/Danr17/microservices_project/section_2/frontend/endpoints"
+	"github.com/Danr17/microservices_project/section_2/frontend/service"
+	"github.com/Danr17/microservices_project/section_2/frontend/transport"
 	"github.com/go-kit/kit/log"
 	"github.com/go-kit/kit/log/level"
 	"github.com/pkg/errors"

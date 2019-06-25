@@ -4,8 +4,8 @@ import (
 	"context"
 	"errors"
 
-	"github.com/Danr17/microservices_project/stats/endpoints"
-	"github.com/Danr17/microservices_project/stats/pb"
+	"github.com/Danr17/microservices_project/section_2/stats/endpoints"
+	"github.com/Danr17/microservices_project/section_2/stats/pb"
 	"github.com/go-kit/kit/log"
 	gt "github.com/go-kit/kit/transport/grpc"
 )

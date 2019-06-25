@@ -10,8 +10,8 @@ import (
 	kithttp "github.com/go-kit/kit/transport/http"
 	"github.com/gorilla/mux"
 
-	"github.com/Danr17/microservices_project/frontend/endpoints"
-	"github.com/Danr17/microservices_project/frontend/service"
+	"github.com/Danr17/microservices_project/section_2/frontend/endpoints"
+	"github.com/Danr17/microservices_project/section_2/frontend/service"
 )
 
 var (

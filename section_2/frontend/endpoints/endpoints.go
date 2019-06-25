@@ -3,7 +3,7 @@ package endpoints
 import (
 	"context"
 
-	"github.com/Danr17/microservices_project/frontend/service"
+	"github.com/Danr17/microservices_project/section_2/frontend/service"
 	"github.com/go-kit/kit/endpoint"
 )
 

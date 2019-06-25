@@ -14,10 +14,10 @@ import (
 	"google.golang.org/api/option"
 	"google.golang.org/grpc"
 
-	"github.com/Danr17/microservices_project/stats/endpoints"
-	"github.com/Danr17/microservices_project/stats/pb"
-	"github.com/Danr17/microservices_project/stats/service"
-	"github.com/Danr17/microservices_project/stats/transport"
+	"github.com/Danr17/microservices_project/section_2/stats/endpoints"
+	"github.com/Danr17/microservices_project/section_2/stats/pb"
+	"github.com/Danr17/microservices_project/section_2/stats/service"
+	"github.com/Danr17/microservices_project/section_2/stats/transport"
 )
 
 func main() {

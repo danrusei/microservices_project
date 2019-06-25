@@ -3,7 +3,7 @@ package endpoints
 import (
 	"context"
 
-	"github.com/Danr17/microservices_project/stats/service"
+	"github.com/Danr17/microservices_project/section_2/stats/service"
 	"github.com/go-kit/kit/endpoint"
 )
 
