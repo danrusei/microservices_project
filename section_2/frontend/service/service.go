@@ -13,9 +13,9 @@ import (
 type SiteService interface {
 	GetTable(ctx context.Context, league string) ([]*Table, error)
 	GetTeamBestPlayers(ctx context.Context, teamName string) ([]*Player, error)
-	GetBestDefenders(ctx context.Context, postion string) ([]*Player, error)
-	GetBestAttackers(ctx context.Context, postion string) ([]*Player, error)
-	GetGreatPassers(ctx context.Context, postion string) ([]*Player, error)
+	GetBestDefenders(ctx context.Context, position string) ([]*Player, error)
+	GetBestAttackers(ctx context.Context, position string) ([]*Player, error)
+	GetGreatPassers(ctx context.Context, position string) ([]*Player, error)
 }
 
 // NewSiteService returns a basic StatsService with all of the expected middlewares wired in.
@@ -28,7 +28,7 @@ func NewSiteService(logger log.Logger, conn *grpc.ClientConn) SiteService {
 
 // NewBasicService returns a naive, stateless implementation of StatsService.
 func NewBasicService(conn *grpc.ClientConn) SiteService {
-	return basicService{
+	return &basicService{
 		gcStats: pb.NewStatsServiceClient(conn),
 	}
 }

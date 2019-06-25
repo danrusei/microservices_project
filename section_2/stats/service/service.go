@@ -21,7 +21,7 @@ var (
 type StatsService interface {
 	ListTable(ctx context.Context, league string) ([]*Table, error)
 	ListTeamPlayers(ctx context.Context, teamName string) ([]Player, error)
-	ListPositionPlayers(ctx context.Context, postion string) ([]Player, error)
+	ListPositionPlayers(ctx context.Context, position string) ([]Player, error)
 }
 
 // ** Implementation of the service **
@@ -36,7 +36,7 @@ func NewStatsService(client *firestore.Client, logger log.Logger) StatsService {
 
 // NewBasicService returns a naive, stateless implementation of StatsService.
 func NewBasicService(client *firestore.Client) StatsService {
-	return basicService{
+	return &basicService{
 		dbClient: client,
 	}
 }
