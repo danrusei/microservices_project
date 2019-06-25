@@ -45,7 +45,7 @@ type basicService struct {
 	dbClient *firestore.Client
 }
 
-func (s basicService) ListTable(ctx context.Context, league string) ([]*Table, error) {
+func (s *basicService) ListTable(ctx context.Context, league string) ([]*Table, error) {
 
 	var teamTable Table
 	var leagueTable []*Table
@@ -71,7 +71,7 @@ func (s basicService) ListTable(ctx context.Context, league string) ([]*Table, e
 	return leagueTable, nil
 }
 
-func (s basicService) ListTeamPlayers(ctx context.Context, teamName string) ([]Player, error) {
+func (s *basicService) ListTeamPlayers(ctx context.Context, teamName string) ([]Player, error) {
 
 	var singlePlayer Player
 	var teamPlayers []Player
@@ -97,7 +97,7 @@ func (s basicService) ListTeamPlayers(ctx context.Context, teamName string) ([]P
 	return teamPlayers, nil
 }
 
-func (s basicService) ListPositionPlayers(ctx context.Context, position string) ([]Player, error) {
+func (s *basicService) ListPositionPlayers(ctx context.Context, position string) ([]Player, error) {
 
 	var singlePlayer Player
 	var teamPlayers []Player

@@ -42,34 +42,72 @@ var (
 	ErrTeamNotFound = errors.New("team not found")
 	//ErrPLayerNotFound unable to find requested player
 	ErrPLayerNotFound = errors.New("player not found")
+	//ErrDisplayTable unable to disply table
+	ErrDisplayTable = errors.New("unable to display table")
+	//ErrDisplayPlayers unable to disply table
+	ErrDisplayPlayers = errors.New("unable to display players")
 )
 
 //GetTable display final league table
-func (s basicService) GetTable(ctx context.Context, league string) ([]*Table, error) {
+func (s *basicService) GetTable(ctx context.Context, league string) ([]*Table, error) {
+	response, err := s.gcStats.ListTable(context.Background(), &pb.TableRequest{
+		TableName: league,
+	})
+	if err != nil {
+		return nil, ErrDisplayTable  
+	}
 
-	return nil, nil
+	return response, nil
 }
 
 //GetTeamBestPLayers diplay top 3 players of a team (one forward, one mid and one defender)
-func (s basicService) GetTeamBestPlayers(ctx context.Context, teamName string) ([]*Player, error) {
+func (s *basicService) GetTeamBestPlayers(ctx context.Context, teamName string) ([]*Player, error) {
 
-	return nil, nil
+	response, err := s.gcStats.ListTeamPlayers(context.Background(), &pb.TeamRequest{
+		TeamName: teamName,
+	})
+	if err != nil {
+		return nil, ErrDisplayPlayers 
+	}
+
+	return response, nil
 }
 
 //GetBestDefenders display top 3 league defenders
-func (s basicService) GetBestDefenders(ctx context.Context, position string) ([]*Player, error) {
+func (s *basicService) GetBestDefenders(ctx context.Context, position string) ([]*Player, error) {
 
-	return nil, nil
+	response, err := s.gcStats.ListPositionPlayers(context.Background(), &pb.PositionRequest{
+		Position: position,
+	})
+	if err != nil {
+		return nil, ErrDisplayPlayers 
+	}
+
+	return response, nil
 }
 
 //GetBestAttackers display top 3 league attackers
-func (s basicService) GetBestAttackers(ctx context.Context, position string) ([]*Player, error) {
+func (s *basicService) GetBestAttackers(ctx context.Context, position string) ([]*Player, error) {
 
-	return nil, nil
+	response, err := s.gcStats.ListPositionPlayers(context.Background(), &pb.PositionRequest{
+		Position: position,
+	})
+	if err != nil {
+		return nil, ErrDisplayPlayers 
+	}
+
+	return response, nil
 }
 
 //GetGreatPassers display top 3 league passers
-func (s basicService) GetGreatPassers(ctx context.Context, position string) ([]*Player, error) {
+func (s *basicService) GetGreatPassers(ctx context.Context, position string) ([]*Player, error) {
 
-	return nil, nil
+	response, err := s.gcStats.ListPositionPlayers(context.Background(), &pb.PositionRequest{
+		Position: position,
+	})
+	if err != nil {
+		return nil, ErrDisplayPlayers 
+	}
+
+	return response, nil
 }
