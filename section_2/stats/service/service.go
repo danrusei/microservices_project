@@ -77,8 +77,10 @@ func (s *basicService) ListTeamPlayers(ctx context.Context, teamName string) ([]
 	var teamPlayers []Player
 
 	teamsDocs := s.dbClient.Collection("Teams")
-	q := teamsDocs.Where("team", "array-contains", teamName).OrderBy("player", firestore.Desc)
+	q := teamsDocs.Where("team", "==", teamName)
+	//.OrderBy("player", firestore.Desc)
 	iter := q.Documents(ctx)
+	//iter := s.dbClient.Collection("Teams").Documents(ctx)
 	defer iter.Stop()
 	for {
 		doc, err := iter.Next()
