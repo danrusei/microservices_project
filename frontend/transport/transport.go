@@ -3,6 +3,7 @@ package transport
 import (
 	"context"
 	"encoding/json"
+	"errors"
 	"net/http"
 
 	"github.com/go-kit/kit/log"
@@ -10,10 +11,16 @@ import (
 	"github.com/gorilla/mux"
 
 	"github.com/Danr17/microservices_project/frontend/endpoints"
+	"github.com/Danr17/microservices_project/frontend/service"
 )
 
-// NewHTTPHandler wires endpoints to the HTTP transport.
-func NewHTTPHandler(siteEndpoints endpoints.Endpoints, logger log.Logger) http.Handler {
+var (
+	// ErrBadRouting is returned when an expected path variable is missing.
+	ErrBadRouting = errors.New("inconsistent mapping between route and handler")
+)
+
+// MakeHTTPHandler wires endpoints to the HTTP transport.
+func MakeHTTPHandler(siteEndpoints endpoints.Endpoints, logger log.Logger) http.Handler {
 
 	r := mux.NewRouter()
 	options := []kithttp.ServerOption{
@@ -24,45 +31,120 @@ func NewHTTPHandler(siteEndpoints endpoints.Endpoints, logger log.Logger) http.H
 	r.Methods("GET").Path("/table").Handler(kithttp.NewServer(
 		siteEndpoints.GetTableEndpoint,
 		decodeGetTableRequest,
-		encodeGenericResponse,
+		encodeResponse,
 		options...,
 	))
 
 	r.Methods("GET").Path("/bestplayers/{team}").Handler(kithttp.NewServer(
 		siteEndpoints.GetTeamBestPlayersEndpoint,
 		decodeGetTeamRequest,
-		encodeGenericResponse,
+		encodeResponse,
 		options...,
 	))
 
 	r.Methods("GET").Path("/bestdefenders").Handler(kithttp.NewServer(
 		siteEndpoints.GetBestDefendersEndpoint,
 		decodeGetDefendersRequest,
-		encodeGenericResponse,
+		encodeResponse,
 		options...,
 	))
 
 	r.Methods("GET").Path("/bestattackers").Handler(kithttp.NewServer(
 		siteEndpoints.GetBestAttackersEndpoint,
 		decodeGetAttackersRequest,
-		encodeGenericResponse,
+		encodeResponse,
 		options...,
 	))
 
 	r.Methods("GET").Path("/greatpassers").Handler(kithttp.NewServer(
 		siteEndpoints.GetGreatPassersEndpoint,
 		decodeGetPassersRequest,
-		encodeGenericResponse,
+		encodeResponse,
 		options...,
 	))
 
 	return r
 }
 
-func encodeError(_ context.Context, err error, w http.ResponseWriter) {
-	w.Header().Set("Content-Type", "application/json; charset=utf-8")
-	w.WriteHeader(err2code(err))
-	json.NewEncoder(w).Encode(errorWrapper{Error: err.Error()})
+func decodeGetTableRequest(_ context.Context, r *http.Request) (request interface{}, err error) {
+	var req endpoints.TableRequest
+	if e := json.NewDecoder(r.Body).Decode(&req.League); e != nil {
+		return nil, e
+	}
+	return req, nil
 }
 
-/// !!! la errorWrapper trebuie sa gasesc erorirle definite de mine in script
+func decodeGetTeamRequest(_ context.Context, r *http.Request) (request interface{}, err error) {
+	vars := mux.Vars(r)
+	team, ok := vars["team"]
+	if !ok {
+		return nil, ErrBadRouting
+	}
+	return endpoints.BestPlayersRequest{Team: team}, nil
+}
+
+func decodeGetDefendersRequest(_ context.Context, r *http.Request) (request interface{}, err error) {
+	var req endpoints.BestAttackersRequest
+	if e := json.NewDecoder(r.Body).Decode(&req.Position); e != nil {
+		return nil, e
+	}
+	return req, nil
+}
+
+func decodeGetAttackersRequest(_ context.Context, r *http.Request) (request interface{}, err error) {
+	var req endpoints.BestAttackersRequest
+	if e := json.NewDecoder(r.Body).Decode(&req.Position); e != nil {
+		return nil, e
+	}
+	return req, nil
+}
+
+func decodeGetPassersRequest(_ context.Context, r *http.Request) (request interface{}, err error) {
+	var req endpoints.GreatPassersRequest
+	if e := json.NewDecoder(r.Body).Decode(&req.Position); e != nil {
+		return nil, e
+	}
+	return req, nil
+}
+
+// errorer is implemented by all concrete response types that may contain
+// errors. It allows us to change the HTTP response code without needing to
+// trigger an endpoint (transport-level) error. For more information, read the
+// big comment in endpoints.go.
+type errorer interface {
+	error() error
+}
+
+// encodeResponse is the common method to encode all response types to the
+// client. Since we're using JSON, there's no reason to provide anything more specific.
+// It's certainly possible to specialize on a per-response (per-method) basis.
+func encodeResponse(ctx context.Context, w http.ResponseWriter, response interface{}) error {
+	if e, ok := response.(errorer); ok && e.error() != nil {
+		// Not a Go kit transport error, but a business-logic error.
+		// Provide those as HTTP errors.
+		encodeError(ctx, e.error(), w)
+		return nil
+	}
+	w.Header().Set("Content-Type", "application/json; charset=utf-8")
+	return json.NewEncoder(w).Encode(response)
+}
+
+func encodeError(_ context.Context, err error, w http.ResponseWriter) {
+	if err == nil {
+		panic("encodeError with nil error")
+	}
+	w.Header().Set("Content-Type", "application/json; charset=utf-8")
+	w.WriteHeader(codeFrom(err))
+	json.NewEncoder(w).Encode(map[string]interface{}{
+		"error": err.Error(),
+	})
+}
+
+func codeFrom(err error) int {
+	switch err {
+	case service.ErrTeamNotFound, service.ErrPLayerNotFound:
+		return http.StatusBadRequest
+	default:
+		return http.StatusInternalServerError
+	}
+}

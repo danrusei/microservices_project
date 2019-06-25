@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	"errors"
 
 	"github.com/Danr17/microservices_project/frontend/pb"
 	"github.com/go-kit/kit/log"
@@ -35,6 +36,13 @@ func NewBasicService(conn *grpc.ClientConn) SiteService {
 type basicService struct {
 	gcStats pb.StatsServiceClient
 }
+
+var (
+	//ErrTeamNotFound unable to find the requested team
+	ErrTeamNotFound = errors.New("team not found")
+	//ErrPLayerNotFound unable to find requested player
+	ErrPLayerNotFound = errors.New("player not found")
+)
 
 //GetTable display final league table
 func (s basicService) GetTable(ctx context.Context, league string) ([]*Table, error) {

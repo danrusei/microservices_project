@@ -58,7 +58,7 @@ func main() {
 
 	addservice := service.NewSiteService(logger, svc.statsSvcConn)
 	addendpoints := endpoints.MakeSiteEndpoints(addservice)
-	httpHandlers := transport.NewHTTPHandler(addendpoints, logger)
+	httpHandlers := transport.MakeHTTPHandler(addendpoints, logger)
 
 	errs := make(chan error)
 	go func() {
