@@ -86,19 +86,7 @@ func (s *basicService) GetTeamBestPlayers(ctx context.Context, teamName string) 
 
 	players := make([]*Player, len(resp.Players))
 	for i := range resp.Players {
-		players[i] = &Player{
-			Name:          resp.Players[i].Name,
-			Team:          resp.Players[i].Team,
-			Nationality:   resp.Players[i].Nationality,
-			Position:      resp.Players[i].Position,
-			Appearences:   resp.Players[i].Appearences,
-			Goals:         resp.Players[i].Goals,
-			Assists:       resp.Players[i].Assists,
-			Passes:        resp.Players[i].Passes,
-			Interceptions: resp.Players[i].Interceptions,
-			Tackles:       resp.Players[i].Tackles,
-			Fouls:         resp.Players[i].Fouls,
-		}
+		players[i] = makePlayer(resp.Players[i])
 	}
 
 	return players, str2err(resp.Err)
@@ -116,22 +104,28 @@ func (s *basicService) GetPositionBestPlayers(ctx context.Context, position stri
 
 	players := make([]*Player, len(resp.Players))
 	for i := range resp.Players {
-		players[i] = &Player{
-			Name:          resp.Players[i].Name,
-			Team:          resp.Players[i].Team,
-			Nationality:   resp.Players[i].Nationality,
-			Position:      resp.Players[i].Position,
-			Appearences:   resp.Players[i].Appearences,
-			Goals:         resp.Players[i].Goals,
-			Assists:       resp.Players[i].Assists,
-			Passes:        resp.Players[i].Passes,
-			Interceptions: resp.Players[i].Interceptions,
-			Tackles:       resp.Players[i].Tackles,
-			Fouls:         resp.Players[i].Fouls,
-		}
+		players[i] = makePlayer(resp.Players[i])
 	}
 
 	return players, str2err(resp.Err)
+}
+
+func makePlayer(p *pb.Player) *Player {
+	player := &Player{
+		Name:          p.Name,
+		Team:          p.Team,
+		Nationality:   p.Nationality,
+		Position:      p.Position,
+		Appearences:   p.Appearences,
+		Goals:         p.Goals,
+		Assists:       p.Assists,
+		Passes:        p.Passes,
+		Interceptions: p.Interceptions,
+		Tackles:       p.Tackles,
+		Fouls:         p.Fouls,
+	}
+
+	return player
 }
 
 // Helper function is required to translate Go error types from strings,

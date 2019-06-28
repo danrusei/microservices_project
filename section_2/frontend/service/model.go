@@ -27,5 +27,5 @@ type Player struct {
 	Interceptions int32  `json:"interceptions"`
 	Tackles       int32  `json:"tackles"`
 	Fouls         int32  `json:"fouls"`
-	Price         int32  `json:"price"`
+	//Price         int32  `json:"price"`
 }
