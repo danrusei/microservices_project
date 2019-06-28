@@ -68,7 +68,7 @@ func MakeHTTPHandler(siteEndpoints endpoints.Endpoints, logger log.Logger) http.
 
 func decodeGetTableRequest(_ context.Context, r *http.Request) (request interface{}, err error) {
 	var req endpoints.TableRequest
-	if e := json.NewDecoder(r.Body).Decode(&req.League); e != nil {
+	if e := json.NewDecoder(r.Body).Decode(&req); e != nil {
 		return nil, e
 	}
 	return req, nil
