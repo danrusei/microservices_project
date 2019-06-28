@@ -84,8 +84,8 @@ func decodeGetTeamRequest(_ context.Context, r *http.Request) (request interface
 }
 
 func decodeGetDefendersRequest(_ context.Context, r *http.Request) (request interface{}, err error) {
-	var req endpoints.BestAttackersRequest
-	if e := json.NewDecoder(r.Body).Decode(&req.Position); e != nil {
+	var req endpoints.BestDefendersRequest
+	if e := json.NewDecoder(r.Body).Decode(&req); e != nil {
 		return nil, e
 	}
 	return req, nil

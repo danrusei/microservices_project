@@ -67,7 +67,7 @@ func makeGetTeamBestPlayersEndpoint(s service.SiteService) endpoint.Endpoint {
 
 //BestDefendersRequest holds the request paramas for GetBestDefenders
 type BestDefendersRequest struct {
-	Position string
+	Position string `json:"position"`
 }
 
 //BestDefendersReply  holds the response paramas for GetBestDefenders
