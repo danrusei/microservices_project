@@ -21,7 +21,7 @@ type loggingMiddleware struct {
 	next   StatsService
 }
 
-func (mw loggingMiddleware) ListTable(ctx context.Context, league string) (t []*Table, err error) {
+func (mw loggingMiddleware) ListTable(ctx context.Context, league string) (t []Table, err error) {
 	defer func() {
 		mw.logger.Log("method", "Listable", "league", league, "err", err)
 	}()
