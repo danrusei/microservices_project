@@ -35,23 +35,9 @@ func (mw loggingMiddleware) GetTeamBestPlayers(ctx context.Context, teamName str
 	return mw.next.GetTeamBestPlayers(ctx, teamName)
 }
 
-func (mw loggingMiddleware) GetBestDefenders(ctx context.Context, position string) (p []*Player, err error) {
+func (mw loggingMiddleware) GetPositionBestPlayers(ctx context.Context, position string) (p []*Player, err error) {
 	defer func() {
 		mw.logger.Log("method", "GetBestDefenders", "position", position, "err", err)
 	}()
-	return mw.next.GetBestDefenders(ctx, position)
-}
-
-func (mw loggingMiddleware) GetBestAttackers(ctx context.Context, position string) (p []*Player, err error) {
-	defer func() {
-		mw.logger.Log("method", "GetBestAttackers", "position", position, "err", err)
-	}()
-	return mw.next.GetBestAttackers(ctx, position)
-}
-
-func (mw loggingMiddleware) GetGreatPassers(ctx context.Context, position string) (p []*Player, err error) {
-	defer func() {
-		mw.logger.Log("method", "GetGreatPassers", "position", position, "err", err)
-	}()
-	return mw.next.GetGreatPassers(ctx, position)
+	return mw.next.GetPositionBestPlayers(ctx, position)
 }

@@ -21,9 +21,7 @@ func MakeSiteEndpoints(s service.SiteService) Endpoints {
 	return Endpoints{
 		GetTableEndpoint:           makeGetTableEndpoint(s),
 		GetTeamBestPlayersEndpoint: makeGetTeamBestPlayersEndpoint(s),
-		GetBestDefendersEndpoint:   makeGetBestDefendersEndpoint(s),
-		GetBestAttackersEndpoint:   makeGetBestAttackersEndpoint(s),
-		GetGreatPassersEndpoint:    makeGetGreatPassersEndpoint(s),
+		GetBestDefendersEndpoint:   makeGetPositionBestPlayersEndpoint(s),
 	}
 }
 
@@ -51,8 +49,8 @@ type BestPlayersRequest struct {
 	Team string
 }
 
-//BestPLayersReply holds the response paramas for GetTeamBestPlayers
-type BestPLayersReply struct {
+//BestPlayersReply holds the response paramas for GetTeamBestPlayers
+type BestPlayersReply struct {
 	Players []*service.Player
 	Err     error
 }
@@ -61,63 +59,25 @@ func makeGetTeamBestPlayersEndpoint(s service.SiteService) endpoint.Endpoint {
 	return func(ctx context.Context, request interface{}) (interface{}, error) {
 		req := request.(BestPlayersRequest)
 		teamplayers, err := s.GetTeamBestPlayers(ctx, req.Team)
-		return BestPLayersReply{Players: teamplayers, Err: err}, nil
+		return BestPlayersReply{Players: teamplayers, Err: err}, nil
 	}
 }
 
-//BestDefendersRequest holds the request paramas for GetBestDefenders
-type BestDefendersRequest struct {
+//BestPositionRequest holds the request paramas for GetBestDefenders
+type BestPositionRequest struct {
 	Position string `json:"position"`
 }
 
-//BestDefendersReply  holds the response paramas for GetBestDefenders
-type BestDefendersReply struct {
+//BestPositionReply  holds the response paramas for GetBestDefenders
+type BestPositionReply struct {
 	Players []*service.Player
 	Err     error
 }
 
-func makeGetBestDefendersEndpoint(s service.SiteService) endpoint.Endpoint {
+func makeGetPositionBestPlayersEndpoint(s service.SiteService) endpoint.Endpoint {
 	return func(ctx context.Context, request interface{}) (interface{}, error) {
-		req := request.(BestDefendersRequest)
-		defenders, err := s.GetBestDefenders(ctx, req.Position)
-		return BestDefendersReply{Players: defenders, Err: err}, nil
-	}
-}
-
-//BestAttackersRequest holds the request paramas for GetBestAttackers
-type BestAttackersRequest struct {
-	Position string
-}
-
-//BestAttackersReply  holds the response paramas for GetBestAttackers
-type BestAttackersReply struct {
-	Players []*service.Player
-	Err     error
-}
-
-func makeGetBestAttackersEndpoint(s service.SiteService) endpoint.Endpoint {
-	return func(ctx context.Context, request interface{}) (interface{}, error) {
-		req := request.(BestAttackersRequest)
-		attackers, err := s.GetBestAttackers(ctx, req.Position)
-		return BestAttackersReply{Players: attackers, Err: err}, nil
-	}
-}
-
-//GreatPassersRequest holds the request paramas for GetGreatPassers
-type GreatPassersRequest struct {
-	Position string
-}
-
-//GreatPassersReply holds the response paramas for GetGreatPassers
-type GreatPassersReply struct {
-	Players []*service.Player
-	Err     error
-}
-
-func makeGetGreatPassersEndpoint(s service.SiteService) endpoint.Endpoint {
-	return func(ctx context.Context, request interface{}) (interface{}, error) {
-		req := request.(GreatPassersRequest)
-		passers, err := s.GetGreatPassers(ctx, req.Position)
-		return GreatPassersReply{Players: passers, Err: err}, nil
+		req := request.(BestPositionRequest)
+		defenders, err := s.GetPositionBestPlayers(ctx, req.Position)
+		return BestPositionReply{Players: defenders, Err: err}, nil
 	}
 }

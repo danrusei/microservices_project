@@ -13,9 +13,7 @@ import (
 type SiteService interface {
 	GetTable(ctx context.Context, league string) ([]*Table, error)
 	GetTeamBestPlayers(ctx context.Context, teamName string) ([]*Player, error)
-	GetBestDefenders(ctx context.Context, position string) ([]*Player, error)
-	GetBestAttackers(ctx context.Context, position string) ([]*Player, error)
-	GetGreatPassers(ctx context.Context, position string) ([]*Player, error)
+	GetPositionBestPlayers(ctx context.Context, position string) ([]*Player, error)
 }
 
 // NewSiteService returns a basic StatsService with all of the expected middlewares wired in.
@@ -54,7 +52,7 @@ func (s *basicService) GetTable(ctx context.Context, league string) ([]*Table, e
 		TableName: league,
 	})
 	if err != nil {
-		return nil, ErrDisplayTable  
+		return nil, ErrDisplayTable
 	}
 
 	teams := make([]*Table, len(resp.Teams))
@@ -83,7 +81,7 @@ func (s *basicService) GetTeamBestPlayers(ctx context.Context, teamName string) 
 		TeamName: teamName,
 	})
 	if err != nil {
-		return nil, ErrDisplayPlayers 
+		return nil, ErrDisplayPlayers
 	}
 
 	players := make([]*Player, len(resp.Players))
@@ -107,73 +105,13 @@ func (s *basicService) GetTeamBestPlayers(ctx context.Context, teamName string) 
 }
 
 //GetBestDefenders display top 3 league defenders
-func (s *basicService) GetBestDefenders(ctx context.Context, position string) ([]*Player, error) {
+func (s *basicService) GetPositionBestPlayers(ctx context.Context, position string) ([]*Player, error) {
 
 	resp, err := s.gcStats.ListPositionPlayers(context.Background(), &pb.PositionRequest{
 		Position: position,
 	})
 	if err != nil {
-		return nil, ErrDisplayPlayers 
-	}
-
-	players := make([]*Player, len(resp.Players))
-	for i := range resp.Players {
-		players[i] = &Player{
-			Name:          resp.Players[i].Name,
-			Team:          resp.Players[i].Team,
-			Nationality:   resp.Players[i].Nationality,
-			Position:      resp.Players[i].Position,
-			Appearences:   resp.Players[i].Appearences,
-			Goals:         resp.Players[i].Goals,
-			Assists:       resp.Players[i].Assists,
-			Passes:        resp.Players[i].Passes,
-			Interceptions: resp.Players[i].Interceptions,
-			Tackles:       resp.Players[i].Tackles,
-			Fouls:         resp.Players[i].Fouls,
-		}
-	}
-
-	return players, str2err(resp.Err)
-}
-
-//GetBestAttackers display top 3 league attackers
-func (s *basicService) GetBestAttackers(ctx context.Context, position string) ([]*Player, error) {
-
-	resp, err := s.gcStats.ListPositionPlayers(context.Background(), &pb.PositionRequest{
-		Position: position,
-	})
-	if err != nil {
-		return nil, ErrDisplayPlayers 
-	}
-
-	players := make([]*Player, len(resp.Players))
-	for i := range resp.Players {
-		players[i] = &Player{
-			Name:          resp.Players[i].Name,
-			Team:          resp.Players[i].Team,
-			Nationality:   resp.Players[i].Nationality,
-			Position:      resp.Players[i].Position,
-			Appearences:   resp.Players[i].Appearences,
-			Goals:         resp.Players[i].Goals,
-			Assists:       resp.Players[i].Assists,
-			Passes:        resp.Players[i].Passes,
-			Interceptions: resp.Players[i].Interceptions,
-			Tackles:       resp.Players[i].Tackles,
-			Fouls:         resp.Players[i].Fouls,
-		}
-	}
-
-	return players, str2err(resp.Err)
-}
-
-//GetGreatPassers display top 3 league passers
-func (s *basicService) GetGreatPassers(ctx context.Context, position string) ([]*Player, error) {
-
-	resp, err := s.gcStats.ListPositionPlayers(context.Background(), &pb.PositionRequest{
-		Position: position,
-	})
-	if err != nil {
-		return nil, ErrDisplayPlayers 
+		return nil, ErrDisplayPlayers
 	}
 
 	players := make([]*Player, len(resp.Players))

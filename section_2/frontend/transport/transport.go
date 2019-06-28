@@ -42,23 +42,9 @@ func MakeHTTPHandler(siteEndpoints endpoints.Endpoints, logger log.Logger) http.
 		options...,
 	))
 
-	r.Methods("GET").Path("/bestdefenders").Handler(kithttp.NewServer(
+	r.Methods("GET").Path("/bestposition").Handler(kithttp.NewServer(
 		siteEndpoints.GetBestDefendersEndpoint,
-		decodeGetDefendersRequest,
-		encodeResponse,
-		options...,
-	))
-
-	r.Methods("GET").Path("/bestattackers").Handler(kithttp.NewServer(
-		siteEndpoints.GetBestAttackersEndpoint,
-		decodeGetAttackersRequest,
-		encodeResponse,
-		options...,
-	))
-
-	r.Methods("GET").Path("/greatpassers").Handler(kithttp.NewServer(
-		siteEndpoints.GetGreatPassersEndpoint,
-		decodeGetPassersRequest,
+		decodeGetPositionRequest,
 		encodeResponse,
 		options...,
 	))
@@ -83,25 +69,9 @@ func decodeGetTeamRequest(_ context.Context, r *http.Request) (request interface
 	return endpoints.BestPlayersRequest{Team: team}, nil
 }
 
-func decodeGetDefendersRequest(_ context.Context, r *http.Request) (request interface{}, err error) {
-	var req endpoints.BestDefendersRequest
+func decodeGetPositionRequest(_ context.Context, r *http.Request) (request interface{}, err error) {
+	var req endpoints.BestPositionRequest
 	if e := json.NewDecoder(r.Body).Decode(&req); e != nil {
-		return nil, e
-	}
-	return req, nil
-}
-
-func decodeGetAttackersRequest(_ context.Context, r *http.Request) (request interface{}, err error) {
-	var req endpoints.BestAttackersRequest
-	if e := json.NewDecoder(r.Body).Decode(&req.Position); e != nil {
-		return nil, e
-	}
-	return req, nil
-}
-
-func decodeGetPassersRequest(_ context.Context, r *http.Request) (request interface{}, err error) {
-	var req endpoints.GreatPassersRequest
-	if e := json.NewDecoder(r.Body).Decode(&req.Position); e != nil {
 		return nil, e
 	}
 	return req, nil
