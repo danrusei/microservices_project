@@ -89,6 +89,8 @@ func (s *basicService) GetTeamBestPlayers(ctx context.Context, teamName string) 
 		players[i] = makePlayer(resp.Players[i])
 	}
 
+	//teambestplayers := topteamplayers(players)
+
 	return players, str2err(resp.Err)
 }
 
