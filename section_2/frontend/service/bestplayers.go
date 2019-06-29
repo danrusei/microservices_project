@@ -15,41 +15,46 @@ func topteamplayers(teamplayers []*Player) []*Player {
 	bestmidfilder := make(map[int32]string)
 	bestforward := make(map[int32]string)
 
-	for i := range teamplayers {
-		switch teamplayers[i].Position {
-		case "Defender":
-			interception = teamplayers[i].Interceptions
-			tackles = teamplayers[i].Tackles
-			defskills := (interception*50)/100 + (tackles*50)/100
-			bestdefender[defskills] = teamplayers[i].Name
+	if len(teamplayers) > 0 {
 
-		case "Forward":
-			goals = teamplayers[i].Goals
-			assists = teamplayers[i].Assists
-			forskills := (goals*70)/100 + (assists*30)/100
-			bestforward[forskills] = teamplayers[i].Name
+		for i := range teamplayers {
+			switch teamplayers[i].Position {
+			case "Defender":
+				interception = teamplayers[i].Interceptions
+				tackles = teamplayers[i].Tackles
+				defskills := (interception*50)/100 + (tackles*50)/100
+				bestdefender[defskills] = teamplayers[i].Name
 
-		case "Midfielder":
-			passes = teamplayers[i].Passes
-			assists = teamplayers[i].Assists
-			midskills := (passes*70)/100 + (assists*30)/100
-			bestmidfilder[midskills] = teamplayers[i].Name
+			case "Forward":
+				goals = teamplayers[i].Goals
+				assists = teamplayers[i].Assists
+				forskills := (goals*70)/100 + (assists*30)/100
+				bestforward[forskills] = teamplayers[i].Name
+
+			case "Midfielder":
+				passes = teamplayers[i].Passes
+				assists = teamplayers[i].Assists
+				midskills := (passes*70)/100 + (assists*30)/100
+				bestmidfilder[midskills] = teamplayers[i].Name
+
+			}
 
 		}
 
-	}
+		nameDef := findplayername(bestdefender)
+		nameFor := findplayername(bestforward)
+		nameMid := findplayername(bestmidfilder)
 
-	nameDef := findplayername(bestdefender)
-	nameFor := findplayername(bestforward)
-	nameMid := findplayername(bestmidfilder)
-
-	for i := range teamplayers {
-		if teamplayers[i].Name == nameDef || teamplayers[i].Name == nameFor || teamplayers[i].Name == nameMid {
-			topplayers = append(topplayers, teamplayers[i])
+		for i := range teamplayers {
+			if teamplayers[i].Name == nameDef || teamplayers[i].Name == nameFor || teamplayers[i].Name == nameMid {
+				topplayers = append(topplayers, teamplayers[i])
+			}
 		}
+
+		return topplayers
 	}
 
-	return topplayers
+	return nil
 }
 
 func findplayername(bestposition map[int32]string) string {
