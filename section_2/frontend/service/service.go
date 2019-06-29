@@ -44,6 +44,8 @@ var (
 	ErrDisplayTable = errors.New("unable to display table")
 	//ErrDisplayPlayers unable to disply table
 	ErrDisplayPlayers = errors.New("unable to display players")
+	//ErrPosition wrong position request
+	ErrPosition = errors.New("wrong position, select either Defender, Forward or Midfielder")
 )
 
 //GetTable display final league table
@@ -108,6 +110,13 @@ func (s *basicService) GetPositionBestPlayers(ctx context.Context, position stri
 	for i := range resp.Players {
 		players[i] = makePlayer(resp.Players[i])
 	}
+	/*
+		bestpositionplayers, err := topposplayers(players, position)
+		if err != nil {
+			return nil, ErrPosition
+		}
+
+	*/
 
 	return players, str2err(resp.Err)
 }
