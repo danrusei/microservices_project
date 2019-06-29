@@ -1,28 +1,64 @@
 package service
 
-//
+import "sort"
+
+//some business logic which find the best player for each position from a team
 func topteamplayers(teamplayers []*Player) []*Player {
 	var topplayers []*Player
-	var defplayer *Player
-	var forplayer *Player
-	var midplayer *Player
+	var interception int32
+	var tackles int32
+	var assists int32
+	var goals int32
+	var passes int32
+
+	bestdefender := make(map[int32]string)
+	bestmidfilder := make(map[int32]string)
+	bestforward := make(map[int32]string)
+
 	for i := range teamplayers {
 		switch teamplayers[i].Position {
 		case "Defender":
-			if ((teamplayers[i].Tackles*50)/100 + (teamplayers[i].Interceptions*50)/100) >= ((defplayer.Tackles*50)/100 + (defplayer.Interceptions*50)/100) {
-				defplayer = teamplayers[i]
-			}
+			interception = teamplayers[i].Interceptions
+			tackles = teamplayers[i].Tackles
+			defskills := (interception*50)/100 + (tackles*50)/100
+			bestdefender[defskills] = teamplayers[i].Name
+
 		case "Forward":
-			if ((teamplayers[i].Goals*50)/100 + (teamplayers[i].Assists*50)/100) >= ((forplayer.Goals*50)/100 + (forplayer.Assists*50)/100) {
-				forplayer = teamplayers[i]
-			}
+			goals = teamplayers[i].Goals
+			assists = teamplayers[i].Assists
+			forskills := (goals*70)/100 + (assists*30)/100
+			bestforward[forskills] = teamplayers[i].Name
+
 		case "Midfielder":
-			if ((teamplayers[i].Passes*80)/100 + (teamplayers[i].Assists*20)/100) >= ((midplayer.Passes*80)/100 + (midplayer.Assists*20)/100) {
-				midplayer = teamplayers[i]
-			}
+			passes = teamplayers[i].Passes
+			assists = teamplayers[i].Assists
+			midskills := (passes*70)/100 + (assists*30)/100
+			bestmidfilder[midskills] = teamplayers[i].Name
+
 		}
-		topplayers = append(topplayers, defplayer, forplayer, midplayer)
 
 	}
+
+	nameDef := findplayername(bestdefender)
+	nameFor := findplayername(bestforward)
+	nameMid := findplayername(bestmidfilder)
+
+	for i := range teamplayers {
+		if teamplayers[i].Name == nameDef || teamplayers[i].Name == nameFor || teamplayers[i].Name == nameMid {
+			topplayers = append(topplayers, teamplayers[i])
+		}
+	}
+
 	return topplayers
+}
+
+func findplayername(bestposition map[int32]string) string {
+	keysDef := make([]int, 0, len(bestposition))
+	for k := range bestposition {
+		keysDef = append(keysDef, int(k))
+	}
+	sort.Ints(keysDef)
+	namePos := bestposition[int32(keysDef[len(keysDef)-1])]
+
+	return namePos
 }
