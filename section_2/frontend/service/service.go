@@ -96,7 +96,7 @@ func (s *basicService) GetTeamBestPlayers(ctx context.Context, teamName string) 
 	return teambestplayers, str2err(resp.Err)
 }
 
-//GetBestDefenders display top 3 league defenders
+//GetPositionBestPlayers display top 3 league defenders
 func (s *basicService) GetPositionBestPlayers(ctx context.Context, position string) ([]*Player, error) {
 
 	resp, err := s.gcStats.ListPositionPlayers(context.Background(), &pb.PositionRequest{
@@ -110,15 +110,13 @@ func (s *basicService) GetPositionBestPlayers(ctx context.Context, position stri
 	for i := range resp.Players {
 		players[i] = makePlayer(resp.Players[i])
 	}
-	/*
-		bestpositionplayers, err := topposplayers(players, position)
-		if err != nil {
-			return nil, ErrPosition
-		}
 
-	*/
+	bestpositionplayers, err := topposplayers(players, position)
+	if err != nil {
+		return nil, ErrPosition
+	}
 
-	return players, str2err(resp.Err)
+	return bestpositionplayers, str2err(resp.Err)
 }
 
 func makePlayer(p *pb.Player) *Player {

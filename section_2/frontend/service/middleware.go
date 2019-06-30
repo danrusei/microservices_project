@@ -37,7 +37,7 @@ func (mw loggingMiddleware) GetTeamBestPlayers(ctx context.Context, teamName str
 
 func (mw loggingMiddleware) GetPositionBestPlayers(ctx context.Context, position string) (p []*Player, err error) {
 	defer func() {
-		mw.logger.Log("method", "GetBestDefenders", "position", position, "err", err)
+		mw.logger.Log("method", "GetPositionBestPlayers", "position", position, "err", err)
 	}()
 	return mw.next.GetPositionBestPlayers(ctx, position)
 }

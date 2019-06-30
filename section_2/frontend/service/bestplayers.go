@@ -57,52 +57,76 @@ func topteamplayers(teamplayers []*Player) []*Player {
 	return nil
 }
 
-/*
 func topposplayers(players []*Player, position string) ([]*Player, error) {
 	var err error
-	var skill1, skill2 string
+	var topplayers []*Player
+	var interception int32
+	var tackles int32
+	var assists int32
+	var goals int32
+	var passes int32
 
-	switch position {
-	case "Defender":
-		skill1 = "Interceptions"
-		skill2 = "Tackles"
-		top3defenders := toppositional(players, skill1, skill2)
-		return top3defenders, nil
-	case "Forward":
-		skill1 = "Goals"
-		skill2 = "Assists"
-		top3forwarders := toppositional(players, skill1, skill2)
-		return top3forwarders, nil
-	case "Midfielder":
-		skill1 = "Passes"
-		skill2 = "Assists"
-		top3midfielders := toppositional(players, skill1, skill2)
-		return top3midfielders, nil
-	default:
-		return nil, err
+	bestposplayer := make(map[int32]string)
+
+	if len(players) > 0 {
+
+		for i := range players {
+
+			switch position {
+			case "Defender":
+				interception = players[i].Interceptions
+				tackles = players[i].Tackles
+				defskills := (interception*50)/100 + (tackles*50)/100
+				bestposplayer[defskills] = players[i].Name
+			case "Forward":
+				goals = players[i].Goals
+				assists = players[i].Assists
+				forskills := (goals*70)/100 + (assists*30)/100
+				bestposplayer[forskills] = players[i].Name
+			case "Midfielder":
+				passes = players[i].Passes
+				assists = players[i].Assists
+				midskills := (passes*70)/100 + (assists*30)/100
+				bestposplayer[midskills] = players[i].Name
+			default:
+				return nil, err
+			}
+		}
+
+		namePos := findplayersname(bestposplayer)
+
+		for i := range players {
+			for v := range namePos {
+				if players[i].Name == namePos[v] {
+					topplayers = append(topplayers, players[i])
+				}
+			}
+		}
+
+		return topplayers, nil
+
 	}
 
 	return nil, nil
 
 }
 
-func toppositional(posplayers []*Player, skill1 string, skill2 string) []*Player {
-	var topplayers []*Player
-
-	allposplayers := make(map[int32]string)
-
-	if len(posplayers) > 0 {
-		for i := range posplayers {
-			gotskill1 := posplayers[i].+"skill1"
-			gotskill2 := posplayers[i].+"skill2"
-		}
-
+func findplayersname(bestposition map[int32]string) []string {
+	keysDef := make([]int, 0, len(bestposition))
+	for k := range bestposition {
+		keysDef = append(keysDef, int(k))
 	}
+	sort.Ints(keysDef)
 
-	return nil
+	namePos := make([]string, 3)
+
+	namePos[0] = bestposition[int32(keysDef[len(keysDef)-1])]
+	namePos[1] = bestposition[int32(keysDef[len(keysDef)-2])]
+	namePos[2] = bestposition[int32(keysDef[len(keysDef)-3])]
+
+	return namePos
 
 }
-*/
 
 func findplayername(bestposition map[int32]string) string {
 	keysDef := make([]int, 0, len(bestposition))
