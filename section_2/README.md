@@ -1,7 +1,8 @@
-Microservices -- Create Frontend and Stats Service :  
-    * Frontend service is an http rest API which communicate with the rest of the world  
-    * Stats is a backend service which communicate with frontend microservices via GRPC  
-    * GO-KIT microservices toolkit is used
+Microservices -- Create Frontend and Stats Service : 
+
+* Frontend service is an http rest API which communicate with the rest of the world  
+* Stats is a backend service which communicate with frontend microservices via GRPC  
+* GO-KIT microservices toolkit is used
 
 Run both Stats and Frontend servers and use below commands to verify functionality.
 
@@ -12,6 +13,7 @@ Run both Stats and Frontend servers and use below commands to verify functionali
     curl --header "Content-Type: application/json" --request GET --data '{"position":"Defender"}' http://localhost:8080/bestposition
     position can be replaced with Forward and Midfielder  
 
-Blog Posts : 
- * https://dev-state.com/blog/microservices_2_gokit1/   
- * https://dev-state.com/blog/microservices_2_gokit2/  
+Blog Posts :
+
+* https://dev-state.com/blog/microservices_2_gokit1/   
+* https://dev-state.com/blog/microservices_2_gokit2/  
