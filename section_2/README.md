@@ -4,7 +4,7 @@ Microservices -- Create Frontend and Stats Service :
 * Stats is a backend service which communicate with frontend microservices via GRPC  
 * GO-KIT microservices toolkit is used
 
-Run both Stats and Frontend servers and use below commands to verify functionality.
+Run both Stats and Frontend services and use following commands to check functionality.
 
     curl http://localhost:8080/bestplayers/Tottenham%20Hotspur
 
