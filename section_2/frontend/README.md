@@ -1,1 +1,2 @@
-This is the main service which expose and JSON over HTTP to users and talk by grpc with Stats Service, Player Service and Transfer Service.
+This is the main service, which expose a JSON over HTTP endpoint to customers.
+It talks by GRPC with  Stats Service.

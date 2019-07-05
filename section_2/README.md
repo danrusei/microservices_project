@@ -1,7 +1,9 @@
-Design Microservices:  
-    -- frontend service is an http rest API which communicate with the rest of the world  
-    -- stats is a backend service which communicate with frontend microservices via GRPC  
-    -- I'm using GO-KIT toolkit which provides separation of concerns pattern in microservices creation
+Microservices -- Create Frontend and Stats Service :  
+    -- Frontend service is an http rest API which communicate with the rest of the world  
+    -- Stats is a backend service which communicate with frontend microservices via GRPC  
+    -- GO-KIT microservices toolkit is used
+
+    Run both Stats and Frontend servers and use below commands to verify functionality.
 
     curl http://localhost:8080/bestplayers/Tottenham%20Hotspur
 
@@ -10,4 +12,4 @@ Design Microservices:
     curl --header "Content-Type: application/json" --request GET --data '{"position":"Defender"}' http://localhost:8080/bestposition
     position can be replaced with Forward and Midfielder  
 
-Blog Post : TBD 
+Blog Post : https://dev-state.com/blog/microservices_2_gokit1/ &  https://dev-state.com/blog/microservices_2_gokit2/
