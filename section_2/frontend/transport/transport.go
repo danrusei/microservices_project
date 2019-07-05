@@ -43,7 +43,7 @@ func MakeHTTPHandler(siteEndpoints endpoints.Endpoints, logger log.Logger) http.
 	))
 
 	r.Methods("GET").Path("/bestposition").Handler(kithttp.NewServer(
-		siteEndpoints.GetBestDefendersEndpoint,
+		siteEndpoints.GetPositionBestPlayersEndpoint,
 		decodeGetPositionRequest,
 		encodeResponse,
 		options...,
