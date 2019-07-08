@@ -29,8 +29,8 @@ func main() {
 	logger = log.With(logger, "ts", log.DefaultTimestampUTC)
 	logger = log.With(logger, "caller", log.DefaultCaller)
 
-	level.Info(logger).Log("msg", "service started")
-	defer level.Info(logger).Log("msg", "service ended")
+	level.Info(logger).Log("msg", "Stats service started")
+	defer level.Info(logger).Log("msg", "Stats service ended")
 
 	// add database with credentials to run locally
 	ctx := context.Background()

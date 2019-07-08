@@ -51,7 +51,7 @@ func (mw loggingMiddleware) CreatePlayer(ctx context.Context, newplayer Player) 
 
 func (mw loggingMiddleware) DeletePlayer(ctx context.Context, delplayer string) (ops string, err error) {
 	defer func() {
-		mw.logger.Log("method", "CreatePlayer", "player", delplayer, "err", err)
+		mw.logger.Log("method", "DeletePlayer", "player", delplayer, "err", err)
 	}()
 	return mw.next.DeletePlayer(ctx, delplayer)
 }

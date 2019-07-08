@@ -39,8 +39,8 @@ func main() {
 	logger = log.With(logger, "ts", log.DefaultTimestampUTC)
 	logger = log.With(logger, "caller", log.DefaultCaller)
 
-	level.Info(logger).Log("msg", "service started")
-	defer level.Info(logger).Log("msg", "service ended")
+	level.Info(logger).Log("msg", "Frontend service started")
+	defer level.Info(logger).Log("msg", "Frontend service ended")
 
 	svc := new(frontendServer)
 	mustMapEnv(&svc.statsSvcAddr, "STATS_SERVICE_ADDR")
