@@ -12,8 +12,8 @@ type Endpoints struct {
 	TransferPlayerEndpoint endpoint.Endpoint
 }
 
-//MakePlayerOpsEndpoints initialize all service Endpoints
-func MakePlayerOpsEndpoints(s service.TransferService) Endpoints {
+//MakeTransferEndpoints initialize all service Endpoints
+func MakeTransferEndpoints(s service.TransferService) Endpoints {
 	return Endpoints{
 		TransferPlayerEndpoint: makeTransferPlayerEndpoint(s),
 	}
