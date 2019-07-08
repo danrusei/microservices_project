@@ -41,3 +41,24 @@ func (mw loggingMiddleware) GetPositionBestPlayers(ctx context.Context, position
 	}()
 	return mw.next.GetPositionBestPlayers(ctx, position)
 }
+
+func (mw loggingMiddleware) CreatePlayer(ctx context.Context, newplayer Player) (ops string, err error) {
+	defer func() {
+		mw.logger.Log("method", "CreatePlayer", "player", newplayer, "err", err)
+	}()
+	return mw.next.CreatePlayer(ctx, newplayer)
+}
+
+func (mw loggingMiddleware) DeletePlayer(ctx context.Context, delplayer string) (ops string, err error) {
+	defer func() {
+		mw.logger.Log("method", "CreatePlayer", "player", delplayer, "err", err)
+	}()
+	return mw.next.DeletePlayer(ctx, delplayer)
+}
+
+func (mw loggingMiddleware) TransferPlayer(ctx context.Context, playerName string, teamFrom string, teamTo string) (ops string, err error) {
+	defer func() {
+		mw.logger.Log("method", "TransferPlayer", "player", playerName, "FromTeam", teamFrom, "ToTeam", teamTo, "err", err)
+	}()
+	return mw.next.TransferPlayer(ctx, playerName, teamFrom, teamTo)
+}

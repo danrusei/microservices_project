@@ -12,6 +12,9 @@ type Endpoints struct {
 	GetTableEndpoint               endpoint.Endpoint
 	GetTeamBestPlayersEndpoint     endpoint.Endpoint
 	GetPositionBestPlayersEndpoint endpoint.Endpoint
+	CreatePlayerEndpoint           endpoint.Endpoint
+	DeletePlayerEndpoint           endpoint.Endpoint
+	TransferPlayerEndpoint         endpoint.Endpoint
 }
 
 //MakeSiteEndpoints initialize all service Endpoints
@@ -20,6 +23,9 @@ func MakeSiteEndpoints(s service.SiteService) Endpoints {
 		GetTableEndpoint:               makeGetTableEndpoint(s),
 		GetTeamBestPlayersEndpoint:     makeGetTeamBestPlayersEndpoint(s),
 		GetPositionBestPlayersEndpoint: makeGetPositionBestPlayersEndpoint(s),
+		CreatePlayerEndpoint:           makeCreatePlayerEndpoint(s),
+		DeletePlayerEndpoint:           makeDeletePlayerEndpoint(s),
+		TransferPlayerEndpoint:         makeTransferPlayerEndpoint(s),
 	}
 }
 
@@ -77,5 +83,64 @@ func makeGetPositionBestPlayersEndpoint(s service.SiteService) endpoint.Endpoint
 		req := request.(BestPositionRequest)
 		defenders, err := s.GetPositionBestPlayers(ctx, req.Position)
 		return BestPositionReply{Players: defenders, Err: err}, nil
+	}
+}
+
+//CreatePlayerRequest holds the request paramas for CreatePlayer
+type CreatePlayerRequest struct {
+	NewPlayer service.Player
+}
+
+//CreatePlayerReply  holds the response paramas for CeeatePLayer
+type CreatePlayerReply struct {
+	Ops string
+	Err error
+}
+
+func makeCreatePlayerEndpoint(s service.SiteService) endpoint.Endpoint {
+	return func(ctx context.Context, request interface{}) (interface{}, error) {
+		req := request.(CreatePlayerRequest)
+		response, err := s.CreatePlayer(ctx, req.NewPlayer)
+		return CreatePlayerReply{Ops: response, Err: err}, nil
+	}
+}
+
+//DeletePlayerRequest holds the request paramas for DeletePlayer
+type DeletePlayerRequest struct {
+	DelPlayer string
+}
+
+//DeletePlayerReply  holds the response paramas for DeletePLayer
+type DeletePlayerReply struct {
+	Ops string
+	Err error
+}
+
+func makeDeletePlayerEndpoint(s service.SiteService) endpoint.Endpoint {
+	return func(ctx context.Context, request interface{}) (interface{}, error) {
+		req := request.(DeletePlayerRequest)
+		response, err := s.DeletePlayer(ctx, req.DelPlayer)
+		return DeletePlayerReply{Ops: response, Err: err}, nil
+	}
+}
+
+//TransferPlayerRequest holds the request paramas for TransferPlayer
+type TransferPlayerRequest struct {
+	PlayerName string
+	TeamFrom   string
+	TeamTo     string
+}
+
+//TransferPlayerReply  holds the response paramas for TransferPLayer
+type TransferPlayerReply struct {
+	Ops string
+	Err error
+}
+
+func makeTransferPlayerEndpoint(s service.SiteService) endpoint.Endpoint {
+	return func(ctx context.Context, request interface{}) (interface{}, error) {
+		req := request.(TransferPlayerRequest)
+		response, err := s.TransferPlayer(ctx, req.PlayerName, req.TeamFrom, req.TeamTo)
+		return TransferPlayerReply{Ops: response, Err: err}, nil
 	}
 }

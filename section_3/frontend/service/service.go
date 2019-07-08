@@ -14,6 +14,9 @@ type SiteService interface {
 	GetTable(ctx context.Context, league string) ([]*Table, error)
 	GetTeamBestPlayers(ctx context.Context, teamName string) ([]*Player, error)
 	GetPositionBestPlayers(ctx context.Context, position string) ([]*Player, error)
+	CreatePlayer(ctx context.Context, newplayer Player) (string, error)
+	DeletePlayer(ctx context.Context, delplayer string) (string, error)
+	TransferPlayer(ctx context.Context, playerName string, teamFrom string, TeamTO string) (string, error)
 }
 
 // NewSiteService returns a basic StatsService with all of the expected middlewares wired in.
@@ -27,12 +30,16 @@ func NewSiteService(logger log.Logger, conn *grpc.ClientConn) SiteService {
 // NewBasicService returns a naive, stateless implementation of StatsService.
 func NewBasicService(conn *grpc.ClientConn) SiteService {
 	return &basicService{
-		gcStats: pb.NewStatsServiceClient(conn),
+		gcStats:  pb.NewStatsServiceClient(conn),
+		gcPlayer: pb.NewPlayerServiceClient(conn),
+		gcTrans:  pb.NewTransferServiceClient(conn),
 	}
 }
 
 type basicService struct {
-	gcStats pb.StatsServiceClient
+	gcStats  pb.StatsServiceClient
+	gcPlayer pb.PlayerServiceClient
+	gcTrans  pb.TransferServiceClient
 }
 
 var (
@@ -135,6 +142,21 @@ func makePlayer(p *pb.Player) *Player {
 	}
 
 	return player
+}
+
+func (s *basicService) CreatePlayer(ctx context.Context, newplayer Player) (string, error) {
+
+	return "", nil
+}
+
+func (s *basicService) DeletePlayer(ctx context.Context, delplayer string) (string, error) {
+
+	return "", nil
+}
+
+func (s *basicService) TransferPlayer(ctx context.Context, playerName string, teamFrom string, teamTo string) (string, error) {
+
+	return "", nil
 }
 
 // Helper function is required to translate Go error types from strings,
