@@ -49,6 +49,27 @@ func MakeHTTPHandler(siteEndpoints endpoints.Endpoints, logger log.Logger) http.
 		options...,
 	))
 
+	r.Methods("PUT").Path("/createplayer").Handler(kithttp.NewServer(
+		siteEndpoints.CreatePlayerEndpoint,
+		decodeCreatePlayerRequest,
+		encodeResponse,
+		options...,
+	))
+
+	r.Methods("GET").Path("/deleteplayer/{player}").Handler(kithttp.NewServer(
+		siteEndpoints.DeletePlayerEndpoint,
+		decodeDeletePlayerRequest,
+		encodeResponse,
+		options...,
+	))
+
+	r.Methods("GET").Path("/transferplayer").Handler(kithttp.NewServer(
+		siteEndpoints.TransferPlayerEndpoint,
+		decodeTransferPlayerRequest,
+		encodeResponse,
+		options...,
+	))
+
 	return r
 }
 
@@ -71,6 +92,31 @@ func decodeGetTeamRequest(_ context.Context, r *http.Request) (request interface
 
 func decodeGetPositionRequest(_ context.Context, r *http.Request) (request interface{}, err error) {
 	var req endpoints.BestPositionRequest
+	if e := json.NewDecoder(r.Body).Decode(&req); e != nil {
+		return nil, e
+	}
+	return req, nil
+}
+
+func decodeCreatePlayerRequest(_ context.Context, r *http.Request) (request interface{}, err error) {
+	var req endpoints.CreatePlayerRequest
+	if e := json.NewDecoder(r.Body).Decode(&req); e != nil {
+		return nil, e
+	}
+	return req, nil
+}
+
+func decodeDeletePlayerRequest(_ context.Context, r *http.Request) (request interface{}, err error) {
+	vars := mux.Vars(r)
+	delplayer, ok := vars["player"]
+	if !ok {
+		return nil, ErrBadRouting
+	}
+	return endpoints.DeletePlayerRequest{DelPlayer: delplayer}, nil
+}
+
+func decodeTransferPlayerRequest(_ context.Context, r *http.Request) (request interface{}, err error) {
+	var req endpoints.TransferPlayerRequest
 	if e := json.NewDecoder(r.Body).Decode(&req); e != nil {
 		return nil, e
 	}

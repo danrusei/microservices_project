@@ -44,13 +44,13 @@ func main() {
 
 	svc := new(frontendServer)
 	mustMapEnv(&svc.statsSvcAddr, "STATS_SERVICE_ADDR")
-	//mustMapEnv(&svc.playerSvcAddr, "PLAYER_SERVICE_ADDR")
-	//mustMapEnv(&svc.transferSvcAddr, "TRANSFER_SERVICE_ADDR")
+	mustMapEnv(&svc.playerSvcAddr, "PLAYER_SERVICE_ADDR")
+	mustMapEnv(&svc.transferSvcAddr, "TRANSFER_SERVICE_ADDR")
 
 	ctx := context.Background()
 	mustConnGRPC(ctx, &svc.statsSvcConn, svc.statsSvcAddr)
-	//mustConnGRPC(ctx, &svc.playerSvcConn, svc.playerSvcAddr)
-	//mustConnGRPC(ctx, &svc.transferSvcConn, svc.transferSvcAddr)
+	mustConnGRPC(ctx, &svc.playerSvcConn, svc.playerSvcAddr)
+	mustConnGRPC(ctx, &svc.transferSvcConn, svc.transferSvcAddr)
 
 	// Build the layers of the service "onion" from the inside out. First, the
 	// business logic service; then, the set of endpoints that wrap the service;
