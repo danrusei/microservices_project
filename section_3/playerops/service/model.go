@@ -2,30 +2,30 @@ package service
 
 //Table struct holds League table data
 type Table struct {
-	TeamName    string `json:"teamName"`
-	TeamPlayed  int32  `json:"teamPlayed"`
-	TeamWon     int32  `json:"teamWon"`
-	TeamDrawn   int32  `json:"teamDrawn"`
-	TeamLost    int32  `json:"teamLost"`
-	TeamGF      int32  `json:"teamGF"`
-	TeamGA      int32  `json:"teamGA"`
-	TeamGD      int32  `json:"teamGD"`
-	TeamPoints  int32  `json:"teamPoints"`
-	TeamCapital int32  `json:"teamCapital"`
+	TeamName    string `firestore:"Name"`
+	TeamPlayed  int32  `firestore:"Played"`
+	TeamWon     int32  `firestore:"Won"`
+	TeamDrawn   int32  `firestore:"Drawn"`
+	TeamLost    int32  `firestore:"Lost"`
+	TeamGF      int32  `firestore:"GF"`
+	TeamGA      int32  `firestore:"GA"`
+	TeamGD      int32  `firestore:"GD"`
+	TeamPoints  int32  `firestore:"Points"`
+	TeamCapital int32  `firestore:"Capital"`
 }
 
 //Player struct holds player data
 type Player struct {
-	Name          string `json:"name"`
-	Team          string `json:"team"`
-	Nationality   string `json:"nationality"`
-	Position      string `json:"position"`
-	Appearences   int32  `json:"appearences"`
-	Goals         int32  `json:"goals"`
-	Assists       int32  `json:"assists"`
-	Passes        int32  `json:"passes"`
-	Interceptions int32  `json:"interceptions"`
-	Tackles       int32  `json:"tackles"`
-	Fouls         int32  `json:"fouls"`
-	//Price         int32  `json:"price"`
+	Name          string `firestore:"player"`
+	Team          string `firestore:"team"`
+	Nationality   string `firestore:"nationality"`
+	Position      string `firestore:"position"`
+	Appearences   int32  `firestore:"appearences"`
+	Goals         int32  `firestore:"goals"`
+	Assists       int32  `firestore:"assists"`
+	Passes        int32  `firestore:"passes"`
+	Interceptions int32  `firestore:"Interceptions"`
+	Tackles       int32  `firestore:"Tackles"`
+	Fouls         int32  `firestore:"Fouls"`
+	//	Price         int32  `firestore:"Price" json:"price"`
 }

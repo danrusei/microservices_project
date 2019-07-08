@@ -3,23 +3,24 @@ package service
 import (
 	"context"
 	"errors"
+	"strings"
 
 	"cloud.google.com/go/firestore"
 	"github.com/go-kit/kit/log"
 )
 
 var (
-	//ErrIterate informs if iteration errors
-	ErrIterate = errors.New("can't iterate over the colection documents")
+	//ErrWrite informs if database write error occurs
+	ErrWrite = errors.New("can't write the document")
 
-	//ErrExtractDataToStruct informs if unable to extract firestore data to struct
-	ErrExtractDataToStruct = errors.New("can't extract the data into a struct with DataTo")
+	//ErrDelete informs if unable to delete the player
+	ErrDelete = errors.New("can't delete the player from database")
 )
 
 //PlayerOpsService  describe the PlayerOps service
 type PlayerOpsService interface {
 	CreatePlayer(ctx context.Context, playerCreate *Player) (string, error)
-	DeletePlayer(ctx context.Context, playerDelete string) (string, error)
+	DeletePlayer(ctx context.Context, playerDelete string, teamName string) (string, error)
 }
 
 // ** Implementation of the service **
@@ -45,10 +46,29 @@ type basicService struct {
 
 func (s *basicService) CreatePlayer(ctx context.Context, playerCreate *Player) (string, error) {
 
-	return "", nil
+	docName := playerCreate.Team + "_" + strings.Replace(playerCreate.Name, " ", "_", -1)
+
+	wr, err := s.dbClient.Collection("Teams").Doc(docName).Create(ctx, playerCreate)
+
+	if err != nil {
+		return "", ErrWrite
+	}
+
+	ops := "Write operation completed at " + wr.UpdateTime.String()
+
+	return ops, nil
 }
 
-func (s *basicService) DeletePlayer(ctx context.Context, playerDelete string) (string, error) {
+func (s *basicService) DeletePlayer(ctx context.Context, playerDelete string, teamName string) (string, error) {
 
-	return "", nil
+	docName := teamName + "_" + strings.Replace(playerDelete, " ", "_", -1)
+
+	wr, err := s.dbClient.Collection("Teams").Doc(docName).Delete(ctx)
+	if err != nil {
+		return "", ErrDelete
+	}
+
+	ops := "Deleted " + playerDelete + " at " + wr.UpdateTime.String()
+
+	return ops, nil
 }

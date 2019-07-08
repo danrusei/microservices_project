@@ -49,6 +49,7 @@ message Player {
     int32 interceptions = 9;
     int32 tackles = 10;
     int32 fouls = 11;
+    int32 price = 12;
 }
 
 message TeamReply {
@@ -83,6 +84,7 @@ message CreatePlayerReply {
 
 message DeletePlayerRequest {
     string name = 1;
+    string team = 2;
 }
 
 message DeletePlayerReply {

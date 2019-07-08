@@ -43,6 +43,7 @@ func makeCreatePlayerEndpoint(s service.PlayerOpsService) endpoint.Endpoint {
 //DeletePlayerRequest holds the request params for DeletePlayer
 type DeletePlayerRequest struct {
 	Name string
+	Team string
 }
 
 //DeletePlayerReply holds the response params for DeletePlayer
@@ -54,7 +55,7 @@ type DeletePlayerReply struct {
 func makeDeletePlayerEndpoint(s service.PlayerOpsService) endpoint.Endpoint {
 	return func(ctx context.Context, request interface{}) (interface{}, error) {
 		req := request.(DeletePlayerRequest)
-		response, err := s.DeletePlayer(ctx, req.Name)
+		response, err := s.DeletePlayer(ctx, req.Name, req.Team)
 		return DeletePlayerReply{Ops: response, Err: err}, nil
 	}
 }

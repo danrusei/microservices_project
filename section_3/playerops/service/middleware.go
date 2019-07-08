@@ -28,9 +28,9 @@ func (mw loggingMiddleware) CreatePlayer(ctx context.Context, playerCreate *Play
 	return mw.next.CreatePlayer(ctx, playerCreate)
 }
 
-func (mw loggingMiddleware) DeletePlayer(ctx context.Context, playerDelete string) (ops string, err error) {
+func (mw loggingMiddleware) DeletePlayer(ctx context.Context, playerDelete string, teamName string) (ops string, err error) {
 	defer func() {
-		mw.logger.Log("method", "DeletePlayer", "player", playerDelete, "err", err)
+		mw.logger.Log("method", "DeletePlayer", "player", playerDelete, "team", teamName, "err", err)
 	}()
-	return mw.next.DeletePlayer(ctx, playerDelete)
+	return mw.next.DeletePlayer(ctx, playerDelete, teamName)
 }

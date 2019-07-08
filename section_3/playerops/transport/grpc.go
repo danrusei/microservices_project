@@ -58,7 +58,7 @@ func encodeCreatePlayerResponse(_ context.Context, response interface{}) (interf
 
 func decodeDeletePlayerRequest(_ context.Context, request interface{}) (interface{}, error) {
 	req := request.(*pb.DeletePlayerRequest)
-	return endpoints.DeletePlayerRequest{Name: req.Name}, nil
+	return endpoints.DeletePlayerRequest{Name: req.Name, Team: req.Team}, nil
 }
 
 func encodeDeletePlayerResponse(_ context.Context, response interface{}) (interface{}, error) {
