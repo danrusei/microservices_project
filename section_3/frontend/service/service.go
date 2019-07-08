@@ -4,7 +4,7 @@ import (
 	"context"
 	"errors"
 
-	"github.com/Danr17/microservices_project/section_2/frontend/pb"
+	"github.com/Danr17/microservices_project/section_3/frontend/pb"
 	"github.com/go-kit/kit/log"
 	"google.golang.org/grpc"
 )
