@@ -21,9 +21,9 @@ type loggingMiddleware struct {
 	next   TransferService
 }
 
-func (mw loggingMiddleware) TransferPlayer(ctx context.Context, playerTransfer string, TeamTo string) (ops string, err error) {
+func (mw loggingMiddleware) TransferPlayer(ctx context.Context, playerTransfer string, TeamFrom string, TeamTo string) (ops string, err error) {
 	defer func() {
-		mw.logger.Log("method", "CreatePlayer", "player", playerTransfer, "err", err)
+		mw.logger.Log("method", "TransferPlayer", "player", playerTransfer, "from", TeamFrom, "to", TeamTo, "err", err)
 	}()
-	return mw.next.TransferPlayer(ctx, playerTransfer, TeamTo)
+	return mw.next.TransferPlayer(ctx, playerTransfer, TeamFrom, TeamTo)
 }

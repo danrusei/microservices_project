@@ -26,7 +26,7 @@ func NewGRPCServer(transferEndpoints endpoints.Endpoints, logger log.Logger) pb.
 
 func decodeTransferRequest(_ context.Context, request interface{}) (interface{}, error) {
 	req := request.(*pb.PlayerTransferRequest)
-	return endpoints.PlayerTransferRequest{PlayerName: req.Name, TeamName: req.Team}, nil
+	return endpoints.PlayerTransferRequest{PlayerName: req.Name, FromTeam: req.FromTeam, ToTeam: req.ToTeam}, nil
 }
 
 func encodeTransferResponse(_ context.Context, response interface{}) (interface{}, error) {

@@ -18,7 +18,7 @@ var (
 
 //TransferService  describe the Transfer service
 type TransferService interface {
-	TransferPlayer(ctx context.Context, playerTransfer string, TeamTo string) (string, error)
+	TransferPlayer(ctx context.Context, playerTransfer string, TeamFrom string, TeamTo string) (string, error)
 }
 
 // ** Implementation of the service **
@@ -42,7 +42,12 @@ type basicService struct {
 	dbClient *firestore.Client
 }
 
-func (s *basicService) TransferPlayer(ctx context.Context, playerTransfer string, TeamTo string) (string, error) {
+func (s *basicService) TransferPlayer(ctx context.Context, playerTransfer string, TeamFrom string, TeamTo string) (string, error) {
+
+	//check player price
+	//check teamTO Capital
+	//if price <= Capital then transfer is allowed
+	//delete TeamFrom_player; create TeamTo_player(change Team field)
 
 	return "", nil
 }

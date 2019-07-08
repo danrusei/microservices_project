@@ -101,7 +101,8 @@ service TransferService {
 
 message PlayerTransferRequest {
     string name = 1;
-    string team = 2;
+    string fromTeam = 2;
+    string toTeam = 3;
 }
 
 message PlayerTransferReply {
