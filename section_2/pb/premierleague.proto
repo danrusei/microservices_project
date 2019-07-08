@@ -68,19 +68,8 @@ message PositionReply {
 // -------------- Player Service -----------------
 
 service PlayerService {
-    rpc GetPlayer(GetPlayerRequest) returns (GetPlayerReply) {}
     rpc CreatePlayer(CreatePlayerRequest) returns (CreatePlayerReply) {}
-    rpc UpdatePlayer(UpdatePlayerRequest) returns (UpdatePlayerReply) {}
     rpc DeletePLayer(DeletePlayerRequest) returns (DeletePlayerReply) {}
-}
-
-message GetPlayerRequest {
-    string name = 1;
-}
-
-message GetPlayerReply {
-    string ops = 1;
-    string err = 2;
 }
 
 message CreatePlayerRequest {
@@ -88,15 +77,6 @@ message CreatePlayerRequest {
 }
 
 message CreatePlayerReply {
-    string ops = 1;
-    string err = 2;
-}
-
-message UpdatePlayerRequest {
-    Player name = 1;
-}
-
-message UpdatePlayerReply {
     string ops = 1;
     string err = 2;
 }
@@ -114,27 +94,7 @@ message DeletePlayerReply {
 // -------------- Transfer Service ---------------
 
 service TransferService {
-    rpc TeamCapital(TeamCapitalRequest) returns (TeamCapitalReply) {}
-    rpc PlayerCost(PlayerCostRequest) returns (PlayerCostReply) {}
     rpc TransferPlayer(PlayerTransferRequest) returns (PlayerTransferReply) {}
-}
-
-message TeamCapitalRequest {
-    string name = 1;
-}
-
-message TeamCapitalReply {
-    int32 capital = 1;
-    string err = 2;
-}
-
-message PlayerCostRequest {
-    string name = 1;
-}
-
-message PlayerCostReply {
-    int32 cost = 1;
-    string err = 2;
 }
 
 message PlayerTransferRequest {

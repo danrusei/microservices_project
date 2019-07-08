@@ -512,92 +512,6 @@ func (m *PositionReply) GetErr() string {
 	return ""
 }
 
-type GetPlayerRequest struct {
-	Name                 string   `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *GetPlayerRequest) Reset()         { *m = GetPlayerRequest{} }
-func (m *GetPlayerRequest) String() string { return proto.CompactTextString(m) }
-func (*GetPlayerRequest) ProtoMessage()    {}
-func (*GetPlayerRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_4204cc63886395c8, []int{8}
-}
-
-func (m *GetPlayerRequest) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_GetPlayerRequest.Unmarshal(m, b)
-}
-func (m *GetPlayerRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_GetPlayerRequest.Marshal(b, m, deterministic)
-}
-func (m *GetPlayerRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_GetPlayerRequest.Merge(m, src)
-}
-func (m *GetPlayerRequest) XXX_Size() int {
-	return xxx_messageInfo_GetPlayerRequest.Size(m)
-}
-func (m *GetPlayerRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_GetPlayerRequest.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_GetPlayerRequest proto.InternalMessageInfo
-
-func (m *GetPlayerRequest) GetName() string {
-	if m != nil {
-		return m.Name
-	}
-	return ""
-}
-
-type GetPlayerReply struct {
-	Ops                  string   `protobuf:"bytes,1,opt,name=ops,proto3" json:"ops,omitempty"`
-	Err                  string   `protobuf:"bytes,2,opt,name=err,proto3" json:"err,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *GetPlayerReply) Reset()         { *m = GetPlayerReply{} }
-func (m *GetPlayerReply) String() string { return proto.CompactTextString(m) }
-func (*GetPlayerReply) ProtoMessage()    {}
-func (*GetPlayerReply) Descriptor() ([]byte, []int) {
-	return fileDescriptor_4204cc63886395c8, []int{9}
-}
-
-func (m *GetPlayerReply) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_GetPlayerReply.Unmarshal(m, b)
-}
-func (m *GetPlayerReply) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_GetPlayerReply.Marshal(b, m, deterministic)
-}
-func (m *GetPlayerReply) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_GetPlayerReply.Merge(m, src)
-}
-func (m *GetPlayerReply) XXX_Size() int {
-	return xxx_messageInfo_GetPlayerReply.Size(m)
-}
-func (m *GetPlayerReply) XXX_DiscardUnknown() {
-	xxx_messageInfo_GetPlayerReply.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_GetPlayerReply proto.InternalMessageInfo
-
-func (m *GetPlayerReply) GetOps() string {
-	if m != nil {
-		return m.Ops
-	}
-	return ""
-}
-
-func (m *GetPlayerReply) GetErr() string {
-	if m != nil {
-		return m.Err
-	}
-	return ""
-}
-
 type CreatePlayerRequest struct {
 	Name                 *Player  `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
@@ -609,7 +523,7 @@ func (m *CreatePlayerRequest) Reset()         { *m = CreatePlayerRequest{} }
 func (m *CreatePlayerRequest) String() string { return proto.CompactTextString(m) }
 func (*CreatePlayerRequest) ProtoMessage()    {}
 func (*CreatePlayerRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_4204cc63886395c8, []int{10}
+	return fileDescriptor_4204cc63886395c8, []int{8}
 }
 
 func (m *CreatePlayerRequest) XXX_Unmarshal(b []byte) error {
@@ -649,7 +563,7 @@ func (m *CreatePlayerReply) Reset()         { *m = CreatePlayerReply{} }
 func (m *CreatePlayerReply) String() string { return proto.CompactTextString(m) }
 func (*CreatePlayerReply) ProtoMessage()    {}
 func (*CreatePlayerReply) Descriptor() ([]byte, []int) {
-	return fileDescriptor_4204cc63886395c8, []int{11}
+	return fileDescriptor_4204cc63886395c8, []int{9}
 }
 
 func (m *CreatePlayerReply) XXX_Unmarshal(b []byte) error {
@@ -684,92 +598,6 @@ func (m *CreatePlayerReply) GetErr() string {
 	return ""
 }
 
-type UpdatePlayerRequest struct {
-	Name                 *Player  `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *UpdatePlayerRequest) Reset()         { *m = UpdatePlayerRequest{} }
-func (m *UpdatePlayerRequest) String() string { return proto.CompactTextString(m) }
-func (*UpdatePlayerRequest) ProtoMessage()    {}
-func (*UpdatePlayerRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_4204cc63886395c8, []int{12}
-}
-
-func (m *UpdatePlayerRequest) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_UpdatePlayerRequest.Unmarshal(m, b)
-}
-func (m *UpdatePlayerRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_UpdatePlayerRequest.Marshal(b, m, deterministic)
-}
-func (m *UpdatePlayerRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_UpdatePlayerRequest.Merge(m, src)
-}
-func (m *UpdatePlayerRequest) XXX_Size() int {
-	return xxx_messageInfo_UpdatePlayerRequest.Size(m)
-}
-func (m *UpdatePlayerRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_UpdatePlayerRequest.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_UpdatePlayerRequest proto.InternalMessageInfo
-
-func (m *UpdatePlayerRequest) GetName() *Player {
-	if m != nil {
-		return m.Name
-	}
-	return nil
-}
-
-type UpdatePlayerReply struct {
-	Ops                  string   `protobuf:"bytes,1,opt,name=ops,proto3" json:"ops,omitempty"`
-	Err                  string   `protobuf:"bytes,2,opt,name=err,proto3" json:"err,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *UpdatePlayerReply) Reset()         { *m = UpdatePlayerReply{} }
-func (m *UpdatePlayerReply) String() string { return proto.CompactTextString(m) }
-func (*UpdatePlayerReply) ProtoMessage()    {}
-func (*UpdatePlayerReply) Descriptor() ([]byte, []int) {
-	return fileDescriptor_4204cc63886395c8, []int{13}
-}
-
-func (m *UpdatePlayerReply) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_UpdatePlayerReply.Unmarshal(m, b)
-}
-func (m *UpdatePlayerReply) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_UpdatePlayerReply.Marshal(b, m, deterministic)
-}
-func (m *UpdatePlayerReply) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_UpdatePlayerReply.Merge(m, src)
-}
-func (m *UpdatePlayerReply) XXX_Size() int {
-	return xxx_messageInfo_UpdatePlayerReply.Size(m)
-}
-func (m *UpdatePlayerReply) XXX_DiscardUnknown() {
-	xxx_messageInfo_UpdatePlayerReply.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_UpdatePlayerReply proto.InternalMessageInfo
-
-func (m *UpdatePlayerReply) GetOps() string {
-	if m != nil {
-		return m.Ops
-	}
-	return ""
-}
-
-func (m *UpdatePlayerReply) GetErr() string {
-	if m != nil {
-		return m.Err
-	}
-	return ""
-}
-
 type DeletePlayerRequest struct {
 	Name                 string   `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
@@ -781,7 +609,7 @@ func (m *DeletePlayerRequest) Reset()         { *m = DeletePlayerRequest{} }
 func (m *DeletePlayerRequest) String() string { return proto.CompactTextString(m) }
 func (*DeletePlayerRequest) ProtoMessage()    {}
 func (*DeletePlayerRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_4204cc63886395c8, []int{14}
+	return fileDescriptor_4204cc63886395c8, []int{10}
 }
 
 func (m *DeletePlayerRequest) XXX_Unmarshal(b []byte) error {
@@ -821,7 +649,7 @@ func (m *DeletePlayerReply) Reset()         { *m = DeletePlayerReply{} }
 func (m *DeletePlayerReply) String() string { return proto.CompactTextString(m) }
 func (*DeletePlayerReply) ProtoMessage()    {}
 func (*DeletePlayerReply) Descriptor() ([]byte, []int) {
-	return fileDescriptor_4204cc63886395c8, []int{15}
+	return fileDescriptor_4204cc63886395c8, []int{11}
 }
 
 func (m *DeletePlayerReply) XXX_Unmarshal(b []byte) error {
@@ -856,178 +684,6 @@ func (m *DeletePlayerReply) GetErr() string {
 	return ""
 }
 
-type TeamCapitalRequest struct {
-	Name                 string   `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *TeamCapitalRequest) Reset()         { *m = TeamCapitalRequest{} }
-func (m *TeamCapitalRequest) String() string { return proto.CompactTextString(m) }
-func (*TeamCapitalRequest) ProtoMessage()    {}
-func (*TeamCapitalRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_4204cc63886395c8, []int{16}
-}
-
-func (m *TeamCapitalRequest) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_TeamCapitalRequest.Unmarshal(m, b)
-}
-func (m *TeamCapitalRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_TeamCapitalRequest.Marshal(b, m, deterministic)
-}
-func (m *TeamCapitalRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_TeamCapitalRequest.Merge(m, src)
-}
-func (m *TeamCapitalRequest) XXX_Size() int {
-	return xxx_messageInfo_TeamCapitalRequest.Size(m)
-}
-func (m *TeamCapitalRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_TeamCapitalRequest.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_TeamCapitalRequest proto.InternalMessageInfo
-
-func (m *TeamCapitalRequest) GetName() string {
-	if m != nil {
-		return m.Name
-	}
-	return ""
-}
-
-type TeamCapitalReply struct {
-	Capital              int32    `protobuf:"varint,1,opt,name=capital,proto3" json:"capital,omitempty"`
-	Err                  string   `protobuf:"bytes,2,opt,name=err,proto3" json:"err,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *TeamCapitalReply) Reset()         { *m = TeamCapitalReply{} }
-func (m *TeamCapitalReply) String() string { return proto.CompactTextString(m) }
-func (*TeamCapitalReply) ProtoMessage()    {}
-func (*TeamCapitalReply) Descriptor() ([]byte, []int) {
-	return fileDescriptor_4204cc63886395c8, []int{17}
-}
-
-func (m *TeamCapitalReply) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_TeamCapitalReply.Unmarshal(m, b)
-}
-func (m *TeamCapitalReply) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_TeamCapitalReply.Marshal(b, m, deterministic)
-}
-func (m *TeamCapitalReply) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_TeamCapitalReply.Merge(m, src)
-}
-func (m *TeamCapitalReply) XXX_Size() int {
-	return xxx_messageInfo_TeamCapitalReply.Size(m)
-}
-func (m *TeamCapitalReply) XXX_DiscardUnknown() {
-	xxx_messageInfo_TeamCapitalReply.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_TeamCapitalReply proto.InternalMessageInfo
-
-func (m *TeamCapitalReply) GetCapital() int32 {
-	if m != nil {
-		return m.Capital
-	}
-	return 0
-}
-
-func (m *TeamCapitalReply) GetErr() string {
-	if m != nil {
-		return m.Err
-	}
-	return ""
-}
-
-type PlayerCostRequest struct {
-	Name                 string   `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *PlayerCostRequest) Reset()         { *m = PlayerCostRequest{} }
-func (m *PlayerCostRequest) String() string { return proto.CompactTextString(m) }
-func (*PlayerCostRequest) ProtoMessage()    {}
-func (*PlayerCostRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_4204cc63886395c8, []int{18}
-}
-
-func (m *PlayerCostRequest) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_PlayerCostRequest.Unmarshal(m, b)
-}
-func (m *PlayerCostRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_PlayerCostRequest.Marshal(b, m, deterministic)
-}
-func (m *PlayerCostRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_PlayerCostRequest.Merge(m, src)
-}
-func (m *PlayerCostRequest) XXX_Size() int {
-	return xxx_messageInfo_PlayerCostRequest.Size(m)
-}
-func (m *PlayerCostRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_PlayerCostRequest.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_PlayerCostRequest proto.InternalMessageInfo
-
-func (m *PlayerCostRequest) GetName() string {
-	if m != nil {
-		return m.Name
-	}
-	return ""
-}
-
-type PlayerCostReply struct {
-	Cost                 int32    `protobuf:"varint,1,opt,name=cost,proto3" json:"cost,omitempty"`
-	Err                  string   `protobuf:"bytes,2,opt,name=err,proto3" json:"err,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *PlayerCostReply) Reset()         { *m = PlayerCostReply{} }
-func (m *PlayerCostReply) String() string { return proto.CompactTextString(m) }
-func (*PlayerCostReply) ProtoMessage()    {}
-func (*PlayerCostReply) Descriptor() ([]byte, []int) {
-	return fileDescriptor_4204cc63886395c8, []int{19}
-}
-
-func (m *PlayerCostReply) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_PlayerCostReply.Unmarshal(m, b)
-}
-func (m *PlayerCostReply) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_PlayerCostReply.Marshal(b, m, deterministic)
-}
-func (m *PlayerCostReply) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_PlayerCostReply.Merge(m, src)
-}
-func (m *PlayerCostReply) XXX_Size() int {
-	return xxx_messageInfo_PlayerCostReply.Size(m)
-}
-func (m *PlayerCostReply) XXX_DiscardUnknown() {
-	xxx_messageInfo_PlayerCostReply.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_PlayerCostReply proto.InternalMessageInfo
-
-func (m *PlayerCostReply) GetCost() int32 {
-	if m != nil {
-		return m.Cost
-	}
-	return 0
-}
-
-func (m *PlayerCostReply) GetErr() string {
-	if m != nil {
-		return m.Err
-	}
-	return ""
-}
-
 type PlayerTransferRequest struct {
 	Name                 string   `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	Team                 string   `protobuf:"bytes,2,opt,name=team,proto3" json:"team,omitempty"`
@@ -1040,7 +696,7 @@ func (m *PlayerTransferRequest) Reset()         { *m = PlayerTransferRequest{} }
 func (m *PlayerTransferRequest) String() string { return proto.CompactTextString(m) }
 func (*PlayerTransferRequest) ProtoMessage()    {}
 func (*PlayerTransferRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_4204cc63886395c8, []int{20}
+	return fileDescriptor_4204cc63886395c8, []int{12}
 }
 
 func (m *PlayerTransferRequest) XXX_Unmarshal(b []byte) error {
@@ -1087,7 +743,7 @@ func (m *PlayerTransferReply) Reset()         { *m = PlayerTransferReply{} }
 func (m *PlayerTransferReply) String() string { return proto.CompactTextString(m) }
 func (*PlayerTransferReply) ProtoMessage()    {}
 func (*PlayerTransferReply) Descriptor() ([]byte, []int) {
-	return fileDescriptor_4204cc63886395c8, []int{21}
+	return fileDescriptor_4204cc63886395c8, []int{13}
 }
 
 func (m *PlayerTransferReply) XXX_Unmarshal(b []byte) error {
@@ -1131,18 +787,10 @@ func init() {
 	proto.RegisterType((*TeamReply)(nil), "pb.TeamReply")
 	proto.RegisterType((*PositionRequest)(nil), "pb.PositionRequest")
 	proto.RegisterType((*PositionReply)(nil), "pb.PositionReply")
-	proto.RegisterType((*GetPlayerRequest)(nil), "pb.GetPlayerRequest")
-	proto.RegisterType((*GetPlayerReply)(nil), "pb.GetPlayerReply")
 	proto.RegisterType((*CreatePlayerRequest)(nil), "pb.CreatePlayerRequest")
 	proto.RegisterType((*CreatePlayerReply)(nil), "pb.CreatePlayerReply")
-	proto.RegisterType((*UpdatePlayerRequest)(nil), "pb.UpdatePlayerRequest")
-	proto.RegisterType((*UpdatePlayerReply)(nil), "pb.UpdatePlayerReply")
 	proto.RegisterType((*DeletePlayerRequest)(nil), "pb.DeletePlayerRequest")
 	proto.RegisterType((*DeletePlayerReply)(nil), "pb.DeletePlayerReply")
-	proto.RegisterType((*TeamCapitalRequest)(nil), "pb.TeamCapitalRequest")
-	proto.RegisterType((*TeamCapitalReply)(nil), "pb.TeamCapitalReply")
-	proto.RegisterType((*PlayerCostRequest)(nil), "pb.PlayerCostRequest")
-	proto.RegisterType((*PlayerCostReply)(nil), "pb.PlayerCostReply")
 	proto.RegisterType((*PlayerTransferRequest)(nil), "pb.PlayerTransferRequest")
 	proto.RegisterType((*PlayerTransferReply)(nil), "pb.PlayerTransferReply")
 }
@@ -1150,58 +798,49 @@ func init() {
 func init() { proto.RegisterFile("premierleague.proto", fileDescriptor_4204cc63886395c8) }
 
 var fileDescriptor_4204cc63886395c8 = []byte{
-	// 816 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xa4, 0x56, 0xdb, 0x6e, 0xd3, 0x4c,
-	0x10, 0xae, 0x93, 0x26, 0xa9, 0x27, 0x4d, 0x93, 0x6c, 0x7a, 0xf0, 0x6f, 0xfd, 0x2a, 0x91, 0x55,
-	0x41, 0x2a, 0x41, 0x91, 0x52, 0x50, 0x05, 0x12, 0x94, 0x2a, 0x51, 0x7b, 0x53, 0xa1, 0x2a, 0x0d,
-	0xe2, 0x7a, 0x93, 0x6e, 0x2b, 0x0b, 0xc7, 0x36, 0xde, 0x2d, 0x28, 0x2f, 0xc1, 0x3b, 0xf0, 0x02,
-	0xdc, 0xf1, 0x26, 0x3c, 0x10, 0xda, 0x93, 0xbd, 0x4e, 0xac, 0xa8, 0xc0, 0xdd, 0xce, 0x37, 0x87,
-	0x6f, 0x32, 0xdf, 0xce, 0x3a, 0xd0, 0x89, 0x13, 0x32, 0xf3, 0x49, 0x12, 0x10, 0x7c, 0x77, 0x4f,
-	0x8e, 0xe2, 0x24, 0x62, 0x11, 0x2a, 0xc5, 0x13, 0xef, 0x29, 0x6c, 0x8e, 0xf1, 0x24, 0x20, 0x23,
-	0xf2, 0xf9, 0x9e, 0x50, 0x86, 0xfe, 0x07, 0x9b, 0x71, 0xfb, 0x3d, 0x9e, 0x11, 0xc7, 0xea, 0x5a,
-	0x3d, 0x7b, 0x94, 0x01, 0xde, 0xf7, 0x12, 0x54, 0x44, 0x38, 0x72, 0x61, 0x83, 0x11, 0x3c, 0x33,
-	0xc2, 0x52, 0x1b, 0xed, 0x03, 0xf0, 0xf3, 0x55, 0x80, 0xe7, 0xe4, 0xc6, 0x29, 0x75, 0xad, 0x5e,
-	0x65, 0x64, 0x20, 0xc8, 0x81, 0x1a, 0xb7, 0x3e, 0x46, 0xa1, 0x53, 0x16, 0x4e, 0x6d, 0x0a, 0x76,
-	0x82, 0x67, 0xc3, 0x04, 0x7f, 0x0d, 0x9d, 0x75, 0xe1, 0xcb, 0x00, 0xcd, 0x79, 0x19, 0x51, 0xe6,
-	0x54, 0x84, 0x33, 0xb5, 0xd1, 0x2e, 0x54, 0xf9, 0xf9, 0xe2, 0xdc, 0xa9, 0x0a, 0x8f, 0xb2, 0x52,
-	0xfc, 0xcc, 0xa9, 0x19, 0xf8, 0x59, 0x8a, 0x0f, 0x9d, 0x0d, 0x03, 0x1f, 0xa6, 0xbd, 0x47, 0x7e,
-	0xc8, 0xa8, 0x63, 0x1b, 0xbd, 0x0b, 0x04, 0x75, 0xa1, 0xce, 0xad, 0x01, 0x8e, 0x7d, 0x86, 0x03,
-	0x07, 0x44, 0x80, 0x09, 0x79, 0xa7, 0x00, 0x6a, 0xa2, 0x71, 0x30, 0x47, 0x8f, 0xa0, 0xc2, 0x9d,
-	0xd4, 0xb1, 0xba, 0xe5, 0x5e, 0xbd, 0x6f, 0x1f, 0xc5, 0x93, 0x23, 0xe9, 0x96, 0x38, 0x6a, 0x41,
-	0x99, 0x24, 0x89, 0x98, 0x92, 0x3d, 0xe2, 0x47, 0xef, 0x10, 0xea, 0x63, 0x82, 0x67, 0x5a, 0x91,
-	0x15, 0x93, 0xf6, 0x7e, 0x94, 0xa0, 0x2a, 0x86, 0x9a, 0x20, 0x04, 0xeb, 0x61, 0x16, 0x22, 0xce,
-	0x1c, 0xe3, 0xa1, 0xaa, 0xb8, 0x38, 0xf3, 0x1f, 0x10, 0x62, 0xe6, 0x47, 0x21, 0x0e, 0x7c, 0x36,
-	0x17, 0x02, 0xd8, 0x23, 0x13, 0xe2, 0x84, 0x71, 0x44, 0x7d, 0x0e, 0x08, 0x0d, 0xec, 0x51, 0x6a,
-	0xf3, 0x6c, 0x1c, 0xc7, 0x04, 0x27, 0x24, 0x9c, 0x12, 0xaa, 0x54, 0x30, 0x21, 0xb4, 0x0d, 0x95,
-	0xbb, 0x08, 0x07, 0x54, 0xe9, 0x20, 0x0d, 0x2e, 0x39, 0xa6, 0xd4, 0xa7, 0x8c, 0x2a, 0x1d, 0xb4,
-	0xc9, 0x85, 0x88, 0x31, 0xa5, 0x84, 0x6a, 0x21, 0xa4, 0x85, 0x0e, 0xa0, 0xe1, 0x87, 0x8c, 0x24,
-	0x53, 0x12, 0x73, 0x66, 0xad, 0x45, 0x1e, 0x14, 0x57, 0x09, 0x4f, 0x3f, 0x05, 0x84, 0x2a, 0x29,
-	0xb4, 0xc9, 0xfb, 0xb8, 0x8d, 0xee, 0x03, 0xea, 0xd4, 0x65, 0x1f, 0xc2, 0xf0, 0x06, 0x60, 0xcb,
-	0xd9, 0x72, 0x6d, 0x0e, 0xa0, 0x16, 0x8b, 0xe1, 0x69, 0x75, 0x80, 0xab, 0x23, 0xe7, 0x39, 0xd2,
-	0xae, 0x02, 0x81, 0x9e, 0x41, 0xf3, 0x4a, 0x0d, 0xc4, 0x10, 0x29, 0x9d, 0x99, 0x95, 0x9f, 0x99,
-	0x77, 0x01, 0x8d, 0x2c, 0xfc, 0x5f, 0x78, 0x1f, 0x43, 0xeb, 0x82, 0x30, 0x15, 0xa7, 0x88, 0x0b,
-	0x64, 0xf7, 0x5e, 0xc0, 0x96, 0x11, 0xc7, 0x19, 0x5b, 0x50, 0x8e, 0x62, 0xaa, 0x82, 0xf8, 0xb1,
-	0xa0, 0xfa, 0x4b, 0xe8, 0x0c, 0x12, 0x82, 0x19, 0xc9, 0x13, 0xec, 0x1b, 0x04, 0xf9, 0x4e, 0x25,
-	0xd9, 0x09, 0xb4, 0xf3, 0x69, 0x7f, 0xc0, 0xf7, 0x21, 0xbe, 0xf9, 0x1b, 0xbe, 0x7c, 0xda, 0x43,
-	0xf9, 0x0e, 0xa1, 0x33, 0x24, 0x01, 0x59, 0xe4, 0x2b, 0x1a, 0xe0, 0x09, 0xb4, 0xf3, 0xa1, 0x0f,
-	0xe5, 0xe8, 0x01, 0x1a, 0x67, 0x4f, 0xc1, 0x2a, 0x8a, 0xb7, 0xd0, 0xca, 0x45, 0x72, 0x06, 0x07,
-	0x6a, 0x53, 0xf5, 0xae, 0x58, 0xf2, 0x32, 0x2b, 0xb3, 0x80, 0xe9, 0x09, 0xb4, 0x65, 0x73, 0x83,
-	0x88, 0xb2, 0xd5, 0xbf, 0xa5, 0x69, 0x06, 0x72, 0x1e, 0x04, 0xeb, 0x53, 0xfe, 0x86, 0x4a, 0x12,
-	0x71, 0x2e, 0x60, 0x38, 0x85, 0x1d, 0x99, 0x38, 0x4e, 0x70, 0x48, 0x6f, 0x57, 0x4e, 0xac, 0xe8,
-	0xa5, 0xf1, 0x5e, 0x41, 0x67, 0xb1, 0xc0, 0x03, 0xe7, 0xd8, 0xff, 0x69, 0xc1, 0xe6, 0x35, 0xc3,
-	0x8c, 0x5e, 0x93, 0xe4, 0x8b, 0x3f, 0x25, 0xe8, 0x39, 0xd8, 0x97, 0x3e, 0x65, 0xf2, 0xdb, 0xd3,
-	0xca, 0x1e, 0x51, 0xd9, 0x92, 0xbb, 0x65, 0x20, 0x71, 0x30, 0xf7, 0xd6, 0xd0, 0x31, 0x34, 0x45,
-	0x82, 0xfe, 0xea, 0x24, 0x14, 0x35, 0x45, 0x50, 0xf6, 0xb2, 0xba, 0x8d, 0x0c, 0x90, 0x49, 0xa7,
-	0xd0, 0xe1, 0x49, 0x7a, 0x5b, 0x75, 0x62, 0x47, 0x5c, 0xc2, 0xfc, 0xc6, 0xbb, 0xed, 0x3c, 0x28,
-	0x0a, 0xf4, 0xbf, 0x95, 0xa0, 0x21, 0xb3, 0x74, 0xe3, 0x27, 0x60, 0xa7, 0xbb, 0x88, 0xb6, 0x79,
-	0xce, 0xe2, 0x0a, 0xbb, 0x68, 0x01, 0x95, 0xbd, 0xbc, 0x83, 0x4d, 0x73, 0xaf, 0xd0, 0x1e, 0x8f,
-	0x2a, 0x58, 0x50, 0x77, 0x67, 0xd9, 0x91, 0x56, 0x30, 0x37, 0x45, 0x56, 0x28, 0x58, 0x39, 0x59,
-	0x61, 0x69, 0xa9, 0x64, 0x05, 0xb5, 0x07, 0x97, 0x59, 0x85, 0x82, 0x25, 0x92, 0x15, 0x96, 0x56,
-	0xc6, 0x5b, 0xeb, 0xff, 0xb2, 0xa0, 0xa9, 0xe5, 0xd7, 0x23, 0x79, 0x23, 0xbf, 0x6f, 0xea, 0xea,
-	0xa3, 0x5d, 0xad, 0x42, 0x7e, 0x6b, 0xdc, 0xed, 0x25, 0x5c, 0x36, 0xf5, 0x1a, 0x20, 0xbb, 0xd0,
-	0x68, 0x27, 0x7b, 0x20, 0x8c, 0x4d, 0x70, 0x3b, 0x8b, 0xb0, 0xcc, 0x3d, 0x87, 0x2d, 0xdd, 0x8d,
-	0x1a, 0xca, 0x7f, 0x59, 0xe0, 0xc2, 0x3d, 0x77, 0xf7, 0x8a, 0x5c, 0xa2, 0xce, 0xa4, 0x2a, 0xfe,
-	0x40, 0x1d, 0xff, 0x0e, 0x00, 0x00, 0xff, 0xff, 0x8c, 0x07, 0x72, 0xd3, 0x57, 0x09, 0x00, 0x00,
+	// 667 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xa4, 0x55, 0xdd, 0x4a, 0x1b, 0x41,
+	0x14, 0x36, 0x89, 0x89, 0xee, 0x49, 0x62, 0x74, 0x52, 0xeb, 0x34, 0x14, 0x1b, 0x16, 0x2f, 0x2c,
+	0xb4, 0x16, 0x22, 0xa5, 0xf4, 0x4a, 0xc5, 0xa0, 0x37, 0x52, 0x64, 0x15, 0x4a, 0x2f, 0x27, 0xe9,
+	0x51, 0x96, 0x6e, 0x76, 0xa7, 0x33, 0x63, 0x4b, 0x9e, 0xa3, 0x4f, 0xd0, 0x17, 0xe8, 0x5d, 0xdf,
+	0xaf, 0xcc, 0xdf, 0xfe, 0xe8, 0x22, 0x42, 0xef, 0xce, 0xf7, 0x9d, 0xdf, 0x9c, 0xef, 0xec, 0x04,
+	0x86, 0x5c, 0xe0, 0x22, 0x46, 0x91, 0x20, 0xbb, 0xbd, 0xc3, 0x03, 0x2e, 0x32, 0x95, 0x91, 0x26,
+	0x9f, 0x85, 0x6f, 0xa0, 0x77, 0xcd, 0x66, 0x09, 0x46, 0xf8, 0xfd, 0x0e, 0xa5, 0x22, 0x2f, 0x21,
+	0x50, 0x1a, 0x7f, 0x62, 0x0b, 0xa4, 0x8d, 0x71, 0x63, 0x3f, 0x88, 0x0a, 0x22, 0xfc, 0xdd, 0x84,
+	0xb6, 0x09, 0x27, 0x23, 0x58, 0x57, 0xc8, 0x16, 0xa5, 0xb0, 0x1c, 0x93, 0x5d, 0x00, 0x6d, 0x5f,
+	0x26, 0x6c, 0x89, 0x5f, 0x69, 0x73, 0xdc, 0xd8, 0x6f, 0x47, 0x25, 0x86, 0x50, 0x58, 0xd3, 0xe8,
+	0x73, 0x96, 0xd2, 0x96, 0x71, 0x7a, 0x68, 0xba, 0x23, 0x5b, 0x4c, 0x05, 0xfb, 0x99, 0xd2, 0x55,
+	0xe3, 0x2b, 0x08, 0xdf, 0xf3, 0x22, 0x93, 0x8a, 0xb6, 0x8d, 0x33, 0xc7, 0xe4, 0x39, 0x74, 0xb4,
+	0x7d, 0x7e, 0x46, 0x3b, 0xc6, 0xe3, 0x50, 0xce, 0x9f, 0xd0, 0xb5, 0x12, 0x7f, 0x92, 0xf3, 0x53,
+	0xba, 0x5e, 0xe2, 0xa7, 0xf9, 0xec, 0x59, 0x9c, 0x2a, 0x49, 0x83, 0xd2, 0xec, 0x86, 0x21, 0x63,
+	0xe8, 0x6a, 0x74, 0xca, 0x78, 0xac, 0x58, 0x42, 0xc1, 0x04, 0x94, 0xa9, 0xf0, 0x08, 0xc0, 0x6d,
+	0x94, 0x27, 0x4b, 0xf2, 0x0a, 0xda, 0xda, 0x29, 0x69, 0x63, 0xdc, 0xda, 0xef, 0x4e, 0x82, 0x03,
+	0x3e, 0x3b, 0xb0, 0x6e, 0xcb, 0x93, 0x4d, 0x68, 0xa1, 0x10, 0x66, 0x4b, 0x41, 0xa4, 0xcd, 0xf0,
+	0x35, 0x74, 0xaf, 0x91, 0x2d, 0xbc, 0x22, 0x8f, 0x6c, 0x3a, 0xfc, 0xd3, 0x84, 0x8e, 0x59, 0xaa,
+	0x20, 0x04, 0x56, 0xd3, 0x22, 0xc4, 0xd8, 0x9a, 0xd3, 0xa1, 0xae, 0xb8, 0xb1, 0xf5, 0x0f, 0x48,
+	0x99, 0x8a, 0xb3, 0x94, 0x25, 0xb1, 0x5a, 0x1a, 0x01, 0x82, 0xa8, 0x4c, 0xe9, 0x86, 0x3c, 0x93,
+	0xb1, 0x26, 0x8c, 0x06, 0x41, 0x94, 0x63, 0x9d, 0xcd, 0x38, 0x47, 0x26, 0x30, 0x9d, 0xa3, 0x74,
+	0x2a, 0x94, 0x29, 0xf2, 0x0c, 0xda, 0xb7, 0x19, 0x4b, 0xa4, 0xd3, 0xc1, 0x02, 0x2d, 0x39, 0x93,
+	0x32, 0x96, 0x4a, 0x3a, 0x1d, 0x3c, 0xd4, 0x42, 0x70, 0x26, 0x25, 0x4a, 0x2f, 0x84, 0x45, 0x64,
+	0x0f, 0xfa, 0x71, 0xaa, 0x50, 0xcc, 0x91, 0xeb, 0xce, 0x5e, 0x8b, 0x2a, 0x69, 0x4e, 0x89, 0xcd,
+	0xbf, 0x25, 0x28, 0x9d, 0x14, 0x1e, 0xea, 0x39, 0x6e, 0xb2, 0xbb, 0x44, 0xd2, 0xae, 0x9d, 0xc3,
+	0x80, 0xf0, 0x14, 0x02, 0xbb, 0x5b, 0xad, 0xcd, 0x1e, 0xac, 0x71, 0xb3, 0x3c, 0xaf, 0x0e, 0x68,
+	0x75, 0xec, 0x3e, 0x23, 0xef, 0xaa, 0x11, 0xe8, 0x2d, 0x0c, 0x2e, 0xdd, 0x42, 0x4a, 0x22, 0xe5,
+	0x3b, 0x6b, 0x54, 0x77, 0x16, 0x9e, 0x43, 0xbf, 0x08, 0xff, 0x9f, 0xbe, 0xef, 0x61, 0x78, 0x2a,
+	0x90, 0x29, 0x74, 0xa1, 0xae, 0xf7, 0x6e, 0x49, 0xf9, 0x6a, 0x2d, 0xc3, 0x87, 0x1f, 0x60, 0xab,
+	0x9a, 0xa6, 0x67, 0xd8, 0x84, 0x56, 0xc6, 0xa5, 0x9b, 0x55, 0x9b, 0xb5, 0x87, 0x38, 0x9c, 0x62,
+	0x82, 0xf7, 0xfb, 0xd5, 0x5c, 0x9a, 0xee, 0x51, 0x0d, 0x7d, 0x6a, 0x8f, 0x23, 0xd8, 0xb6, 0x29,
+	0xd7, 0x82, 0xa5, 0xf2, 0xe6, 0xd1, 0x2e, 0x75, 0xf7, 0x1c, 0x7e, 0x84, 0xe1, 0xfd, 0x02, 0x4f,
+	0xec, 0x3d, 0xf9, 0xdb, 0x80, 0xde, 0x95, 0x62, 0x4a, 0x5e, 0xa1, 0xf8, 0x11, 0xcf, 0x91, 0xbc,
+	0x83, 0xe0, 0x22, 0x96, 0xca, 0xbe, 0x70, 0x9b, 0xc5, 0xa7, 0x6a, 0x47, 0x1a, 0x6d, 0x94, 0x18,
+	0x9e, 0x2c, 0xc3, 0x15, 0x72, 0x08, 0x03, 0x93, 0xe0, 0xdf, 0x36, 0x21, 0xc9, 0xc0, 0x04, 0x15,
+	0xdf, 0xef, 0xa8, 0x5f, 0x10, 0x36, 0xe9, 0x08, 0x86, 0x3a, 0xc9, 0xdf, 0x84, 0x4f, 0x1c, 0x1a,
+	0xe1, 0xaa, 0x77, 0x35, 0xda, 0xaa, 0x92, 0xa6, 0xc0, 0xe4, 0x57, 0x03, 0xfa, 0x36, 0xcb, 0x0f,
+	0x7e, 0x0c, 0xbd, 0xb2, 0xc4, 0x64, 0x47, 0xa7, 0xd5, 0xdc, 0xca, 0x68, 0xfb, 0xa1, 0xc3, 0x0e,
+	0x75, 0x0c, 0x3d, 0x27, 0xe0, 0x45, 0x51, 0xa1, 0x46, 0x7d, 0x5b, 0xe1, 0x81, 0xd6, 0xe1, 0xca,
+	0xe4, 0x0b, 0x0c, 0xbc, 0x04, 0x7e, 0xac, 0x33, 0xd8, 0xf0, 0x94, 0x1b, 0xec, 0x45, 0x71, 0x9d,
+	0xf7, 0x04, 0x1f, 0xed, 0xd4, 0xb9, 0x4c, 0xe9, 0x59, 0xc7, 0xfc, 0x5f, 0x1d, 0xfe, 0x0b, 0x00,
+	0x00, 0xff, 0xff, 0xb8, 0x77, 0xe7, 0xef, 0xc6, 0x06, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -1360,9 +999,7 @@ var _StatsService_serviceDesc = grpc.ServiceDesc{
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type PlayerServiceClient interface {
-	GetPlayer(ctx context.Context, in *GetPlayerRequest, opts ...grpc.CallOption) (*GetPlayerReply, error)
 	CreatePlayer(ctx context.Context, in *CreatePlayerRequest, opts ...grpc.CallOption) (*CreatePlayerReply, error)
-	UpdatePlayer(ctx context.Context, in *UpdatePlayerRequest, opts ...grpc.CallOption) (*UpdatePlayerReply, error)
 	DeletePLayer(ctx context.Context, in *DeletePlayerRequest, opts ...grpc.CallOption) (*DeletePlayerReply, error)
 }
 
@@ -1374,27 +1011,9 @@ func NewPlayerServiceClient(cc *grpc.ClientConn) PlayerServiceClient {
 	return &playerServiceClient{cc}
 }
 
-func (c *playerServiceClient) GetPlayer(ctx context.Context, in *GetPlayerRequest, opts ...grpc.CallOption) (*GetPlayerReply, error) {
-	out := new(GetPlayerReply)
-	err := c.cc.Invoke(ctx, "/pb.PlayerService/GetPlayer", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *playerServiceClient) CreatePlayer(ctx context.Context, in *CreatePlayerRequest, opts ...grpc.CallOption) (*CreatePlayerReply, error) {
 	out := new(CreatePlayerReply)
 	err := c.cc.Invoke(ctx, "/pb.PlayerService/CreatePlayer", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *playerServiceClient) UpdatePlayer(ctx context.Context, in *UpdatePlayerRequest, opts ...grpc.CallOption) (*UpdatePlayerReply, error) {
-	out := new(UpdatePlayerReply)
-	err := c.cc.Invoke(ctx, "/pb.PlayerService/UpdatePlayer", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1412,9 +1031,7 @@ func (c *playerServiceClient) DeletePLayer(ctx context.Context, in *DeletePlayer
 
 // PlayerServiceServer is the server API for PlayerService service.
 type PlayerServiceServer interface {
-	GetPlayer(context.Context, *GetPlayerRequest) (*GetPlayerReply, error)
 	CreatePlayer(context.Context, *CreatePlayerRequest) (*CreatePlayerReply, error)
-	UpdatePlayer(context.Context, *UpdatePlayerRequest) (*UpdatePlayerReply, error)
 	DeletePLayer(context.Context, *DeletePlayerRequest) (*DeletePlayerReply, error)
 }
 
@@ -1422,14 +1039,8 @@ type PlayerServiceServer interface {
 type UnimplementedPlayerServiceServer struct {
 }
 
-func (*UnimplementedPlayerServiceServer) GetPlayer(ctx context.Context, req *GetPlayerRequest) (*GetPlayerReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetPlayer not implemented")
-}
 func (*UnimplementedPlayerServiceServer) CreatePlayer(ctx context.Context, req *CreatePlayerRequest) (*CreatePlayerReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreatePlayer not implemented")
-}
-func (*UnimplementedPlayerServiceServer) UpdatePlayer(ctx context.Context, req *UpdatePlayerRequest) (*UpdatePlayerReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdatePlayer not implemented")
 }
 func (*UnimplementedPlayerServiceServer) DeletePLayer(ctx context.Context, req *DeletePlayerRequest) (*DeletePlayerReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeletePLayer not implemented")
@@ -1437,24 +1048,6 @@ func (*UnimplementedPlayerServiceServer) DeletePLayer(ctx context.Context, req *
 
 func RegisterPlayerServiceServer(s *grpc.Server, srv PlayerServiceServer) {
 	s.RegisterService(&_PlayerService_serviceDesc, srv)
-}
-
-func _PlayerService_GetPlayer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetPlayerRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(PlayerServiceServer).GetPlayer(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/pb.PlayerService/GetPlayer",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PlayerServiceServer).GetPlayer(ctx, req.(*GetPlayerRequest))
-	}
-	return interceptor(ctx, in, info, handler)
 }
 
 func _PlayerService_CreatePlayer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -1471,24 +1064,6 @@ func _PlayerService_CreatePlayer_Handler(srv interface{}, ctx context.Context, d
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(PlayerServiceServer).CreatePlayer(ctx, req.(*CreatePlayerRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _PlayerService_UpdatePlayer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdatePlayerRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(PlayerServiceServer).UpdatePlayer(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/pb.PlayerService/UpdatePlayer",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PlayerServiceServer).UpdatePlayer(ctx, req.(*UpdatePlayerRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1516,16 +1091,8 @@ var _PlayerService_serviceDesc = grpc.ServiceDesc{
 	HandlerType: (*PlayerServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "GetPlayer",
-			Handler:    _PlayerService_GetPlayer_Handler,
-		},
-		{
 			MethodName: "CreatePlayer",
 			Handler:    _PlayerService_CreatePlayer_Handler,
-		},
-		{
-			MethodName: "UpdatePlayer",
-			Handler:    _PlayerService_UpdatePlayer_Handler,
 		},
 		{
 			MethodName: "DeletePLayer",
@@ -1540,8 +1107,6 @@ var _PlayerService_serviceDesc = grpc.ServiceDesc{
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type TransferServiceClient interface {
-	TeamCapital(ctx context.Context, in *TeamCapitalRequest, opts ...grpc.CallOption) (*TeamCapitalReply, error)
-	PlayerCost(ctx context.Context, in *PlayerCostRequest, opts ...grpc.CallOption) (*PlayerCostReply, error)
 	TransferPlayer(ctx context.Context, in *PlayerTransferRequest, opts ...grpc.CallOption) (*PlayerTransferReply, error)
 }
 
@@ -1551,24 +1116,6 @@ type transferServiceClient struct {
 
 func NewTransferServiceClient(cc *grpc.ClientConn) TransferServiceClient {
 	return &transferServiceClient{cc}
-}
-
-func (c *transferServiceClient) TeamCapital(ctx context.Context, in *TeamCapitalRequest, opts ...grpc.CallOption) (*TeamCapitalReply, error) {
-	out := new(TeamCapitalReply)
-	err := c.cc.Invoke(ctx, "/pb.TransferService/TeamCapital", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *transferServiceClient) PlayerCost(ctx context.Context, in *PlayerCostRequest, opts ...grpc.CallOption) (*PlayerCostReply, error) {
-	out := new(PlayerCostReply)
-	err := c.cc.Invoke(ctx, "/pb.TransferService/PlayerCost", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
 }
 
 func (c *transferServiceClient) TransferPlayer(ctx context.Context, in *PlayerTransferRequest, opts ...grpc.CallOption) (*PlayerTransferReply, error) {
@@ -1582,8 +1129,6 @@ func (c *transferServiceClient) TransferPlayer(ctx context.Context, in *PlayerTr
 
 // TransferServiceServer is the server API for TransferService service.
 type TransferServiceServer interface {
-	TeamCapital(context.Context, *TeamCapitalRequest) (*TeamCapitalReply, error)
-	PlayerCost(context.Context, *PlayerCostRequest) (*PlayerCostReply, error)
 	TransferPlayer(context.Context, *PlayerTransferRequest) (*PlayerTransferReply, error)
 }
 
@@ -1591,54 +1136,12 @@ type TransferServiceServer interface {
 type UnimplementedTransferServiceServer struct {
 }
 
-func (*UnimplementedTransferServiceServer) TeamCapital(ctx context.Context, req *TeamCapitalRequest) (*TeamCapitalReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method TeamCapital not implemented")
-}
-func (*UnimplementedTransferServiceServer) PlayerCost(ctx context.Context, req *PlayerCostRequest) (*PlayerCostReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PlayerCost not implemented")
-}
 func (*UnimplementedTransferServiceServer) TransferPlayer(ctx context.Context, req *PlayerTransferRequest) (*PlayerTransferReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method TransferPlayer not implemented")
 }
 
 func RegisterTransferServiceServer(s *grpc.Server, srv TransferServiceServer) {
 	s.RegisterService(&_TransferService_serviceDesc, srv)
-}
-
-func _TransferService_TeamCapital_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(TeamCapitalRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(TransferServiceServer).TeamCapital(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/pb.TransferService/TeamCapital",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TransferServiceServer).TeamCapital(ctx, req.(*TeamCapitalRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _TransferService_PlayerCost_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PlayerCostRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(TransferServiceServer).PlayerCost(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/pb.TransferService/PlayerCost",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TransferServiceServer).PlayerCost(ctx, req.(*PlayerCostRequest))
-	}
-	return interceptor(ctx, in, info, handler)
 }
 
 func _TransferService_TransferPlayer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -1663,14 +1166,6 @@ var _TransferService_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "pb.TransferService",
 	HandlerType: (*TransferServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "TeamCapital",
-			Handler:    _TransferService_TeamCapital_Handler,
-		},
-		{
-			MethodName: "PlayerCost",
-			Handler:    _TransferService_PlayerCost_Handler,
-		},
 		{
 			MethodName: "TransferPlayer",
 			Handler:    _TransferService_TransferPlayer_Handler,
