@@ -21,20 +21,20 @@ func MakePlayerOpsEndpoints(s service.TransferService) Endpoints {
 
 //PlayerTransferRequest holds the request params for PlayerTransfer
 type PlayerTransferRequest struct {
-	playerName string
-	teamName   string
+	PlayerName string
+	TeamName   string
 }
 
 //PlayerTransferReply holds the response params for PlayerTransfer
 type PlayerTransferReply struct {
-	ops string
+	Ops string
 	Err error
 }
 
 func makeTransferPlayerEndpoint(s service.TransferService) endpoint.Endpoint {
 	return func(ctx context.Context, request interface{}) (interface{}, error) {
 		req := request.(PlayerTransferRequest)
-		response, err := s.TransferPlayer(ctx, req.playerName, req.teamName)
-		return PlayerTransferReply{ops: response, Err: err}, nil
+		response, err := s.TransferPlayer(ctx, req.PlayerName, req.TeamName)
+		return PlayerTransferReply{Ops: response, Err: err}, nil
 	}
 }

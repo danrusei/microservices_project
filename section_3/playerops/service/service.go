@@ -18,7 +18,7 @@ var (
 
 //PlayerOpsService  describe the PlayerOps service
 type PlayerOpsService interface {
-	CreatePlayer(ctx context.Context, playerCreate []Player) (string, error)
+	CreatePlayer(ctx context.Context, playerCreate *Player) (string, error)
 	DeletePlayer(ctx context.Context, playerDelete string) (string, error)
 }
 
@@ -43,7 +43,7 @@ type basicService struct {
 	dbClient *firestore.Client
 }
 
-func (s *basicService) CreatePlayer(ctx context.Context, playerCreate []Player) (string, error) {
+func (s *basicService) CreatePlayer(ctx context.Context, playerCreate *Player) (string, error) {
 
 	return "", nil
 }
