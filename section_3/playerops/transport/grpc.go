@@ -46,6 +46,7 @@ func decodeCreatePlayerRequest(_ context.Context, request interface{}) (interfac
 		Interceptions: req.Name.Interceptions,
 		Tackles:       req.Name.Tackles,
 		Fouls:         req.Name.Fouls,
+		Price:         req.Name.Price,
 	}
 
 	return endpoints.CreatePlayerRequest{PlayerDetail: player}, nil

@@ -117,7 +117,7 @@ func (s *basicService) TransferPlayer(ctx context.Context, playerTransfer string
 		return "", err
 	}
 
-	ops := "Player " + playerStruct.Name + "has transfered to " + teamToTable.TeamName + "from " + teamFromTable.TeamName + "at " + wr.UpdateTime.String()
+	ops := "Player " + playerStruct.Name + " has been transfered to " + teamToTable.TeamName + " from " + teamFromTable.TeamName + " at " + wr.UpdateTime.String()
 
 	return ops, nil
 }

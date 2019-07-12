@@ -54,7 +54,7 @@ func (s *basicService) CreatePlayer(ctx context.Context, playerCreate *Player) (
 		return "", ErrWrite
 	}
 
-	ops := "Write operation completed at " + wr.UpdateTime.String()
+	ops := "Player " + playerCreate.Name + "was created at " + wr.UpdateTime.String()
 
 	return ops, nil
 }
@@ -68,7 +68,7 @@ func (s *basicService) DeletePlayer(ctx context.Context, playerDelete string, te
 		return "", ErrDelete
 	}
 
-	ops := "Deleted " + playerDelete + " at " + wr.UpdateTime.String()
+	ops := "Player " + playerDelete + " has been removed at " + wr.UpdateTime.String()
 
 	return ops, nil
 }
