@@ -23,7 +23,7 @@ type loggingMiddleware struct {
 
 func (mw loggingMiddleware) CreatePlayer(ctx context.Context, playerCreate *Player) (ops string, err error) {
 	defer func() {
-		mw.logger.Log("method", "CreatePlayer", "player", playerCreate, "err", err)
+		mw.logger.Log("method", "CreatePlayer", "player", playerCreate.Name, "err", err)
 	}()
 	return mw.next.CreatePlayer(ctx, playerCreate)
 }

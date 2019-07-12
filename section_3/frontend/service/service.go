@@ -20,19 +20,19 @@ type SiteService interface {
 }
 
 // NewSiteService returns a basic StatsService with all of the expected middlewares wired in.
-func NewSiteService(logger log.Logger, conn *grpc.ClientConn) SiteService {
+func NewSiteService(logger log.Logger, conn1 *grpc.ClientConn, conn2 *grpc.ClientConn, conn3 *grpc.ClientConn) SiteService {
 	var svc SiteService
-	svc = NewBasicService(conn)
+	svc = NewBasicService(conn1, conn2, conn3)
 	svc = LoggingMiddleware(logger)(svc)
 	return svc
 }
 
 // NewBasicService returns a naive, stateless implementation of StatsService.
-func NewBasicService(conn *grpc.ClientConn) SiteService {
+func NewBasicService(conn1 *grpc.ClientConn, conn2 *grpc.ClientConn, conn3 *grpc.ClientConn) SiteService {
 	return &basicService{
-		gcStats:  pb.NewStatsServiceClient(conn),
-		gcPlayer: pb.NewPlayerServiceClient(conn),
-		gcTrans:  pb.NewTransferServiceClient(conn),
+		gcStats:  pb.NewStatsServiceClient(conn1),
+		gcPlayer: pb.NewPlayerServiceClient(conn2),
+		gcTrans:  pb.NewTransferServiceClient(conn3),
 	}
 }
 
@@ -110,7 +110,8 @@ func (s *basicService) GetPositionBestPlayers(ctx context.Context, position stri
 		Position: position,
 	})
 	if err != nil {
-		return nil, ErrDisplayPlayers
+		return nil, err
+		//return nil, ErrDisplayPlayers
 	}
 
 	players := make([]*Player, len(resp.Players))

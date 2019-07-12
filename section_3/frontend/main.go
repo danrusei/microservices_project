@@ -56,7 +56,7 @@ func main() {
 	// business logic service; then, the set of endpoints that wrap the service;
 	// and finally, a series of concrete transport adapters
 
-	addservice := service.NewSiteService(logger, svc.statsSvcConn)
+	addservice := service.NewSiteService(logger, svc.statsSvcConn, svc.playerSvcConn, svc.transferSvcConn)
 	addendpoints := endpoints.MakeSiteEndpoints(addservice)
 	httpHandlers := transport.MakeHTTPHandler(addendpoints, logger)
 
