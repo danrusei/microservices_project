@@ -103,7 +103,21 @@ func (s *basicService) TransferPlayer(ctx context.Context, playerTransfer string
 		return "", ErrWrite
 	}
 
-	//last to make the Set for each team and modify just Capital
+	toTeamCapital := int(teamToTable.TeamCapital - playerStruct.Price)
+	_, err = s.dbClient.Collection("League").Doc(TeamTo).Set(ctx, map[string]interface{}{
+		"Capital": toTeamCapital}, firestore.MergeAll)
+	if err != nil {
+		return "", err
+	}
 
-	return "", nil
+	fromTeamCapital := int(teamToTable.TeamCapital + playerStruct.Price)
+	wr, err := s.dbClient.Collection("League").Doc(TeamFrom).Set(ctx, map[string]interface{}{
+		"Capital": fromTeamCapital}, firestore.MergeAll)
+	if err != nil {
+		return "", err
+	}
+
+	ops := "Player " + playerStruct.Name + "has transfered to " + teamToTable.TeamName + "from " + teamFromTable.TeamName + "at " + wr.UpdateTime.String()
+
+	return ops, nil
 }

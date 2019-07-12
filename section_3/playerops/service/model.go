@@ -27,5 +27,5 @@ type Player struct {
 	Interceptions int32  `firestore:"Interceptions"`
 	Tackles       int32  `firestore:"Tackles"`
 	Fouls         int32  `firestore:"Fouls"`
-	//	Price         int32  `firestore:"Price" json:"price"`
+	Price         int32  `firestore:"Price"`
 }
