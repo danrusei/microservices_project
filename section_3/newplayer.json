@@ -1,0 +1,16 @@
+{
+  "NewPlayer": { 
+	  "Name": "Gabriel Jesus",
+	  "Team": "Manchester City",
+	  "Nationality": "Brazil",
+	  "Position": "Forward",
+	  "Appearences": 29,
+	  "Goals": 7,
+	  "Assists": 3,
+	  "Passes": 357,
+	  "Interceptions": 3,
+	  "Tackles": 10,
+	  "Fouls": 12,
+	  "Price": 70
+  }
+}

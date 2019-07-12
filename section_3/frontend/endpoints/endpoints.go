@@ -88,7 +88,7 @@ func makeGetPositionBestPlayersEndpoint(s service.SiteService) endpoint.Endpoint
 
 //CreatePlayerRequest holds the request paramas for CreatePlayer
 type CreatePlayerRequest struct {
-	NewPlayer service.Player
+	NewPlayer *service.Player
 }
 
 //CreatePlayerReply  holds the response paramas for CeeatePLayer

@@ -14,7 +14,7 @@ type SiteService interface {
 	GetTable(ctx context.Context, league string) ([]*Table, error)
 	GetTeamBestPlayers(ctx context.Context, teamName string) ([]*Player, error)
 	GetPositionBestPlayers(ctx context.Context, position string) ([]*Player, error)
-	CreatePlayer(ctx context.Context, newplayer Player) (string, error)
+	CreatePlayer(ctx context.Context, newplayer *Player) (string, error)
 	DeletePlayer(ctx context.Context, delplayer string, teamName string) (string, error)
 	TransferPlayer(ctx context.Context, playerName string, teamFrom string, TeamTO string) (string, error)
 }
@@ -144,7 +144,7 @@ func makePlayer(p *pb.Player) *Player {
 	return player
 }
 
-func (s *basicService) CreatePlayer(ctx context.Context, newplayer Player) (string, error) {
+func (s *basicService) CreatePlayer(ctx context.Context, newplayer *Player) (string, error) {
 
 	resp, err := s.gcPlayer.CreatePlayer(context.Background(), &pb.CreatePlayerRequest{
 		Name: &pb.Player{

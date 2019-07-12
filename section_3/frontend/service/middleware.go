@@ -42,9 +42,9 @@ func (mw loggingMiddleware) GetPositionBestPlayers(ctx context.Context, position
 	return mw.next.GetPositionBestPlayers(ctx, position)
 }
 
-func (mw loggingMiddleware) CreatePlayer(ctx context.Context, newplayer Player) (ops string, err error) {
+func (mw loggingMiddleware) CreatePlayer(ctx context.Context, newplayer *Player) (ops string, err error) {
 	defer func() {
-		mw.logger.Log("method", "CreatePlayer", "player", newplayer, "err", err)
+		mw.logger.Log("method", "CreatePlayer", "player", &newplayer.Name, "err", err)
 	}()
 	return mw.next.CreatePlayer(ctx, newplayer)
 }

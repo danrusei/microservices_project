@@ -49,7 +49,7 @@ func MakeHTTPHandler(siteEndpoints endpoints.Endpoints, logger log.Logger) http.
 		options...,
 	))
 
-	r.Methods("PUT").Path("/createplayer").Handler(kithttp.NewServer(
+	r.Methods("GET").Path("/createplayer").Handler(kithttp.NewServer(
 		siteEndpoints.CreatePlayerEndpoint,
 		decodeCreatePlayerRequest,
 		encodeResponse,
