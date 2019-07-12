@@ -14,8 +14,8 @@ type SiteService interface {
 	GetTable(ctx context.Context, league string) ([]*Table, error)
 	GetTeamBestPlayers(ctx context.Context, teamName string) ([]*Player, error)
 	GetPositionBestPlayers(ctx context.Context, position string) ([]*Player, error)
-	CreatePlayer(ctx context.Context, newplayer Player) (string, error)
-	DeletePlayer(ctx context.Context, delplayer string) (string, error)
+	CreatePlayer(ctx context.Context, newplayer Player, teamName string) (string, error)
+	DeletePlayer(ctx context.Context, delplayer string, teamName string) (string, error)
 	TransferPlayer(ctx context.Context, playerName string, teamFrom string, TeamTO string) (string, error)
 }
 
@@ -144,19 +144,59 @@ func makePlayer(p *pb.Player) *Player {
 	return player
 }
 
-func (s *basicService) CreatePlayer(ctx context.Context, newplayer Player) (string, error) {
+func (s *basicService) CreatePlayer(ctx context.Context, newplayer Player, teamName string) (string, error) {
 
-	return "", nil
+	resp, err := s.gcPlayer.CreatePlayer(context.Background(), &pb.CreatePlayerRequest{
+		Name: &pb.Player{
+			Name:          newplayer.Name,
+			Team:          newplayer.Team,
+			Nationality:   newplayer.Nationality,
+			Position:      newplayer.Position,
+			Appearences:   newplayer.Appearences,
+			Goals:         newplayer.Goals,
+			Assists:       newplayer.Assists,
+			Passes:        newplayer.Passes,
+			Interceptions: newplayer.Interceptions,
+			Tackles:       newplayer.Tackles,
+			Fouls:         newplayer.Fouls,
+			Price:         newplayer.Price,
+		},
+		Team: teamName,
+	})
+
+	if err != nil {
+		return "", err
+	}
+
+	return resp.Ops, str2err(resp.Err)
 }
 
-func (s *basicService) DeletePlayer(ctx context.Context, delplayer string) (string, error) {
+func (s *basicService) DeletePlayer(ctx context.Context, delplayer string, teamName string) (string, error) {
 
-	return "", nil
+	resp, err := s.gcPlayer.DeletePLayer(context.Background(), &pb.DeletePlayerRequest{
+		Name: delplayer,
+		Team: teamName,
+	})
+
+	if err != nil {
+		return "", ErrPLayerNotFound
+	}
+
+	return resp.Ops, str2err(resp.Err)
 }
 
 func (s *basicService) TransferPlayer(ctx context.Context, playerName string, teamFrom string, teamTo string) (string, error) {
+	resp, err := s.gcTrans.TransferPlayer(context.Background(), &pb.PlayerTransferRequest{
+		Name:     playerName,
+		FromTeam: teamFrom,
+		ToTeam:   teamTo,
+	})
 
-	return "", nil
+	if err != nil {
+		return "", ErrPLayerNotFound
+	}
+
+	return resp.Ops, str2err(resp.Err)
 }
 
 // Helper function is required to translate Go error types from strings,

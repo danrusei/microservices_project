@@ -56,7 +56,7 @@ func MakeHTTPHandler(siteEndpoints endpoints.Endpoints, logger log.Logger) http.
 		options...,
 	))
 
-	r.Methods("GET").Path("/deleteplayer/{player}").Handler(kithttp.NewServer(
+	r.Methods("GET").Path("/deleteplayer/{fromteam}/{player}").Handler(kithttp.NewServer(
 		siteEndpoints.DeletePlayerEndpoint,
 		decodeDeletePlayerRequest,
 		encodeResponse,
@@ -108,11 +108,12 @@ func decodeCreatePlayerRequest(_ context.Context, r *http.Request) (request inte
 
 func decodeDeletePlayerRequest(_ context.Context, r *http.Request) (request interface{}, err error) {
 	vars := mux.Vars(r)
+	teamname, ok := vars["teamname"]
 	delplayer, ok := vars["player"]
 	if !ok {
 		return nil, ErrBadRouting
 	}
-	return endpoints.DeletePlayerRequest{DelPlayer: delplayer}, nil
+	return endpoints.DeletePlayerRequest{DelPlayer: delplayer, TeamName: teamname}, nil
 }
 
 func decodeTransferPlayerRequest(_ context.Context, r *http.Request) (request interface{}, err error) {

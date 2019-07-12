@@ -89,6 +89,7 @@ func makeGetPositionBestPlayersEndpoint(s service.SiteService) endpoint.Endpoint
 //CreatePlayerRequest holds the request paramas for CreatePlayer
 type CreatePlayerRequest struct {
 	NewPlayer service.Player
+	TeamName  string
 }
 
 //CreatePlayerReply  holds the response paramas for CeeatePLayer
@@ -100,7 +101,7 @@ type CreatePlayerReply struct {
 func makeCreatePlayerEndpoint(s service.SiteService) endpoint.Endpoint {
 	return func(ctx context.Context, request interface{}) (interface{}, error) {
 		req := request.(CreatePlayerRequest)
-		response, err := s.CreatePlayer(ctx, req.NewPlayer)
+		response, err := s.CreatePlayer(ctx, req.NewPlayer, req.TeamName)
 		return CreatePlayerReply{Ops: response, Err: err}, nil
 	}
 }
@@ -108,6 +109,7 @@ func makeCreatePlayerEndpoint(s service.SiteService) endpoint.Endpoint {
 //DeletePlayerRequest holds the request paramas for DeletePlayer
 type DeletePlayerRequest struct {
 	DelPlayer string
+	TeamName  string
 }
 
 //DeletePlayerReply  holds the response paramas for DeletePLayer
@@ -119,7 +121,7 @@ type DeletePlayerReply struct {
 func makeDeletePlayerEndpoint(s service.SiteService) endpoint.Endpoint {
 	return func(ctx context.Context, request interface{}) (interface{}, error) {
 		req := request.(DeletePlayerRequest)
-		response, err := s.DeletePlayer(ctx, req.DelPlayer)
+		response, err := s.DeletePlayer(ctx, req.DelPlayer, req.TeamName)
 		return DeletePlayerReply{Ops: response, Err: err}, nil
 	}
 }
