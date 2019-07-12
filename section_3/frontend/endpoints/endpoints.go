@@ -89,7 +89,6 @@ func makeGetPositionBestPlayersEndpoint(s service.SiteService) endpoint.Endpoint
 //CreatePlayerRequest holds the request paramas for CreatePlayer
 type CreatePlayerRequest struct {
 	NewPlayer service.Player
-	TeamName  string
 }
 
 //CreatePlayerReply  holds the response paramas for CeeatePLayer
@@ -101,7 +100,7 @@ type CreatePlayerReply struct {
 func makeCreatePlayerEndpoint(s service.SiteService) endpoint.Endpoint {
 	return func(ctx context.Context, request interface{}) (interface{}, error) {
 		req := request.(CreatePlayerRequest)
-		response, err := s.CreatePlayer(ctx, req.NewPlayer, req.TeamName)
+		response, err := s.CreatePlayer(ctx, req.NewPlayer)
 		return CreatePlayerReply{Ops: response, Err: err}, nil
 	}
 }

@@ -56,7 +56,7 @@ func MakeHTTPHandler(siteEndpoints endpoints.Endpoints, logger log.Logger) http.
 		options...,
 	))
 
-	r.Methods("GET").Path("/deleteplayer/{fromteam}/{player}").Handler(kithttp.NewServer(
+	r.Methods("GET").Path("/deleteplayer/{teamname}/{player}").Handler(kithttp.NewServer(
 		siteEndpoints.DeletePlayerEndpoint,
 		decodeDeletePlayerRequest,
 		encodeResponse,
