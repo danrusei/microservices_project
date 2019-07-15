@@ -5,16 +5,15 @@ FROM golang:1.12-alpine AS builder
 # Install ca-certificates bundle & git inside the docker image
 RUN apk add --no-cache ca-certificates git
 # Sets the environment variables
-ENV PROJECT github.com/Danr17/microservices_project/section_3/frontend
+#ENV PROJECT github.com/Danr17/microservices_project/section_3/frontend
 # Sets the working directory
-WORKDIR /go/src/$PROJECT/
-# Copy the go.mod and go.sum & download the dependencies
-COPY go.mod .
-COPY go.sum .
-# Download dependencies
-RUN GO111MODULE=on go mod download
-# Copy rest of the application source code
+#WORKDIR /go/src/$PROJECT/
+WORKDIR /microservices_project/section_3/frontend
+# Copy the application source code including go.mod and go.sum files
 COPY . .
+# Download dependencies
+RUN go mod download
+
 # Compile the application to /frontend.
 RUN go build -ldflags="-w -s" -o /frontend main.go
 
