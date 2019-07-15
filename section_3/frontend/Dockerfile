@@ -7,9 +7,12 @@ RUN apk add --no-cache ca-certificates git
 # Sets the environment variables
 ENV PROJECT github.com/Danr17/microservices_project/section_3/frontend
 # Sets the working directory
-WORKDIR /go/src/$PROJECT
+WORKDIR /go/src/$PROJECT/
 # Copy the go.mod and go.sum & download the dependencies
-COPY ../../go.mod ../../go.sum ./
+COPY go.mod .
+COPY go.sum .
+# Download dependencies
+RUN GO111MODULE=on go mod download
 # Copy rest of the application source code
 COPY . .
 # Compile the application to /frontend.
