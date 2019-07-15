@@ -1,6 +1,6 @@
 {
     "cloudcode.profile-cluster-map": {
-        "[default]": "microservices"
+        "[default]": "minikube"
     },
     "cloudcode.profile-registry-map": {
         "[default]": "eu.gcr.io/apps-microservices"

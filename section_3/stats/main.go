@@ -35,7 +35,7 @@ func main() {
 	// add database with credentials to run locally
 	ctx := context.Background()
 	var firestoreClient *firestore.Client
-	sa := option.WithCredentialsFile("../keys/apps-microservices-68b9b8c44847.json")
+	sa := option.WithCredentialsFile("keys/apps-microservices-68b9b8c44847.json")
 	firestoreClient, err := firestore.NewClient(ctx, "apps-microservices", sa)
 	if err != nil {
 		logger.Log("database", "firestore", "during", "ClientCreation", "err", err)
