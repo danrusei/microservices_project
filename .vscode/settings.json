@@ -1,0 +1,8 @@
+{
+    "cloudcode.profile-cluster-map": {
+        "[default]": "microservices"
+    },
+    "cloudcode.profile-registry-map": {
+        "[default]": "eu.gcr.io/apps-microservices"
+    }
+}

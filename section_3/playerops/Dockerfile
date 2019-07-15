@@ -4,9 +4,9 @@ RUN apk add --no-cache ca-certificates git
 ENV PROJECT github.com/Danr17/microservices_project/section_3/playerops
 WORKDIR /go/src/$PROJECT
 
-COPY go.mod go.sum ./
+COPY ../../go.mod ../../go.sum ./
 COPY . .
-RUN go build -o /playerops .
+RUN go build -ldflags="-w -s" -o /playerops main.go
 
 FROM alpine as release
 RUN apk add --no-cache ca-certificates

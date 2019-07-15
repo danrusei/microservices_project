@@ -4,15 +4,15 @@ RUN apk add --no-cache ca-certificates git
 ENV PROJECT github.com/Danr17/microservices_project/section_3/transfer
 WORKDIR /go/src/$PROJECT
 
-COPY go.mod go.sum ./
+COPY ../../go.mod ../../go.sum ./
 COPY . .
-RUN go build -o /transfer .
+RUN go build -ldflags="-w -s" -o /transfer main.go
 
 FROM alpine as release
 RUN apk add --no-cache ca-certificates
 WORKDIR /transfer
 COPY --from=builder /transfer ./server
-EXPOSE 8082
+EXPOSE 8083
 ENTRYPOINT ["/transfer/server"]
 
 

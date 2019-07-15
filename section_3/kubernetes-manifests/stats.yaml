@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stats-deployment
+spec:
+  selector:
+    matchLabels:
+      app: stats
+  template:
+    metadata:
+      labels:
+        app: stats
+    spec:
+      containers:
+      - name: stats
+        image: stats-image
+        resources:
+          requests:
+            memory: "32Mi"
+            cpu: "100m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8081 
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: stats-service
+spec:
+  type: ClusterIP
+  selector:
+    app: stats
+  ports:
+  - port: 8081
+    targetPort: 8081
+
+
+
+
