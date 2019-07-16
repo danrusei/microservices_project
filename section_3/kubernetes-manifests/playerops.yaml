@@ -23,6 +23,17 @@ spec:
             cpu: "500m"
         ports:
         - containerPort: 8082
+        volumeMounts:
+        - name: service-key
+          mountPath: /root/apps-microservices-68b9b8c44847.json
+          subPath: apps-microservices-68b9b8c44847.json
+      volumes:
+      - name: service-key
+        secret:
+          secretName: firestore-secret
+          items:
+          - key: service_account_key
+            path: apps-microservices-68b9b8c44847.json
 
 ---
 apiVersion: v1
