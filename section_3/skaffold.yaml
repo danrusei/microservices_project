@@ -1,0 +1,21 @@
+apiVersion: skaffold/v1beta12
+kind: Config
+build:
+  artifacts:
+    - image: frontend-image
+      context: frontend
+    - image: playerops-image
+      context: playerops
+    - image: stats-image
+      context: stats
+    - image: transfer-image
+      context: transfer
+  tagPolicy:
+    sha256: {}
+deploy:
+  kubectl:
+    manifests:
+      - kubernetes-manifests/frontend.yaml
+      - kubernetes-manifests/playerops.yaml
+      - kubernetes-manifests/stats.yaml
+      - kubernetes-manifests/transfer.yaml

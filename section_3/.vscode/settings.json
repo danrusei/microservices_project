@@ -1,0 +1,8 @@
+{
+    "cloudcode.profile-cluster-map": {
+        "[default]": "gke_apps-microservices_europe-west1-b_microservices"
+    },
+    "cloudcode.profile-registry-map": {
+        "[default]": "eu.gcr.io/apps-microservices"
+    }
+}

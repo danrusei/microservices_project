@@ -1,0 +1,20 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: sa-external-services
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - http-gateway                      # 1
+  http:
+  - match:
+    - uri:
+        exact: /
+    - uri:
+        exact: /bestposition
+    route:
+    - destination:
+        host: frontend-service             # 2
+        port:
+          number: 80
