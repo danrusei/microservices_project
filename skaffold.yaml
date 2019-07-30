@@ -19,3 +19,10 @@ deploy:
       - section_3/kubernetes-manifests/playerops.yaml
       - section_3/kubernetes-manifests/stats.yaml
       - section_3/kubernetes-manifests/transfer.yaml
+profiles:
+  - build: {}
+    deploy: {}
+    name: remote cluster
+  - build: {}
+    deploy: {}
+    name: GKE

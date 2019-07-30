@@ -1,8 +1,12 @@
 {
     "cloudcode.profile-cluster-map": {
-        "[default]": "minikube"
+        "[default]": "minikube",
+        "remote cluster": "gke_apps-microservices_europe-west1-b_microservices",
+        "GKE": "gke_apps-microservices_europe-west1-b_microservices"
     },
     "cloudcode.profile-registry-map": {
-        "[default]": "eu.gcr.io/apps-microservices"
+        "[default]": "eu.gcr.io/apps-microservices",
+        "remote cluster": "eu.gcr.io/apps-microservices",
+        "GKE": "eu.gcr.io/apps-microservices"
     }
 }

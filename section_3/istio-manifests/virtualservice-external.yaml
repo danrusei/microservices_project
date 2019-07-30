@@ -1,20 +1,30 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: sa-external-services
+  name: leagueapp-services
 spec:
   hosts:
   - "*"
   gateways:
-  - http-gateway                      # 1
+  - leagueapp-gateway
   http:
   - match:
     - uri:
         exact: /
     - uri:
         exact: /bestposition
+    - uri:
+        exact: /table
+    - uri:
+        prefix: "/bestplayers/"
+    - uri:
+        exact: /createplayer
+    - uri:
+        prefix: "/deleteplayer/"
+    - uri:
+        exact: /transferplayer
     route:
     - destination:
-        host: frontend-service             # 2
+        host: frontend-service
         port:
           number: 80

@@ -1,7 +1,7 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
-  name: http-gateway
+  name: leagueapp-gateway
 spec:
   selector:
     istio: ingressgateway
