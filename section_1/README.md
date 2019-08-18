@@ -5,4 +5,4 @@
 
 **Blog Posts :**
 
-* https://dev-state.com/blog/microservices_1_setup/ 
+* https://dev-state.com/posts/microservices_1_setup/

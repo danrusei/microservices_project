@@ -4,7 +4,7 @@
 * Stats is a backend service which communicate with frontend microservices via GRPC  
 * GO-KIT microservices toolkit is used
 
-Run both Stats and Frontend services and use following commands to check functionality.
+Run both Stats and Frontend services and use following commands to test functionality.
 
     curl http://localhost:8080/bestplayers/Tottenham%20Hotspur
 
@@ -15,5 +15,5 @@ Run both Stats and Frontend services and use following commands to check functio
 
 **Blog Posts :**
 
-* https://dev-state.com/blog/microservices_2_gokit1/   
-* https://dev-state.com/blog/microservices_2_gokit2/  
+* https://dev-state.com/posts/microservices_2_gokit1/  
+* https://dev-state.com/posts/microservices_2_gokit2/

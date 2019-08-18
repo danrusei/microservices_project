@@ -3,13 +3,13 @@ Microservices Project
 **Section 1 :**
 
 * Ingest Data, using cloud function and firestore  
-* https://dev-state.com/blog/microservices_1_setup/
+* https://dev-state.com/posts/microservices_1_setup/  
 
 **Section 2 :**
 
 * Create the microservice League App, using go-kit toolkit  
-* https://dev-state.com/blog/microservices_2_gokit1/  
-* https://dev-state.com/blog/microservices_2_gokit2/  
+* https://dev-state.com/posts/microservices_2_gokit1/  
+* https://dev-state.com/posts/microservices_2_gokit2/  
 
 **Section 3 :**
 
