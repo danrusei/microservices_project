@@ -7,16 +7,16 @@ Microservices Project
 
 **Section 2 :**
 
-* Create microservices, using go-kit toolkit  
+* Create the microservice League App, using go-kit toolkit  
 * https://dev-state.com/blog/microservices_2_gokit1/  
-* https://dev-state.com/blog/microservices_2_gokit2/   
+* https://dev-state.com/blog/microservices_2_gokit2/  
 
 **Section 3 :**
 
-* Deploy, over Kubernetes  
-* Soon
+* Deploy on Minikube (Kubernetes local cluster)  
+* https://dev-state.com/posts/microservices_4_kubernetes/  
 
 **Section 4 :**
 
-* Manage and Monitor, using Istio  
-* Soon   
+* Deploy on GKE and enable Istio for observability and service control.  
+* https://dev-state.com/posts/microservices_5_istio/  
